@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Süzen Construction for your projects. Get free site inspection and consultation.">
+  <title>Contact - Süzen Construction</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/images/suzen-logo.svg">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="index.html"><img src="../assets/images/suzen-logo.svg" alt="Süzen Construction Logo" class="logo"></a>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#services" class="nav-link">Services</a></li>
+          <li><a href="corporate.html" class="nav-link">Corporate</a></li>
+          <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact</a></li>
+          <li class="lang-switcher">
+            <a href="../iletisim.html" class="lang-btn">TR</a>
+            <a href="contact.html?lang=en" class="lang-btn active">EN</a>
+          </li>
+        </ul>
+        <button class="menu-toggle" aria-label="Toggle Menu"><span></span><span></span><span></span></button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="min-height: 50vh;">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Contact</h1>
+        <p>Get in touch with us for your projects</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2" style="gap: var(--space-3xl); align-items: start;">
+        <div>
+          <span class="section-label">Contact Form</span>
+          <h2>Get in Touch</h2>
+          <p>Fill out the form to get detailed information about your project, and we'll get back to you as soon as possible.</p>
+          
+          <form id="contact-form" style="margin-top: var(--space-xl);">
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name *</label>
+              <input type="text" id="name" name="name" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="form-label">Email *</label>
+              <input type="email" id="email" name="email" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone *</label>
+              <input type="tel" id="phone" name="phone" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="service" class="form-label">Service Type</label>
+              <select id="service" name="service" class="form-select">
+                <option value="">Select</option>
+                <option value="roofing">Roofing & Insulation</option>
+                <option value="facade">Exterior Facade Systems</option>
+                <option value="solar">Solar Energy</option>
+                <option value="laminate">Laminate Flooring</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="message" class="form-label">Your Message *</label>
+              <textarea id="message" name="message" class="form-textarea" required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-red" style="width: 100%;">Send</button>
+          </form>
+        </div>
+        
+        <div>
+          <div class="card card-glass">
+            <h3>Contact Information</h3>
+            
+            <div style="padding: var(--space-lg) 0; border-bottom: 1px solid var(--gray-200);">
+              <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
+                <span style="font-size: var(--text-2xl);">📞</span>
+                <strong>Phone</strong>
+              </div>
+              <p style="margin: 0; padding-left: calc(var(--text-2xl) + var(--space-md));">
+                <a href="tel:+905324052877">+90 532 405 28 77</a>
+              </p>
+            </div>
+            
+            <div style="padding: var(--space-lg) 0; border-bottom: 1px solid var(--gray-200);">
+              <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
+                <span style="font-size: var(--text-2xl);">📧</span>
+                <strong>Email</strong>
+              </div>
+              <p style="margin: 0; padding-left: calc(var(--text-2xl) + var(--space-md));">
+                <a href="mailto:info@suzeninsaat.com">info@suzeninsaat.com</a>
+              </p>
+            </div>
+            
+            <div style="padding: var(--space-lg) 0;">
+              <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
+                <span style="font-size: var(--text-2xl);">💬</span>
+                <strong>WhatsApp</strong>
+              </div>
+              <p style="margin: 0; padding-left: calc(var(--text-2xl) + var(--space-md));">
+                <a href="https://wa.me/905324052877?text=Hello,%20I%20would%20like%20to%20get%20information." target="_blank" rel="noopener noreferrer">
+                  Send Message via WhatsApp
+                </a>
+              </p>
+            </div>
+          </div>
+          
+          <div class="card" style="margin-top: var(--space-lg); background: var(--gray-50);">
+            <h3>Working Hours</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li style="padding: var(--space-sm) 0; display: flex; justify-content: space-between; border-bottom: 1px solid var(--gray-200);">
+                <span>Monday - Friday</span>
+                <strong>09:00 - 18:00</strong>
+              </li>
+              <li style="padding: var(--space-sm) 0; display: flex; justify-content: space-between; border-bottom: 1px solid var(--gray-200);">
+                <span>Saturday</span>
+                <strong>09:00 - 14:00</strong>
+              </li>
+              <li style="padding: var(--space-sm) 0; display: flex; justify-content: space-between;">
+                <span>Sunday</span>
+                <strong>Closed</strong>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="card" style="margin-top: var(--space-lg); background: linear-gradient(135deg, var(--red-600), var(--red-700)); color: var(--white);">
+            <h3 style="color: var(--white);">Free Site Inspection</h3>
+            <p style="color: rgba(255, 255, 255, 0.9);">
+              We provide free site inspection and consultation for all our projects. Contact us now!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Süzen Construction</h4>
+          <p>Your trusted partner in building systems.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="corporate.html">Corporate</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Our Services</h4>
+          <ul class="footer-links">
+            <li><a href="services/roofing.html">Roofing & Insulation</a></li>
+            <li><a href="services/facade.html">Exterior Facade Systems</a></li>
+            <li><a href="services/solar.html">Solar Energy</a></li>
+            <li><a href="services/laminate.html">Laminate Flooring</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li>📞 <a href="tel:+905324052877">+90 532 405 28 77</a></li>
+            <li>📧 <a href="mailto:info@suzeninsaat.com">info@suzeninsaat.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Süzen Construction. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/905324052877?text=Hello,%20I%20would%20like%20to%20get%20information." 
+     class="whatsapp-float" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     aria-label="Contact via WhatsApp"
+     data-tooltip="+90 532 405 28 77">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
