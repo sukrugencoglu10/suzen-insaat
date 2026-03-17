@@ -238,6 +238,7 @@ a:hover {
   justify-content: space-between;
   padding: 0;
   height: 100px;
+  position: relative;
 }
 
 .logo-link {
@@ -261,11 +262,11 @@ a:hover {
 
 /* Company name appears on hover */
 .logo-link::after {
-  content: 'Erol Süzen';
+  content: 'Melis & Ecrin';
   position: absolute;
-  left: 220px; /* Position next to logo */
+  right: 100%;
   top: 50%;
-  transform: translateY(-50%) translateX(-20px);
+  transform: translateY(-50%) translateX(20px);
   font-family: 'Great Vibes', cursive;
   font-size: 30px;
   font-weight: 400;
@@ -290,6 +291,11 @@ a:hover {
   list-style: none;
   gap: var(--space-xl);
   align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .nav-link {
@@ -299,6 +305,7 @@ a:hover {
   border-radius: var(--radius-md);
   transition: all var(--transition);
   position: relative;
+  white-space: nowrap;
 }
 
 .nav-link:visited {
@@ -404,7 +411,7 @@ a:hover {
   position: relative;
   background: linear-gradient(135deg, var(--red-600) 0%, var(--red-800) 100%);
   overflow: hidden;
-  padding-top: 80px;
+  padding-top: 100px;
 }
 
 .hero::before {
@@ -424,11 +431,12 @@ a:hover {
   text-align: center;
   color: var(--white);
   max-width: 900px;
+  margin-top: 1rem;
 }
 
 .hero h1 {
   color: var(--white);
-  font-size: var(--text-6xl);
+  font-size: clamp(1.8rem, 3.2vw, 3.75rem);
   font-weight: 900;
   margin-bottom: var(--space-lg);
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -448,6 +456,104 @@ a:hover {
   justify-content: center;
   flex-wrap: wrap;
   animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+/* === HERO LAYOUT === */
+.hero-layout {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3xl);
+}
+
+.hero-layout .hero-content {
+  flex: 1;
+  text-align: left;
+  max-width: 520px;
+  margin-top: 0;
+}
+
+.hero-layout .hero-content .hero-buttons {
+  justify-content: flex-start;
+}
+
+/* === HERO MOSAIC === */
+.hero-mosaic {
+  flex: 1;
+  position: relative;
+  height: 370px;
+}
+
+.mosaic-item {
+  position: absolute;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255,255,255,0.1);
+}
+
+.mosaic-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Resim yokken placeholder */
+.mosaic-item img[src$=".jpg"]:not([complete]),
+.mosaic-item img {
+  min-height: 100%;
+}
+
+/* Kare konumları ve boyutları */
+.mosaic-1 {
+  width: 200px; height: 190px;
+  top: 0; left: 50px;
+  transform: rotate(-3deg);
+}
+.mosaic-2 {
+  width: 165px; height: 160px;
+  top: 10px; left: 265px;
+  transform: rotate(2.5deg);
+}
+.mosaic-3 {
+  width: 220px; height: 175px;
+  top: 0; right: 0;
+  transform: rotate(-1.5deg);
+}
+.mosaic-4 {
+  width: 180px; height: 185px;
+  top: 185px; left: 100px;
+  transform: rotate(2deg);
+}
+.mosaic-5 {
+  width: 185px; height: 175px;
+  top: 190px; right: 10px;
+  transform: rotate(-2.5deg);
+}
+.mosaic-6 {
+  width: 155px; height: 160px;
+  top: 180px; left: 295px;
+  transform: rotate(1.5deg);
+}
+
+@media (max-width: 900px) {
+  .hero-layout {
+    flex-direction: column;
+  }
+
+  .hero-layout .hero-content {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .hero-layout .hero-content .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-mosaic {
+    display: none;
+  }
 }
 
 @keyframes fadeInUp {
@@ -647,6 +753,7 @@ a:hover {
   z-index: 999;
   transition: all var(--transition);
   text-decoration: none;
+  animation: pulse 1.4s infinite;
 }
 
 .whatsapp-float:hover {
@@ -705,12 +812,14 @@ a:hover {
 
 
 @keyframes pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.9);
   }
   50% {
-    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    box-shadow: 0 0 0 22px rgba(37, 211, 102, 0.15);
+  }
+  100% {
+    box-shadow: 0 0 0 30px rgba(37, 211, 102, 0);
   }
 }
 
@@ -753,9 +862,14 @@ a:hover {
 }
 
 /* === RESPONSIVE === */
+@media (min-width: 768px) {
+  .hero-content {
+    margin-top: 2rem;
+  }
+}
+
 @media (max-width: 1024px) {
   :root {
-    --text-6xl: 3rem;
     --text-5xl: 2.5rem;
     --text-4xl: 2rem;
   }
@@ -766,11 +880,23 @@ a:hover {
   .grid-3 {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .nav-menu {
+    gap: var(--space-sm);
+  }
+
+  .nav-link {
+    padding: var(--space-xs) var(--space-xs);
+    font-size: var(--text-sm);
+  }
+
+  .lang-btn {
+    padding: var(--space-xs) var(--space-sm);
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   :root {
-    --text-6xl: 2.5rem;
     --text-5xl: 2rem;
     --text-4xl: 1.75rem;
   }
