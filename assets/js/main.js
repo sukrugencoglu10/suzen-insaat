@@ -446,10 +446,12 @@ window.addEventListener('scroll', function() {
     return w;
   }
 
+  var tickerSpeed = window.matchMedia('(max-width: 900px)').matches ? 1.4 : 0.6;
+
   function tick() {
     if (!paused) {
       if (!setWidth) setWidth = measureSetWidth();
-      pos -= 0.6;
+      pos -= tickerSpeed;
       if (Math.abs(pos) >= setWidth) {
         pos += setWidth;
       }
