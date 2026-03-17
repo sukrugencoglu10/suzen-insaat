@@ -2,6 +2,20 @@
 // SÜZEN İNŞAAT - MAIN JAVASCRIPT
 // ===================================
 
+// === LOGO TOUCH HOVER (mobile) ===
+document.addEventListener("DOMContentLoaded", function () {
+  const logoLink = document.querySelector(".logo-link");
+  if (logoLink && window.matchMedia("(max-width: 900px)").matches) {
+    let timeout;
+    logoLink.addEventListener("touchstart", function (e) {
+      e.preventDefault();
+      logoLink.classList.add("touch-hover");
+      clearTimeout(timeout);
+      timeout = setTimeout(() => logoLink.classList.remove("touch-hover"), 2000);
+    }, { passive: false });
+  }
+});
+
 // === MOBILE MENU TOGGLE ===
 document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.querySelector(".menu-toggle");
@@ -407,3 +421,46 @@ window.addEventListener('scroll', function() {
     }
   });
 });
+
+// === BRAND TICKER SEAMLESS LOOP ===
+(function () {
+  const track = document.querySelector('.brands-track');
+  if (!track) return;
+
+  // Disable CSS animation — we handle movement with JS
+  track.style.animation = 'none';
+
+  const halfCount = track.children.length / 2;
+  let pos = 0;
+  let setWidth = 0;
+  let paused = false;
+
+  track.parentElement.addEventListener('mouseenter', () => { paused = true; });
+  track.parentElement.addEventListener('mouseleave', () => { paused = false; });
+
+  function measureSetWidth() {
+    let w = 0;
+    for (let i = 0; i < halfCount; i++) {
+      w += track.children[i].getBoundingClientRect().width;
+    }
+    return w;
+  }
+
+  function tick() {
+    if (!paused) {
+      if (!setWidth) setWidth = measureSetWidth();
+      pos -= 0.6;
+      if (Math.abs(pos) >= setWidth) {
+        pos += setWidth;
+      }
+      track.style.transform = 'translateX(' + pos + 'px)';
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Wait for images to load before starting
+  window.addEventListener('load', function () {
+    setWidth = measureSetWidth();
+    requestAnimationFrame(tick);
+  });
+})();

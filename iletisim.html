@@ -18,29 +18,18 @@
         <ul class="nav-menu">
           <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
           <li><a href="index.html#hizmetler" class="nav-link">Hizmetler</a></li>
-          <li><a href="kurumsal.html" class="nav-link">Kurumsal</a></li>
           <li><a href="galeri.html" class="nav-link">Galeri</a></li>
           <li><a href="iletisim.html" class="nav-link active">İletişim</a></li>
-          <li class="lang-switcher">
-            <a href="iletisim.html?lang=tr" class="lang-btn active">TR</a>
-            <a href="en/contact.html" class="lang-btn">EN</a>
-          </li>
-        </ul>
-        <button class="menu-toggle" aria-label="Menüyü Aç/Kapat"><span></span><span></span><span></span></button>
+        </ul><button class="menu-toggle" aria-label="Menüyü Aç/Kapat"><span></span><span></span><span></span></button>
+        <div class="lang-switcher">
+          <a href="iletisim.html?lang=tr" class="lang-btn active"><img src="https://flagcdn.com/w80/tr.png" width="20" height="14" alt="TR" style="vertical-align:middle;border-radius:2px;"></a>
+            <a href="en/contact.html" class="lang-btn"><img src="https://flagcdn.com/w80/gb.png" width="20" height="14" alt="EN" style="vertical-align:middle;border-radius:2px;"></a>
+        </div>
       </nav>
     </div>
   </header>
 
-  <section class="hero" style="min-height: 50vh;">
-    <div class="container">
-      <div class="hero-content">
-        <h1>İletişim</h1>
-        <p>Projeleriniz için bizimle iletişime geçin</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
+  <section class="section" style="padding-top: 120px;">
     <div class="container">
       <div class="grid grid-2" style="gap: var(--space-3xl); align-items: start;">
         <!-- Contact Form -->
@@ -84,6 +73,26 @@
             
             <button type="submit" class="btn btn-red" style="width: 100%;">Gönder</button>
           </form>
+          <script>
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+              e.preventDefault();
+              const name    = document.getElementById('name').value;
+              const email   = document.getElementById('email').value;
+              const phone   = document.getElementById('phone').value;
+              const service = document.getElementById('service').value;
+              const message = document.getElementById('message').value;
+              const serviceLabels = {
+                'cati-kaplama': 'Çatı Kaplama & İzolasyon',
+                'dis-cephe': 'Dış Cephe Sistemleri',
+                'gunes-enerjisi': 'Güneş Enerjisi',
+                'laminant': 'Laminant Parke',
+                'diger': 'Diğer'
+              };
+              const serviceText = serviceLabels[service] || 'Belirtilmedi';
+              const text = `Merhaba, iletişim formundan mesaj aldınız:\n\n👤 Ad Soyad: ${name}\n📧 E-posta: ${email}\n📞 Telefon: ${phone}\n🔧 Hizmet: ${serviceText}\n\n💬 Mesaj:\n${message}`;
+              window.open('https://wa.me/905324052877?text=' + encodeURIComponent(text), '_blank');
+            });
+          </script>
         </div>
         
         <!-- Contact Info -->
@@ -127,13 +136,9 @@
           <div class="card" style="margin-top: var(--space-lg); background: var(--gray-50);">
             <h3>Çalışma Saatleri</h3>
             <ul style="list-style: none; padding: 0;">
-              <li style="padding: var(--space-sm) 0; display: flex; justify-content: space-between; border-bottom: 1px solid var(--gray-200);">
-                <span>Pazartesi - Cuma</span>
-                <strong>09:00 - 18:00</strong>
-              </li>
-              <li style="padding: var(--space-sm) 0; display: flex; justify-content: space-between; border-bottom: 1px solid var(--gray-200);">
-                <span>Cumartesi</span>
-                <strong>09:00 - 14:00</strong>
+              <li style="padding: var(--space-sm) 0; display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px solid var(--gray-200);">
+                <span style="white-space: nowrap;">Pazartesi - Cumartesi</span>
+                <strong style="white-space: nowrap;">09:00 - 18:00</strong>
               </li>
               <li style="padding: var(--space-sm) 0; display: flex; justify-content: space-between;">
                 <span>Pazar</span>
