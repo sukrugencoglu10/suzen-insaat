@@ -8,11 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
   if (logoLink && window.matchMedia("(max-width: 900px)").matches) {
     let timeout;
     logoLink.addEventListener("touchstart", function (e) {
-      e.preventDefault();
       logoLink.classList.add("touch-hover");
       clearTimeout(timeout);
       timeout = setTimeout(() => logoLink.classList.remove("touch-hover"), 2000);
-    }, { passive: false });
+    }, { passive: true });
   }
 });
 
