@@ -593,7 +593,7 @@ a:hover {
   }
 }
 
-/* === HERO MOBILE IMAGE GRID === */
+/* === HERO MOBILE IMAGE SLIDER === */
 .hero-mobile-images {
   display: none;
 }
@@ -605,22 +605,49 @@ a:hover {
   }
 
   .hero-mobile-images {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 12px;
     margin-top: 0;
     margin-bottom: 20px;
+  }
+
+  .hero-mobile-images .slides-track {
+    display: flex;
     width: 100%;
+    transition: transform 0.4s ease;
   }
 
   .hero-mobile-images img {
+    flex: 0 0 100%;
     width: 100%;
-    height: 90px;
+    height: 200px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.2);
     display: block;
+  }
+
+  .hero-slide-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .hero-slide-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .hero-slide-dots span.active {
+    background: #fff;
   }
 }
 
