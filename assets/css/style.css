@@ -1002,6 +1002,11 @@ a:hover {
   .footer-content {
     grid-template-columns: 1fr;
   }
+
+  .footer-logo {
+    height: 120px;
+    padding: 8px 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1014,9 +1019,9 @@ a:hover {
   }
 
   .whatsapp-float {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
+    width: 65px;
+    height: 65px;
+    font-size: 30px;
     bottom: 20px;
     right: 20px;
     animation: pulse-mobile 1.4s infinite;
