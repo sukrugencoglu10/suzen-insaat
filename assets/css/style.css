@@ -1397,24 +1397,32 @@ a:hover {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: white !important;
     text-decoration: none !important;
     font-weight: 600;
     font-size: 0.95rem;
   }
 
   .btn-call {
-    background: #1a2744;
+    background: #780116;
+    color: #F7B538 !important;
+  }
+
+  .btn-call svg {
+    fill: #F7B538 !important;
   }
 
   .btn-directions {
-    background: #f29f12;
+    background: #F7B538;
+    color: #780116 !important;
+  }
+
+  .btn-directions svg {
+    fill: #780116 !important;
   }
 
   .bottom-bar-btn svg {
     width: 20px;
     height: 20px;
-    fill: white;
   }
 }
 
