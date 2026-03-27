@@ -1309,6 +1309,16 @@ a:hover {
   margin-right: 8px;
 }
 
+.nav-directions-btn svg {
+  animation: floating-icon 3s ease-in-out infinite;
+}
+
+@keyframes floating-icon {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+
 .nav-directions-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(230,126,34,0.45);
@@ -1344,6 +1354,12 @@ a:hover {
     text-decoration: none;
   }
 
+  @keyframes floating-icon-float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+
   .directions-float:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
@@ -1353,6 +1369,7 @@ a:hover {
     width: 30px;
     height: 30px;
     fill: white;
+    animation: floating-icon-float 3s ease-in-out infinite;
   }
 
   @keyframes pulse-red {
