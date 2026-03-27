@@ -23,7 +23,7 @@
   --red-300: #fca5a5;
   --red-400: #f87171;
   --red-500: #ef4444;
-  --red-600: #dc2626;
+  --red-600: #CD0000; /* Cherry Red */
   --red-700: #b91c1c;
   --red-800: #991b1b;
   --red-900: #7f1d1d;
@@ -221,8 +221,9 @@ a:hover {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
+  background: #ffffff;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: var(--shadow-sm);
   transition: all var(--transition);
 }
@@ -422,7 +423,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: linear-gradient(135deg, var(--red-600) 0%, var(--red-800) 100%);
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
   overflow: hidden;
   padding-top: 100px;
 }
@@ -1210,6 +1211,7 @@ a:hover {
 .brands-ticker-wrapper {
   overflow: hidden;
   position: relative;
+  isolation: isolate;
 }
 
 .brands-ticker-wrapper::before,
@@ -1239,6 +1241,7 @@ a:hover {
   gap: 0;
   animation: none;
   width: max-content;
+  background: var(--white);
 }
 
 .brands-ticker-wrapper:hover .brands-track {
@@ -1251,6 +1254,7 @@ a:hover {
   justify-content: center;
   flex-shrink: 0;
   padding: 0 48px;
+  background: var(--white);
 }
 
 .brand-item img {
@@ -1258,9 +1262,11 @@ a:hover {
   width: auto;
   max-width: 160px;
   object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.6;
-  transition: filter 0.3s ease, opacity 0.3s ease;
+  filter: none;
+  opacity: 1;
+  mix-blend-mode: multiply;
+  display: block;
+  transition: all 0.3s ease;
 }
 
 .brand-item img:hover {
@@ -1364,3 +1370,42 @@ a:hover {
   }
 }
 
+/* === STATS SECTION === */
+.stats-section {
+  padding: var(--space-2xl) 0;
+  background: var(--white);
+  border-top: 1px solid var(--gray-100);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-xl);
+  text-align: center;
+}
+
+.stat-item {
+  padding: var(--space-lg);
+}
+
+.stat-number {
+  display: block;
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  color: var(--red-600);
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-primary);
+}
+
+.stat-label {
+  display: block;
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .stat-number {
+    font-size: var(--text-3xl);
+  }
+}

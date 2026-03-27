@@ -239,38 +239,54 @@ function switchLanguage(lang) {
 
   const currentPath = window.location.pathname;
   const currentPage = currentPath.split("/").pop() || "index.html";
+  
+  // File name mappings between TR and EN
+  const trToEn = {
+    "index.html": "index.html",
+    "galeri.html": "gallery.html",
+    "hakkimizda.html": "corporate.html",
+    "kurumsal.html": "corporate.html",
+    "iletisim.html": "contact.html"
+  };
+  
+  const enToTr = {
+    "index.html": "index.html",
+    "gallery.html": "galeri.html",
+    "corporate.html": "hakkimizda.html",
+    "contact.html": "iletisim.html"
+  };
 
   if (lang === "en") {
-    // Switch to English
     if (!currentPath.includes("/en/")) {
-      window.location.href = "/en/" + currentPage;
+      const enPage = trToEn[currentPage] || "index.html";
+      window.location.href = "en/" + enPage;
     }
   } else {
-    // Switch to Turkish
     if (currentPath.includes("/en/")) {
-      const newPath = currentPath.replace("/en/", "/");
-      window.location.href = newPath;
+      const trPage = enToTr[currentPage] || "index.html";
+      const newPath = currentPath.replace("/en/" + currentPage, "/" + trPage);
+      window.location.href = window.location.origin + "/" + trPage;
     }
   }
 }
 
-// Auto-redirect on first visit based on browser language
+// Auto-redirect disabled to prevent navigation issues
+/*
 document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const langParam = urlParams.get("lang");
 
-  // Don't auto-redirect if user explicitly chose a language
   if (!langParam && !localStorage.getItem("preferredLanguage")) {
     const detectedLang = detectLanguage();
     const currentPath = window.location.pathname;
 
-    // If detected language is English and we're not on English page, redirect
     if (detectedLang === "en" && !currentPath.includes("/en/")) {
       const currentPage = currentPath.split("/").pop() || "index.html";
       window.location.href = "/en/" + currentPage;
     }
   }
 });
+*/
 
 // === GALLERY LIGHTBOX ===
 function initGallery() {
@@ -499,7 +515,7 @@ window.addEventListener('scroll', function() {
     return w;
   }
 
-  var tickerSpeed = window.matchMedia('(max-width: 900px)').matches ? 1.4 : 0.6;
+  var tickerSpeed = window.matchMedia('(max-width: 900px)').matches ? 3.0 : 1.8;
 
   function tick() {
     if (!paused) {
@@ -519,3 +535,45 @@ window.addEventListener('scroll', function() {
     requestAnimationFrame(tick);
   });
 })();
+
+// === COUNTER ANIMATION ===
+function animateCounters() {
+  const stats = document.querySelectorAll('.stat-number');
+  const duration = 2000; // 2 seconds
+
+  stats.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+    const start = 0;
+    const startTime = performance.now();
+
+    const updateCount = (currentTime) => {
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+      
+      const currentCount = Math.floor(easeProgress * target);
+      counter.innerText = currentCount + (counter.getAttribute('data-suffix') || "");
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      } else {
+        counter.innerText = target + (counter.getAttribute('data-suffix') || "");
+      }
+    };
+    requestAnimationFrame(updateCount);
+  });
+}
+
+// Observe stats section
+document.addEventListener('DOMContentLoaded', () => {
+  const statsSection = document.querySelector('.stats-section');
+  if (statsSection) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        animateCounters();
+        observer.disconnect();
+      }
+    }, { threshold: 0.2 });
+    observer.observe(statsSection);
+  }
+});
