@@ -1317,7 +1317,7 @@ a:hover {
 
 @media (max-width: 768px) {
   .nav-directions-btn {
-    display: none;
+    display: inline-flex;
   }
 }
 
@@ -1334,7 +1334,7 @@ a:hover {
     left: 30px;
     width: 60px;
     height: 60px;
-    background: #e30a17;
+    background: linear-gradient(135deg, #e67e22, #d35400);
     border-radius: 50%;
     align-items: center;
     justify-content: center;
