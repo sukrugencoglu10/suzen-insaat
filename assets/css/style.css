@@ -1412,13 +1412,13 @@ a:hover {
   }
 
   .btn-directions {
-    background: #EFEDE6;
-    color: #CD0000 !important;
-    border-left: 1px solid rgba(0,0,0,0.05);
+    background: #f29f12;
+    color: white !important;
+    border-left: 1px solid rgba(0,0,0,0.1);
   }
 
   .btn-directions svg {
-    fill: #CD0000 !important;
+    fill: white !important;
   }
 
   .bottom-bar-btn svg {
