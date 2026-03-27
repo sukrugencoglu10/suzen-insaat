@@ -1403,21 +1403,22 @@ a:hover {
   }
 
   .btn-call {
-    background: #780116;
-    color: #F7B538 !important;
+    background: #CD0000;
+    color: #EFEDE6 !important;
   }
 
   .btn-call svg {
-    fill: #F7B538 !important;
+    fill: #EFEDE6 !important;
   }
 
   .btn-directions {
-    background: #F7B538;
-    color: #780116 !important;
+    background: #EFEDE6;
+    color: #CD0000 !important;
+    border-left: 1px solid rgba(0,0,0,0.05);
   }
 
   .btn-directions svg {
-    fill: #780116 !important;
+    fill: #CD0000 !important;
   }
 
   .bottom-bar-btn svg {
