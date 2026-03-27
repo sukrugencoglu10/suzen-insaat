@@ -1079,6 +1079,18 @@ a:hover {
       box-shadow: 0 0 0 58px rgba(37, 211, 102, 0);
     }
   }
+  .footer-logo {
+    display: block;
+    margin: 0 auto var(--space-xl);
+  }
+
+  .footer-section {
+    text-align: center;
+  }
+
+  .footer-section .footer-links {
+    padding-left: 0;
+  }
 }
 
 /* === UTILITY CLASSES === */
@@ -1318,8 +1330,8 @@ a:hover {
   .directions-float {
     display: flex;
     position: fixed;
-    bottom: 100px;
-    right: 30px;
+    bottom: 30px;
+    left: 30px;
     width: 60px;
     height: 60px;
     background: #e30a17;
@@ -1330,7 +1342,6 @@ a:hover {
     z-index: 998;
     transition: all var(--transition);
     text-decoration: none;
-    animation: pulse-red 1.4s infinite;
   }
 
   .directions-float:hover {
@@ -1361,8 +1372,8 @@ a:hover {
   .directions-float {
     width: 65px;
     height: 65px;
-    bottom: 95px;
-    right: 20px;
+    bottom: 20px;
+    left: 20px;
   }
   .directions-float svg {
     width: 35px;

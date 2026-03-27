@@ -515,7 +515,7 @@ window.addEventListener('scroll', function() {
     return w;
   }
 
-  var tickerSpeed = window.matchMedia('(max-width: 900px)').matches ? 3.0 : 1.8;
+  var tickerSpeed = window.matchMedia('(max-width: 900px)').matches ? 1.6 : 1.8;
 
   function tick() {
     if (!paused) {
