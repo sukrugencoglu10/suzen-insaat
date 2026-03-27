@@ -404,6 +404,10 @@ a:hover {
   transition: all var(--transition);
 }
 
+.header.scrolled .menu-toggle span {
+  background: var(--text-primary);
+}
+
 .menu-toggle.active span:nth-child(1) {
   transform: rotate(45deg) translate(7px, 7px);
 }
@@ -732,6 +736,28 @@ a:hover {
   align-self: flex-start;
 }
 
+@media (max-width: 900px) {
+  .card {
+     background: linear-gradient(135deg, var(--red-600), var(--red-800));
+     color: var(--white);
+     border: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .card h3, .card p {
+    color: var(--white) !important;
+  }
+  
+  .card-icon {
+    background: var(--white);
+    color: var(--primary);
+  }
+  
+  .card .btn-red {
+    background: var(--white);
+    color: var(--primary);
+  }
+}
+
 .card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-xl);
@@ -1027,6 +1053,18 @@ a:hover {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
+    background: linear-gradient(135deg, var(--red-600), var(--red-800));
+    color: var(--white);
+  }
+  
+  .nav-menu.active .nav-link {
+    color: var(--white) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: var(--space-md) 0;
+  }
+  
+  .nav-menu.active .nav-link:hover {
+    background: rgba(255,255,255,0.1);
   }
 
   .grid-2,
@@ -1433,7 +1471,20 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+  .stats-section {
+    background: linear-gradient(135deg, var(--red-600), var(--red-800));
+    color: var(--white);
+    border-top: none;
+  }
+  
+  .stats-section .section-title,
+  .stats-section .section-label,
+  .stat-label {
+    color: var(--white) !important;
+  }
+  
   .stat-number {
     font-size: var(--text-3xl);
+    color: var(--white) !important;
   }
 }
