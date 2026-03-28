@@ -7,7 +7,10 @@
       "Bash(node -e \":*)",
       "Bash(sed -i 's|\\\\.\\\\./assets/images/suzen-logo\\\\.svg|../assets/images/logolar/suzen-logo.svg|g' hizmetler/cati-kaplama.html hizmetler/dis-cephe.html hizmetler/gunes-enerjisi.html hizmetler/laminant.html en/corporate.html en/contact.html en/gallery.html en/index.html)",
       "Bash(sed -i 's|\\\\.\\\\./\\\\.\\\\./assets/images/suzen-logo\\\\.svg|../../assets/images/logolar/suzen-logo.svg|g' en/services/roofing.html en/services/facade.html en/services/solar.html en/services/laminate.html)",
-      "Bash(py --version)"
+      "Bash(py --version)",
+      "Bash(magick --version)",
+      "Bash(convert --version)",
+      "Bash(npx sharp-cli:*)"
     ]
   }
 }
