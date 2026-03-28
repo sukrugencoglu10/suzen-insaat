@@ -4,7 +4,10 @@
       "Bash(npx --version)",
       "mcp__Claude_Preview__preview_start",
       "Bash(where npx:*)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Bash(sed -i 's|\\\\.\\\\./assets/images/suzen-logo\\\\.svg|../assets/images/logolar/suzen-logo.svg|g' hizmetler/cati-kaplama.html hizmetler/dis-cephe.html hizmetler/gunes-enerjisi.html hizmetler/laminant.html en/corporate.html en/contact.html en/gallery.html en/index.html)",
+      "Bash(sed -i 's|\\\\.\\\\./\\\\.\\\\./assets/images/suzen-logo\\\\.svg|../../assets/images/logolar/suzen-logo.svg|g' en/services/roofing.html en/services/facade.html en/services/solar.html en/services/laminate.html)",
+      "Bash(py --version)"
     ]
   }
 }
