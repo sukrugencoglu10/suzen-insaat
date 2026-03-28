@@ -1536,3 +1536,51 @@ a:hover {
 @media (max-width: 768px) {
   .firsat-section .grid-3 { grid-template-columns: 1fr; }
 }
+
+/* === FIRSAT — YENİ ELEMENTLER === */
+.firsat-trust-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  background: linear-gradient(135deg, var(--red-600), var(--red-700));
+  border-radius: var(--radius-xl);
+  padding: var(--space-md) var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  color: white;
+}
+.firsat-trust-item {
+  font-size: var(--text-sm);
+  padding: 6px 14px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.firsat-price-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: var(--space-xs);
+}
+.price-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--red-600);
+}
+.price-saving {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: #16a34a;
+  background: #f0fdf4;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+@media (max-width: 600px) {
+  .firsat-trust-bar { gap: var(--space-xs); padding: var(--space-sm); }
+  .firsat-trust-item { font-size: 0.75rem; }
+}
