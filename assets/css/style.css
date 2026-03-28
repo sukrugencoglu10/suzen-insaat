@@ -427,20 +427,11 @@ a:hover {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+  background:
+    linear-gradient(135deg, rgba(220,38,38,0.85) 0%, rgba(153,27,27,0.88) 100%),
+    url('../images/building-dream.jpeg') center/cover no-repeat;
   overflow: hidden;
   padding-top: 100px;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
-  opacity: 0.3;
 }
 
 .hero-content {
@@ -1543,16 +1534,19 @@ a:hover {
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-sm);
-  background: linear-gradient(135deg, var(--red-600), var(--red-700));
+  background: white;
+  border: 1px solid var(--gray-200);
   border-radius: var(--radius-xl);
   padding: var(--space-md) var(--space-xl);
   margin-bottom: var(--space-2xl);
-  color: white;
+  color: var(--text-primary);
 }
 .firsat-trust-item {
-  font-size: var(--text-sm);
-  padding: 6px 14px;
-  background: rgba(255,255,255,0.15);
+  font-size: var(--text-base);
+  font-weight: 600;
+  padding: 8px 18px;
+  background: linear-gradient(135deg, var(--red-600), var(--red-700));
+  color: white;
   border-radius: 20px;
   white-space: nowrap;
 }
@@ -1674,3 +1668,347 @@ a:hover {
 .sonuc-sayi { font-size: 3.5rem; font-weight: 900; color: var(--red-600); line-height: 1; }
 .sonuc-aciklama { font-size: var(--text-base); font-weight: 600; color: var(--text-secondary); margin-top: 6px; }
 .sonuc-not { font-size: var(--text-xs); color: var(--gray-400); text-align: center; margin: 0; }
+
+/* === YAN YANA: REFERANS + HESAP === */
+.hesap-referans-section { background: var(--gray-50); }
+
+.hesap-referans-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+.referans-col, .hesap-col { display: flex; flex-direction: column; }
+
+.hesap-col .hesap-card {
+  box-shadow: var(--shadow-md);
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .hesap-referans-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
+}
+
+/* === MÜŞTERİ YORUMLARI (TESTİMONIALS) === */
+.testimonials-section { background: var(--gray-50); }
+
+.google-rating-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: white;
+  border-radius: 12px;
+  padding: 16px 24px;
+  border: 1px solid var(--gray-200);
+  max-width: 600px;
+  margin: 0 auto var(--space-2xl);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.google-logo { height: 20px; }
+.rating-stars { color: #FBBC05; font-size: 1.2rem; letter-spacing: 2px; }
+.rating-score { font-size: 1.3rem; font-weight: 800; color: var(--text-primary); }
+.rating-count { font-size: var(--text-sm); color: var(--text-secondary); }
+.rating-link {
+  font-size: var(--text-sm);
+  color: #1a73e8;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: auto;
+}
+.rating-link:hover { text-decoration: underline; }
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  background: white;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--gray-200);
+  padding: var(--space-xl);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: all var(--transition);
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tc-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.tc-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--red-600), var(--red-800));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.tc-meta { flex: 1; }
+.tc-name { font-weight: 700; font-size: var(--text-sm); color: var(--text-primary); }
+.tc-stars { color: #FBBC05; font-size: 0.85rem; letter-spacing: 1px; }
+.tc-google-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.tc-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+.tc-date { font-size: 0.72rem; color: var(--gray-400); }
+
+@media (max-width: 768px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+}
+
+/* === KENDİ EVİNİ TASARLA SAYFASI === */
+.tasarim-hero {
+  background: linear-gradient(135deg, var(--red-600), var(--red-800));
+  color: white;
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  text-align: center;
+}
+.tasarim-hero .section-label { color: rgba(255,255,255,0.8); }
+.tasarim-hero-title {
+  font-size: var(--text-5xl);
+  font-weight: 800;
+  margin: var(--space-sm) 0 var(--space-md);
+  color: white;
+}
+.tasarim-hero-desc {
+  font-size: var(--text-lg);
+  color: rgba(255,255,255,0.9);
+  max-width: 620px;
+  margin: 0 auto var(--space-md);
+  line-height: 1.6;
+}
+.tasarim-tip {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border-radius: var(--radius-full);
+  padding: 8px 18px;
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.9);
+}
+
+.tasarim-section { background: var(--gray-50); }
+
+.tasarim-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+/* --- SOL: Önizleme --- */
+.tasarim-left { position: sticky; top: 90px; }
+
+.tasarim-preview-wrap {
+  position: relative;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  background: var(--gray-200);
+  aspect-ratio: 4/3;
+}
+.tasarim-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 300ms ease;
+}
+.tasarim-overlay {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  background-color: transparent;
+  transition: background-color 350ms ease, opacity 350ms ease;
+  pointer-events: none;
+}
+.tasarim-secilen-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.55);
+  color: white;
+  text-align: center;
+  padding: 10px 16px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+.tasarim-thumbs {
+  display: flex;
+  gap: 10px;
+  margin-top: var(--space-md);
+}
+.tasarim-thumb {
+  flex: 1;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: border-color 200ms, transform 200ms;
+  opacity: 0.7;
+}
+.tasarim-thumb:hover { opacity: 0.9; transform: scale(1.03); }
+.tasarim-thumb.active {
+  border-color: var(--red-600);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* --- SAĞ: Panel --- */
+.tasarim-panel {
+  background: white;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--gray-200);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.tasarim-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: var(--space-xl);
+  background: var(--gray-100);
+  border-radius: var(--radius-xl);
+  padding: 4px;
+}
+.tasarim-tab {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: var(--radius-lg);
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 200ms;
+}
+.tasarim-tab.active {
+  background: white;
+  color: var(--red-600);
+  box-shadow: var(--shadow-sm);
+}
+
+.palette-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: var(--space-lg);
+}
+
+.tasarim-swatch {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: transform 200ms, border-color 200ms, box-shadow 200ms;
+  overflow: visible;
+}
+.tasarim-swatch:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.tasarim-swatch.active {
+  border-color: var(--red-600);
+  transform: scale(1.12);
+  box-shadow: 0 0 0 2px white, 0 0 0 4px var(--red-600);
+}
+.swatch-label {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gray-900);
+  color: white;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms;
+  z-index: 10;
+}
+.tasarim-swatch:hover .swatch-label { opacity: 1; }
+
+.tasarim-sifirla-btn {
+  width: 100%;
+  padding: 8px;
+  border: 1px dashed var(--gray-300);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  margin-bottom: var(--space-lg);
+  transition: all 200ms;
+}
+.tasarim-sifirla-btn:hover {
+  border-color: var(--red-400);
+  color: var(--red-600);
+  background: var(--red-50);
+}
+
+.tasarim-cta { border-top: 1px solid var(--gray-100); padding-top: var(--space-lg); }
+.tasarim-cta-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+.tasarim-wa-btn {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  color: #ffffff !important;
+}
+.tasarim-wa-btn:hover { color: #ffffff !important; }
+
+@media (max-width: 900px) {
+  .tasarim-grid { grid-template-columns: 1fr; }
+  .tasarim-left { position: static; }
+  .tasarim-hero-title { font-size: var(--text-3xl); }
+  .swatch-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* === HERO İLLÜSTRASYON === */
+.hero-illustration {
+  display: block;
+  max-width: 420px;
+  width: 100%;
+  margin: var(--space-lg) 0;
+  border-radius: var(--radius-xl);
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.25));
+}
+@media (max-width: 900px) {
+  .hero-illustration { max-width: 280px; margin: var(--space-md) auto; }
+}
