@@ -296,6 +296,46 @@
       </div>
     </section>
 
+    <!-- Hesap Makinesi -->
+    <section class="section hesap-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Ücretsiz Hesaplama</span>
+          <h2 class="section-title">Kaç Paket Lazım?</h2>
+          <p class="section-description">Metrekarenizi girin, ihtiyacınızı anında hesaplayalım.</p>
+        </div>
+
+        <div class="hesap-card">
+          <div class="hesap-tabs">
+            <button class="hesap-tab active" data-tip="laminant">🪵 Laminant Parke</button>
+            <button class="hesap-tab" data-tip="cephe">🏠 Dış Cephe Mantolama</button>
+          </div>
+
+          <div class="hesap-input-row">
+            <label class="hesap-label" for="hesapM2">Kaç m² alanınız var?</label>
+            <div class="hesap-input-wrap">
+              <input type="number" id="hesapM2" min="1" placeholder="Örn: 45" class="hesap-input">
+              <span class="hesap-unit">m²</span>
+            </div>
+          </div>
+
+          <button class="btn btn-red hesap-btn" onclick="hesapla()">Hesapla →</button>
+
+          <div class="hesap-sonuc" id="hesapSonuc" style="display:none;">
+            <div class="sonuc-box">
+              <div class="sonuc-sayi" id="sonucSayi">—</div>
+              <div class="sonuc-aciklama" id="sonucAciklama"></div>
+            </div>
+            <p class="sonuc-not" id="sonucNot"></p>
+            <a id="hesapWA" href="#" class="btn btn-red" target="_blank"
+               style="width:100%;text-align:center;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;">
+              💬 WhatsApp'tan Kesin Fiyat Al
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Stats Section -->
     <section class="stats-section">
       <div class="container">
@@ -458,6 +498,44 @@
 
     <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
+    <script>
+      // Hesap Makinesi Tab
+      document.querySelectorAll('.hesap-tab').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.hesap-tab').forEach(function(b) { b.classList.remove('active'); });
+          this.classList.add('active');
+          document.getElementById('hesapSonuc').style.display = 'none';
+          document.getElementById('hesapM2').value = '';
+        });
+      });
+
+      function hesapla() {
+        var m2 = parseFloat(document.getElementById('hesapM2').value);
+        if (!m2 || m2 <= 0) { document.getElementById('hesapM2').focus(); return; }
+        var tip = document.querySelector('.hesap-tab.active').dataset.tip;
+        var sayi, birim, not, waText;
+        if (tip === 'laminant') {
+          sayi = Math.ceil(m2 * 1.10 / 2);
+          birim = 'Paket Laminant Parke';
+          not = '%10 fire payı dahil edildi. Kesin ölçüm için uzmanımıza danışın.';
+          waText = m2 + 'm² laminant parke için fiyat almak istiyorum.';
+        } else {
+          sayi = Math.ceil(m2 * 1.15 / 5);
+          birim = 'Torba Dış Cephe Malzemesi';
+          not = '%15 fire payı dahil edildi. Kesin hesap için uzmanımıza danışın.';
+          waText = m2 + 'm² dış cephe mantolama için fiyat almak istiyorum.';
+        }
+        document.getElementById('sonucSayi').textContent = sayi;
+        document.getElementById('sonucAciklama').textContent = birim;
+        document.getElementById('sonucNot').textContent = not;
+        document.getElementById('hesapWA').href = 'https://wa.me/905324052877?text=' + encodeURIComponent(waText);
+        document.getElementById('hesapSonuc').style.display = 'flex';
+      }
+
+      document.getElementById('hesapM2').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') hesapla();
+      });
+    </script>
   </body>
 </html>
 
