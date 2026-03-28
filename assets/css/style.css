@@ -1584,3 +1584,9 @@ a:hover {
   .firsat-trust-bar { gap: var(--space-xs); padding: var(--space-sm); }
   .firsat-trust-item { font-size: 0.75rem; }
 }
+
+/* Firsat kart buton hover kontrast düzeltmesi */
+.firsat-card .btn-red,
+.firsat-card .btn-red:hover {
+  color: #ffffff !important;
+}
