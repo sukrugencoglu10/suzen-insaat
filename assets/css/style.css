@@ -1590,3 +1590,45 @@ a:hover {
 .firsat-card .btn-red:hover {
   color: #ffffff !important;
 }
+
+/* === STOKTA HAZIR ROZETİ === */
+.firsat-stock-badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: #16a34a;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 9px;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+/* === REFERANS KÖYLER === */
+.referans-section { background: var(--gray-50); }
+
+.referans-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.referans-item {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: all 0.2s;
+}
+.referans-item:hover {
+  border-color: var(--red-300);
+  box-shadow: 0 4px 12px rgba(205,0,0,0.12);
+  transform: translateY(-2px);
+}
