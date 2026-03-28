@@ -491,50 +491,6 @@ window.addEventListener('scroll', function() {
   });
 });
 
-// === BRAND TICKER SEAMLESS LOOP ===
-(function () {
-  const track = document.querySelector('.brands-track');
-  if (!track) return;
-
-  // Disable CSS animation — we handle movement with JS
-  track.style.animation = 'none';
-
-  const halfCount = track.children.length / 2;
-  let pos = 0;
-  let setWidth = 0;
-  let paused = false;
-
-  track.parentElement.addEventListener('mouseenter', () => { paused = true; });
-  track.parentElement.addEventListener('mouseleave', () => { paused = false; });
-
-  function measureSetWidth() {
-    let w = 0;
-    for (let i = 0; i < halfCount; i++) {
-      w += track.children[i].getBoundingClientRect().width;
-    }
-    return w;
-  }
-
-  var tickerSpeed = window.matchMedia('(max-width: 900px)').matches ? 1.6 : 1.8;
-
-  function tick() {
-    if (!paused) {
-      if (!setWidth) setWidth = measureSetWidth();
-      pos -= tickerSpeed;
-      if (Math.abs(pos) >= setWidth) {
-        pos += setWidth;
-      }
-      track.style.transform = 'translateX(' + pos + 'px)';
-    }
-    requestAnimationFrame(tick);
-  }
-
-  // Wait for images to load before starting
-  window.addEventListener('load', function () {
-    setWidth = measureSetWidth();
-    requestAnimationFrame(tick);
-  });
-})();
 
 // === COUNTER ANIMATION ===
 function animateCounters() {

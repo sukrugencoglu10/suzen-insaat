@@ -1289,7 +1289,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 0;
-  animation: none;
+  animation: brandScroll 25s linear infinite;
   width: max-content;
   background: var(--white);
 }
@@ -1303,6 +1303,8 @@ a:hover {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-sizing: border-box;
+  width: 256px;
   padding: 0 48px;
   background: var(--white);
 }
@@ -1326,7 +1328,7 @@ a:hover {
 
 @keyframes brandScroll {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(calc(-100% / 3)); }
 }
 
 /* === NAV DIRECTIONS BUTTON (DESKTOP ONLY) === */
