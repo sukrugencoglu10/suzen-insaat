@@ -434,7 +434,9 @@ a:hover {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: url('../images/indir%20(10).jpeg') center/cover no-repeat;
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
+    url('../images/indir%20(10).jpeg') center/cover no-repeat;
   overflow: hidden;
   padding-top: 100px;
 }
