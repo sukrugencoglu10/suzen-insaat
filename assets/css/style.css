@@ -1091,6 +1091,11 @@ a:hover {
     --text-4xl: 1.75rem;
   }
 
+  .logo-link {
+    width: 160px;
+    flex-shrink: 0;
+  }
+
   .menu-toggle {
     display: flex;
     order: 3;
