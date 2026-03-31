@@ -1486,15 +1486,19 @@ a:hover {
     align-items: center;
     background: linear-gradient(135deg, var(--red-600), var(--red-800)) !important;
     color: var(--white) !important;
-    margin-left: auto; /* Sağa iterek logoyu sola yaslar */
-    margin-right: var(--space-md);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    margin-right: 0;
     padding: 7px 14px;
     font-size: 0.8rem;
     font-weight: 700;
     border-radius: 40px;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4) !important;
-    order: 0;
+    order: 2;
+    overflow: visible;
     animation: mobile-pulse-red 2s infinite !important;
   }
 
@@ -1517,10 +1521,6 @@ a:hover {
   }
 
   /* === CIN ALI (STICKMAN) BUILDER ANIMATION === */
-  .nav-design-btn {
-    position: relative; /* Required for stickman container */
-    overflow: visible;
-  }
   
   .builder-stickman {
     position: absolute;
