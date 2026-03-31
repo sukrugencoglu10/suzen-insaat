@@ -236,7 +236,7 @@ a:hover {
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0;
   height: 100px;
   position: relative;
@@ -249,6 +249,8 @@ a:hover {
   width: 250px; /* Space reserved for logo in layout */
   height: 100px; /* Same as navbar height */
   overflow: visible;
+  order: 1;
+  flex-shrink: 0;
 }
 
 .logo {
@@ -292,6 +294,8 @@ a:hover {
   list-style: none;
   gap: var(--space-lg);
   align-items: center;
+  order: 3;
+  margin-left: auto;
   flex-wrap: nowrap;
   white-space: nowrap;
   flex: 1;
@@ -349,10 +353,11 @@ a:hover {
   background: transparent;
   padding: 0;
   border-radius: 0;
-  margin-left: auto;
+  margin-left: 0;
   align-items: center;
   z-index: 1001;
   flex-shrink: 0;
+  order: 6;
 }
 
 .lang-btn {
@@ -429,7 +434,9 @@ a:hover {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: var(--white);
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.92)),
+    url('../images/indir%20(10).jpeg') center/cover no-repeat;
   overflow: hidden;
   padding-top: 100px;
 }
@@ -1399,8 +1406,7 @@ a:hover {
 
 /* === NAV DESIGN BUTTON === */
 .nav-design-btn {
-  display: none !important;
-  /* display: inline-flex;
+  display: inline-flex;
   align-items: center;
   gap: 5px;
   background: linear-gradient(135deg, #8e44ad, #9b59b6);
@@ -1413,8 +1419,9 @@ a:hover {
   white-space: nowrap;
   box-shadow: 0 3px 10px rgba(142, 68, 173, 0.35);
   transition: all 0.25s ease;
-  margin-left: 8px;
-  margin-right: var(--space-md); */
+  margin-left: var(--space-lg);
+  margin-right: 0;
+  order: 2;
 }
 
 .nav-design-btn svg {
@@ -1435,6 +1442,7 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  order: 5;
   background: linear-gradient(135deg, #e67e22, #d35400);
   color: white !important;
   text-decoration: none !important;
