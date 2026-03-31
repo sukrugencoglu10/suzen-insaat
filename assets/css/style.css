@@ -444,9 +444,10 @@ a:hover {
   position: absolute;
   inset: 0;
   background: 
+    linear-gradient(to left, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 50%),
     linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)),
     url('../images/%d0%93%d0%bb%d0%b0%d0%b2%d0%bd%d0%b0%d1%8f%20-.jpeg') center/cover no-repeat;
-  filter: blur(1.5px); /* %2 buzlama hissi için 1.5px blur */
+  filter: blur(5px); /* %10 buzlama hissi için 5px blur */
   transform: scale(1.1); /* Blur kenarlarındaki beyazlığı önlemek için hafif büyütme */
   z-index: 0;
 }
