@@ -472,6 +472,7 @@ a:hover {
 .hero p {
   color: #000000;
   font-size: var(--text-xl);
+  font-weight: 600; /* Kalınlaştırıldı */
   margin-bottom: var(--space-2xl);
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
