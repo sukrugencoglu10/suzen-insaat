@@ -268,16 +268,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Mobile: inject lang switcher into hamburger menu
-  if (window.matchMedia("(max-width: 1100px)").matches) {
-    const langSwitcher = document.querySelector(".lang-switcher");
-    if (langSwitcher && navMenu) {
-      const li = document.createElement("li");
-      li.style.cssText = "display:flex; gap:14px; padding:10px 0; border-top:1px solid rgba(0,0,0,0.08); margin-top:6px; justify-content:center;";
-      li.innerHTML = langSwitcher.innerHTML;
-      navMenu.appendChild(li);
-    }
-  }
 });
 
 // === STICKY HEADER ON SCROLL ===

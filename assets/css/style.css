@@ -1429,10 +1429,12 @@ a:hover {
   }
 
   .lang-switcher {
-    margin-left: 0;
+    display: flex !important;
+    margin-left: auto;
     margin-right: 0;
   }
 }
+
 
 /* === DIRECTIONS BUTTON (MOBILE ONLY) - HIDDEN IN FAVOR OF BOTTOM BAR === */
 .directions-float {
