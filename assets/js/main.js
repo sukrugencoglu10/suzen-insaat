@@ -43,6 +43,181 @@ document.addEventListener("DOMContentLoaded", function () {
     if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
     startAuto();
   }, { passive: true });
+
+  // Click to next image
+  track.addEventListener("click", () => {
+    clearInterval(autoTimer);
+    goTo(current + 1);
+    startAuto();
+  });
+});
+
+// === HERO DESKTOP MOSAIC CLICK TO CYCLE ===
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.matchMedia("(max-width: 900px)").matches) return;
+
+  const heroMosaic = document.getElementById("heroMosaic");
+  if (!heroMosaic) return;
+
+  const mosaicItems = heroMosaic.querySelectorAll(".mosaic-item img");
+  const heroImages = [
+    "assets/images/3.jpg",
+    "assets/images/1.jpg",
+    "assets/images/5.jpeg",
+    "assets/images/6.jpg",
+    "assets/images/2.jpg",
+    "assets/images/4.jpeg"
+  ];
+
+  let currentImageIndex = 0;
+
+  // Create lightbox for hero images
+  const lightbox = document.createElement("div");
+  lightbox.className = "hero-lightbox";
+  lightbox.innerHTML = `
+    <div class="hero-lightbox-content">
+      <span class="hero-lightbox-close">&times;</span>
+      <img class="hero-lightbox-image" src="" alt="İnşaat" />
+      <button class="hero-lightbox-nav hero-lightbox-prev">&#10094;</button>
+      <button class="hero-lightbox-nav hero-lightbox-next">&#10095;</button>
+      <div class="hero-lightbox-counter"><span id="current">1</span> / <span id="total">6</span></div>
+    </div>
+  `;
+  document.body.appendChild(lightbox);
+
+  // Add lightbox styles
+  const style = document.createElement("style");
+  style.textContent = `
+    .hero-lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9998;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-lightbox.active {
+      display: flex;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .hero-lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-lightbox-image {
+      max-width: 100%;
+      max-height: 85vh;
+      object-fit: contain;
+    }
+    .hero-lightbox-close {
+      position: absolute;
+      top: -35px;
+      right: 0;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      z-index: 10000;
+      transition: color 0.3s;
+    }
+    .hero-lightbox-close:hover {
+      color: #ccc;
+    }
+    .hero-lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 28px;
+      color: white;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      padding: 15px 18px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      border-radius: 3px;
+    }
+    .hero-lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .hero-lightbox-prev { left: 15px; }
+    .hero-lightbox-next { right: 15px; }
+    .hero-lightbox-counter {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+  `;
+  document.head.appendChild(style);
+
+  function showImage(index) {
+    currentImageIndex = (index + heroImages.length) % heroImages.length;
+    const lightboxImage = lightbox.querySelector(".hero-lightbox-image");
+    lightboxImage.src = heroImages[currentImageIndex];
+    document.getElementById("current").textContent = currentImageIndex + 1;
+  }
+
+  // Click on mosaic images to open lightbox
+  mosaicItems.forEach((img, index) => {
+    img.style.cursor = "pointer";
+    img.addEventListener("click", function (e) {
+      e.stopPropagation();
+      lightbox.classList.add("active");
+      showImage(index);
+    });
+  });
+
+  // Close lightbox
+  lightbox.querySelector(".hero-lightbox-close").addEventListener("click", function () {
+    lightbox.classList.remove("active");
+  });
+
+  // Next image
+  lightbox.querySelector(".hero-lightbox-next").addEventListener("click", function (e) {
+    e.stopPropagation();
+    showImage(currentImageIndex + 1);
+  });
+
+  // Previous image
+  lightbox.querySelector(".hero-lightbox-prev").addEventListener("click", function (e) {
+    e.stopPropagation();
+    showImage(currentImageIndex - 1);
+  });
+
+  // Close on background click
+  lightbox.addEventListener("click", function (e) {
+    if (e.target === lightbox) {
+      lightbox.classList.remove("active");
+    }
+  });
+
+  // Keyboard navigation
+  document.addEventListener("keydown", function (e) {
+    if (!lightbox.classList.contains("active")) return;
+
+    if (e.key === "Escape") {
+      lightbox.classList.remove("active");
+    } else if (e.key === "ArrowLeft") {
+      showImage(currentImageIndex - 1);
+    } else if (e.key === "ArrowRight") {
+      showImage(currentImageIndex + 1);
+    }
+  });
 });
 
 // === LOGO TOUCH HOVER (mobile) ===
