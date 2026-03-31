@@ -1632,31 +1632,33 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #f39c12, #e67e22);
-  color: white !important;
+  background: var(--white); /* Değiştirildi: Beyaz yapıldı */
+  color: var(--red-600) !important; /* Değiştirildi: Kırmızı yapıldı */
   text-decoration: none !important;
   padding: 12px 18px;
   border-radius: 50px;
   font-size: 0.85rem;
   font-weight: 700;
   white-space: nowrap;
-  box-shadow: 0 4px 15px rgba(243, 156, 18, 0.45);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Gölge yumuşatıldı */
+  border: 1px solid var(--red-200); /* Hafif çerçeve eklendi */
   z-index: 9998;
   transition: all 0.25s ease;
-  animation: pulse-orange 2.5s infinite;
+  animation: pulse-white 2.5s infinite;
   transform: rotate(-90deg);
   transform-origin: center center;
 }
 
 .firsat-float:hover {
   transform: rotate(-90deg) scale(1.04);
-  box-shadow: 0 8px 24px rgba(243, 156, 18, 0.55);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background: var(--red-50);
 }
 
-@keyframes pulse-orange {
-  0%   { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.6); }
-  70%  { box-shadow: 0 0 0 12px rgba(243, 156, 18, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
+@keyframes pulse-white {
+  0%   { box-shadow: 0 0 0 0 rgba(205, 0, 0, 0.4); }
+  70%  { box-shadow: 0 0 0 12px rgba(205, 0, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(205, 0, 0, 0); }
 }
 
 @media (max-width: 900px) {
@@ -1711,13 +1713,13 @@ a:hover {
   }
 
   .btn-directions {
-    background: #f29f12;
-    color: white !important;
-    border-left: 1px solid rgba(0,0,0,0.1);
+    background: #ffffff; /* Değiştirildi */
+    color: #CD0000 !important; /* Değiştirildi */
+    border-left: 1px solid var(--gray-100);
   }
 
   .btn-directions svg {
-    fill: white !important;
+    fill: #CD0000 !important; /* Değiştirildi */
   }
 
   .bottom-bar-btn svg {
