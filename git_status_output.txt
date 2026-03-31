@@ -1,0 +1,40 @@
+﻿On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .claude/settings.local.json
+	modified:   assets/css/style.css
+	modified:   en/contact.html
+	modified:   en/corporate.html
+	modified:   en/gallery.html
+	modified:   en/index.html
+	modified:   en/services/facade.html
+	modified:   en/services/laminate.html
+	modified:   en/services/roofing.html
+	modified:   en/services/solar.html
+	modified:   galeri.html
+	modified:   hakkimizda.html
+	modified:   hizmetler/cati-kaplama.html
+	modified:   hizmetler/dis-cephe.html
+	modified:   hizmetler/gunes-enerjisi.html
+	modified:   hizmetler/laminant.html
+	modified:   iletisim.html
+	modified:   index.html
+	modified:   kurumsal.html
+	modified:   tasarim.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	"assets/images/Building your dream home just got easier! \360\237\217\241\342\234\250 With Customize Your Home, I guide you through every step of the building process, ensuring a smooth and enjoyable experience_ Let\342\200\231s turn your visions into reality in M.jpeg"
+	assets/images/Red Yellow Illustration Construction Presentation.gif
+	assets/images/indir (9).jpeg
+	assets/images/laminant-parke/
+	assets/images/what-is-civil-engineering.avif
+	"assets/images/\305\236ablonlar.html"
+	"assets/images/\305\236ablonlar_files/"
+	git_status_output.txt
+	hizmetler/agt-laminant.html
+
+no changes added to commit (use "git add" and/or "git commit -a")

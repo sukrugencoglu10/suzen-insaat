@@ -1329,6 +1329,40 @@ a:hover {
   100% { transform: translateX(calc(-100% / 3)); }
 }
 
+/* === NAV DESIGN BUTTON === */
+.nav-design-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, #8e44ad, #9b59b6);
+  color: white !important;
+  text-decoration: none !important;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(142, 68, 173, 0.35);
+  transition: all 0.25s ease;
+  margin-right: 8px;
+}
+
+.nav-design-btn svg {
+  animation: floating-icon 3s ease-in-out infinite;
+}
+
+.nav-design-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(142, 68, 173, 0.45);
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+@media (max-width: 768px) {
+  .nav-design-btn {
+    display: none; /* Hide on mobile to save space */
+  }
+}
+
 /* === NAV DIRECTIONS BUTTON (DESKTOP ONLY) === */
 .nav-directions-btn {
   display: inline-flex;
