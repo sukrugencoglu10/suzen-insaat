@@ -1093,12 +1093,13 @@ a:hover {
 
   .menu-toggle {
     display: flex;
-    order: 3; /* hamburger en sağda */
+    order: 3;
+    margin-left: auto; /* hamburger sağa yapışır */
   }
 
   .lang-switcher {
-    order: 2;           /* logo ile hamburger arasında */
-    margin-left: auto;  /* sola kalan boşluğu doldur → sağa yasla */
+    order: 3;
+    margin-left: 0;
     margin-right: 0;
   }
 
@@ -1486,10 +1487,9 @@ a:hover {
     align-items: center;
     background: linear-gradient(135deg, var(--red-600), var(--red-800)) !important;
     color: var(--white) !important;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-left: 0;
+    position: static;
+    transform: none;
+    margin-left: var(--space-xs);
     margin-right: 0;
     padding: 7px 14px;
     font-size: 0.8rem;
