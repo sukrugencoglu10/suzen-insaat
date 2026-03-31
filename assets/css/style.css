@@ -642,6 +642,7 @@ a:hover {
   .hero-layout h1 {
     order: 1;
     text-align: center;
+    margin-top: 2rem; /* Başlığı navbar'dan uzaklaştırır */
   }
 
   .hero-layout p {
