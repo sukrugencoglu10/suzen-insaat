@@ -1407,7 +1407,22 @@ a:hover {
 
 /* === NAV DESIGN BUTTON === */
 .nav-design-btn {
-  display: none !important; /* Kullanıcı isteği ile gizlendi */
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, var(--red-600), var(--red-700));
+  color: white !important;
+  text-decoration: none !important;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(220, 38, 38, 0.35);
+  transition: all 0.25s ease;
+  margin-left: var(--space-lg);
+  margin-right: 0;
+  order: 2;
 }
 
 .nav-design-btn svg {
