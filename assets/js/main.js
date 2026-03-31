@@ -52,172 +52,48 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// === HERO DESKTOP MOSAIC CLICK TO CYCLE ===
+// === HERO ACCORDION PANELS ===
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.matchMedia("(max-width: 1100px)").matches) return;
+  const accordion = document.getElementById("heroAccordion");
+  if (!accordion) return;
 
-  const heroMosaic = document.getElementById("heroMosaic");
-  if (!heroMosaic) return;
+  const panels = accordion.querySelectorAll(".accordion-panel");
+  let autoTimer;
+  let currentIndex = 0;
+  let isHovering = false;
 
-  const mosaicItems = heroMosaic.querySelectorAll(".mosaic-item img");
-  const heroImages = [
-    "assets/images/3.jpg",
-    "assets/images/1.jpg",
-    "assets/images/5.jpeg",
-    "assets/images/6.jpg",
-    "assets/images/2.jpg",
-    "assets/images/4.jpeg"
-  ];
-
-  let currentImageIndex = 0;
-
-  // Create lightbox for hero images
-  const lightbox = document.createElement("div");
-  lightbox.className = "hero-lightbox";
-  lightbox.innerHTML = `
-    <div class="hero-lightbox-content">
-      <span class="hero-lightbox-close">&times;</span>
-      <img class="hero-lightbox-image" src="" alt="İnşaat" />
-      <button class="hero-lightbox-nav hero-lightbox-prev">&#10094;</button>
-      <button class="hero-lightbox-nav hero-lightbox-next">&#10095;</button>
-      <div class="hero-lightbox-counter"><span id="current">1</span> / <span id="total">6</span></div>
-    </div>
-  `;
-  document.body.appendChild(lightbox);
-
-  // Add lightbox styles
-  const style = document.createElement("style");
-  style.textContent = `
-    .hero-lightbox {
-      display: none;
-      position: fixed;
-      z-index: 9998;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.92);
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-lightbox.active {
-      display: flex;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .hero-lightbox-content {
-      position: relative;
-      max-width: 90%;
-      max-height: 90%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-lightbox-image {
-      max-width: 100%;
-      max-height: 85vh;
-      object-fit: contain;
-    }
-    .hero-lightbox-close {
-      position: absolute;
-      top: -35px;
-      right: 0;
-      font-size: 40px;
-      color: white;
-      cursor: pointer;
-      z-index: 10000;
-      transition: color 0.3s;
-    }
-    .hero-lightbox-close:hover {
-      color: #ccc;
-    }
-    .hero-lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 28px;
-      color: white;
-      background: rgba(255, 255, 255, 0.15);
-      border: none;
-      padding: 15px 18px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-      border-radius: 3px;
-    }
-    .hero-lightbox-nav:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-50%) scale(1.1);
-    }
-    .hero-lightbox-prev { left: 15px; }
-    .hero-lightbox-next { right: 15px; }
-    .hero-lightbox-counter {
-      position: absolute;
-      bottom: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: white;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-  `;
-  document.head.appendChild(style);
-
-  function showImage(index) {
-    currentImageIndex = (index + heroImages.length) % heroImages.length;
-    const lightboxImage = lightbox.querySelector(".hero-lightbox-image");
-    lightboxImage.src = heroImages[currentImageIndex];
-    document.getElementById("current").textContent = currentImageIndex + 1;
+  function activatePanel(index) {
+    panels.forEach((p) => p.classList.remove("active"));
+    panels[index].classList.add("active");
+    currentIndex = index;
   }
 
-  // Click on mosaic images to open lightbox
-  mosaicItems.forEach((img, index) => {
-    img.style.cursor = "pointer";
-    img.addEventListener("click", function (e) {
-      e.stopPropagation();
-      lightbox.classList.add("active");
-      showImage(index);
+  // Hover interaction
+  panels.forEach((panel, index) => {
+    panel.addEventListener("mouseenter", function () {
+      isHovering = true;
+      clearInterval(autoTimer);
+      activatePanel(index);
     });
   });
 
-  // Close lightbox
-  lightbox.querySelector(".hero-lightbox-close").addEventListener("click", function () {
-    lightbox.classList.remove("active");
+  accordion.addEventListener("mouseleave", function () {
+    isHovering = false;
+    startAuto();
   });
 
-  // Next image
-  lightbox.querySelector(".hero-lightbox-next").addEventListener("click", function (e) {
-    e.stopPropagation();
-    showImage(currentImageIndex + 1);
-  });
+  // Auto-cycle panels
+  function startAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => {
+      if (!isHovering) {
+        currentIndex = (currentIndex + 1) % panels.length;
+        activatePanel(currentIndex);
+      }
+    }, 3500);
+  }
 
-  // Previous image
-  lightbox.querySelector(".hero-lightbox-prev").addEventListener("click", function (e) {
-    e.stopPropagation();
-    showImage(currentImageIndex - 1);
-  });
-
-  // Close on background click
-  lightbox.addEventListener("click", function (e) {
-    if (e.target === lightbox) {
-      lightbox.classList.remove("active");
-    }
-  });
-
-  // Keyboard navigation
-  document.addEventListener("keydown", function (e) {
-    if (!lightbox.classList.contains("active")) return;
-
-    if (e.key === "Escape") {
-      lightbox.classList.remove("active");
-    } else if (e.key === "ArrowLeft") {
-      showImage(currentImageIndex - 1);
-    } else if (e.key === "ArrowRight") {
-      showImage(currentImageIndex + 1);
-    }
-  });
+  startAuto();
 });
 
 // === LOGO TOUCH HOVER (mobile) ===
@@ -696,47 +572,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { threshold: 0.2 });
     observer.observe(statsSection);
+
   }
 });
-
-// === CIN ALI (STICKMAN) BUILDER INJECTION (MOBILE ANIMATION) ===
-document.addEventListener("DOMContentLoaded", function () {
-  // Sadece mobil cihazlarda çalışması için kontrol eklenebilir ama CSS zaten gizliyor
-  const designBtns = document.querySelectorAll(".nav-design-btn");
-  
-  designBtns.forEach(btn => {
-    // Daha önce eklenmemişse ekle
-    if (!btn.querySelector(".builder-stickman")) {
-      const stickmanHTML = `
-        <svg class="builder-stickman" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <g class="builder-body-group">
-            <g stroke="#ffffff" stroke-width="6" stroke-linecap="round" fill="none">
-              <!-- Body -->
-              <line x1="50" y1="45" x2="50" y2="75" />
-              <!-- Legs -->
-              <line x1="50" y1="75" x2="35" y2="95" />
-              <line x1="50" y1="75" x2="65" y2="95" />
-              <!-- Left arm -->
-              <line x1="50" y1="55" x2="35" y2="65" />
-              <!-- Right arm with hammer inside a rotating group -->
-              <g class="builder-arm-right">
-                <line x1="50" y1="55" x2="68" y2="45" />
-                <!-- Hammer head and handle -->
-                <rect x="65" y="15" width="6" height="35" fill="#f39c12" stroke="none" transform="rotate(30 68 32)" />
-                <rect x="57" y="12" width="22" height="12" fill="#bdc3c7" stroke="none" rx="2" transform="rotate(30 68 32)" />
-              </g>
-            </g>
-            <!-- Head -->
-            <circle cx="50" cy="35" r="12" fill="#ffffff" />
-            <!-- Hardhat -->
-            <path d="M34 35 Q50 10 66 35 Z" fill="#f1c40f" />
-            <rect x="32" y="33" width="36" height="5" fill="#f1c40f" rx="2" />
-          </g>
-        </svg>
-        <div class="builder-spark"></div>
-      `;
-      btn.insertAdjacentHTML('beforeend', stickmanHTML);
-    }
-  });
-});
-

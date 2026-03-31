@@ -487,65 +487,124 @@ a:hover {
   justify-content: flex-start;
 }
 
-/* === HERO MOSAIC === */
-.hero-mosaic {
-  flex: 1;
-  position: relative;
-  height: 370px;
-}
-
-.mosaic-item {
-  position: absolute;
+/* === HERO ACCORDION PANELS === */
+.hero-accordion {
+  flex: 1.2;
+  display: flex;
+  height: 420px;
+  gap: 6px;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-  border: 3px solid rgba(255, 255, 255, 0.25);
-  background: rgba(255,255,255,0.1);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
 }
 
-.mosaic-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.accordion-panel {
+  position: relative;
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  min-width: 0;
 }
 
-/* Resim yokken placeholder */
-.mosaic-item img[src$=".jpg"]:not([complete]),
-.mosaic-item img {
-  min-height: 100%;
+.accordion-panel.active {
+  flex: 3.5;
 }
 
-/* Kare konumları ve boyutları */
-.mosaic-1 {
-  width: 200px; height: 190px;
-  top: 0; left: 50px;
-  transform: rotate(-3deg);
+.panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.15) 40%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+  transition: background 0.5s ease;
 }
-.mosaic-2 {
-  width: 165px; height: 160px;
-  top: 10px; left: 265px;
-  transform: rotate(2.5deg);
+
+.accordion-panel:hover .panel-overlay,
+.accordion-panel.active .panel-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
 }
-.mosaic-3 {
-  width: 220px; height: 175px;
-  top: 0; right: 0;
-  transform: rotate(-1.5deg);
+
+.panel-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px;
+  z-index: 2;
+  transform: translateY(10px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.mosaic-4 {
-  width: 180px; height: 185px;
-  top: 185px; left: 100px;
-  transform: rotate(2deg);
+
+.accordion-panel .panel-content h3 {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  transition: font-size 0.4s ease;
 }
-.mosaic-5 {
-  width: 185px; height: 175px;
-  top: 190px; right: 10px;
-  transform: rotate(-2.5deg);
+
+.accordion-panel.active .panel-content h3 {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
 }
-.mosaic-6 {
-  width: 155px; height: 160px;
-  top: 180px; left: 295px;
-  transform: rotate(1.5deg);
+
+.accordion-panel .panel-content p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease 0.1s;
+}
+
+.accordion-panel.active .panel-content p {
+  max-height: 40px;
+  opacity: 1;
+  margin-bottom: 12px;
+}
+
+.panel-btn {
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  color: #fff !important;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  text-decoration: none;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0;
+  transition: all 0.3s ease 0.15s;
+}
+
+.accordion-panel.active .panel-btn {
+  max-height: 50px;
+  opacity: 1;
+  padding: 8px 20px;
+}
+
+.panel-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff !important;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 900px) {
@@ -586,7 +645,7 @@ a:hover {
     justify-content: center;
   }
 
-  .hero-mosaic {
+  .hero-accordion {
     display: none;
   }
 }
