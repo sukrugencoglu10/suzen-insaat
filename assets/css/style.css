@@ -1108,7 +1108,7 @@ a:hover {
   }
 
   .nav {
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 0;
   }
 
@@ -1494,7 +1494,7 @@ a:hover {
     color: var(--white) !important;
     position: static;
     transform: none;
-    margin-left: 0;
+    margin-left: auto;
     margin-right: 0;
     padding: 7px 14px;
     font-size: 0.8rem;
