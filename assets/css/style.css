@@ -654,7 +654,11 @@ a:hover {
   }
 
   .hero-layout .hero-content {
-    display: contents; /* Allows children to participate in flex layout */
+    display: block;
+    position: relative;
+    z-index: 1;
+    order: 1;
+    width: 100%;
   }
 
   .hero-layout h1 {
@@ -1113,7 +1117,9 @@ a:hover {
   .menu-toggle {
     display: flex;
     order: 3;
-    margin-left: auto; /* Hamburgeri en sağa iter */
+    margin-left: auto;
+    margin-right: 0;
+    flex-shrink: 0;
   }
 
   .lang-switcher {
