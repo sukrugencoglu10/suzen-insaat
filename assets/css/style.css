@@ -429,9 +429,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   position: relative;
-  background:
-    linear-gradient(135deg, rgba(220,38,38,0.85) 0%, rgba(153,27,27,0.88) 100%),
-    url('../images/building-dream.jpeg') center/cover no-repeat;
+  background: var(--white);
   overflow: hidden;
   padding-top: 100px;
 }
@@ -440,22 +438,22 @@ a:hover {
   position: relative;
   z-index: 1;
   text-align: center;
-  color: var(--white);
+  color: var(--text-primary);
   max-width: 900px;
   margin-top: 1rem;
 }
 
 .hero h1 {
-  color: var(--white);
+  color: var(--red-600);
   font-size: clamp(1.8rem, 3.2vw, 3.75rem);
   font-weight: 900;
   margin-bottom: var(--space-lg);
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  text-shadow: none;
   animation: fadeInUp 0.8s ease-out;
 }
 
 .hero p {
-  color: rgba(255, 255, 255, 0.95);
+  color: var(--text-secondary);
   font-size: var(--text-xl);
   margin-bottom: var(--space-2xl);
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
@@ -698,13 +696,13 @@ a:hover {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.4);
+    background: rgba(205, 0, 0, 0.25);
     cursor: pointer;
     transition: background 0.3s;
   }
 
   .hero-slide-dots span.active {
-    background: #fff;
+    background: var(--red-600);
   }
 }
 
@@ -769,6 +767,20 @@ a:hover {
   background: linear-gradient(135deg, var(--red-700), var(--red-800));
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
+  color: var(--white) !important;
+}
+
+.btn-outline-red {
+  background: transparent;
+  color: var(--red-600) !important;
+  border: 2px solid var(--red-600);
+}
+
+.btn-outline-red:hover {
+  background: var(--red-600);
+  color: var(--white) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 /* === CARDS === */
