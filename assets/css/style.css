@@ -434,9 +434,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: 
-    linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
-    url('../images/fatsa.jpeg') center/cover no-repeat;
+  background: url('../images/fatsa.jpeg') center/cover no-repeat;
   overflow: hidden;
   padding-top: 100px;
 }
@@ -1420,7 +1418,7 @@ a:hover {
   white-space: nowrap;
   box-shadow: 0 3px 10px rgba(220, 38, 38, 0.35);
   transition: all 0.25s ease;
-  margin-left: var(--space-lg);
+  margin-left: var(--space-xs);
   margin-right: 0;
   order: 2;
 }
