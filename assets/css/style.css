@@ -1513,7 +1513,7 @@ a:hover {
     color: var(--white) !important;
     position: static;
     transform: none;
-    margin-left: var(--space-md); /* Tasarım butonu ile logo arasında boşluk */
+    margin-left: var(--space-xl); /* Tasarım butonu hafif sağa kaydırıldı */
     margin-right: 0;
     padding: 7px 14px;
     font-size: 0.8rem;
