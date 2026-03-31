@@ -290,13 +290,14 @@ a:hover {
 .nav-menu {
   display: flex;
   list-style: none;
-  gap: var(--space-xl);
+  gap: var(--space-lg);
   align-items: center;
   flex-wrap: nowrap;
   white-space: nowrap;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  flex: 1;
+  justify-content: center;
+  position: static;
+  transform: none;
 }
 
 .nav-link {
