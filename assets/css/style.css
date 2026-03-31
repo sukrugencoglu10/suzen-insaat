@@ -351,6 +351,7 @@ a:hover {
   margin-left: auto;
   align-items: center;
   z-index: 1001;
+  flex-shrink: 0;
 }
 
 .lang-btn {
@@ -1030,6 +1031,16 @@ a:hover {
 
   .menu-toggle {
     display: flex;
+    order: 2; /* logo=1 | design-btn=2(via lang-switcher) | hamburger=3 */
+  }
+
+  .lang-switcher {
+    order: 3;
+    margin-left: 0;
+  }
+
+  .nav {
+    gap: 8px;
   }
 
   .nav-menu {
@@ -1358,11 +1369,8 @@ a:hover {
   background: linear-gradient(135deg, #9b59b6, #8e44ad);
 }
 
-@media (max-width: 768px) {
-  .nav-design-btn {
-    display: none; /* Hide on mobile to save space */
-  }
-}
+/* On mobile: design button shown next to hamburger - controlled by mobile media query below */
+/* Default (desktop): shown in lang-switcher on the right */
 
 /* === NAV DIRECTIONS BUTTON (DESKTOP ONLY) === */
 .nav-directions-btn {
@@ -1398,9 +1406,30 @@ a:hover {
   background: linear-gradient(135deg, #d35400, #a04000);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  /* On mobile: hide lang-switcher items (flags, directions) — only design btn shown next to hamburger */
   .nav-directions-btn {
-    display: inline-flex;
+    display: none !important;
+  }
+
+  .lang-btn {
+    display: none !important;
+  }
+
+  /* Evini Tasarla butonu mobilde hamburger sağında gösterilir */
+  .nav-design-btn {
+    display: inline-flex !important;
+    margin-left: 0;
+    margin-right: 4px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    order: -1; /* hamburger butonunun sağına gelsin */
+  }
+
+  /* Lang-switcher sağ tarafta kalmasın, hamburger yanına taşı */
+  .lang-switcher {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
