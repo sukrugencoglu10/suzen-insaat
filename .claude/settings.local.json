@@ -79,7 +79,23 @@
       "Bash(curl --ssl-no-revoke -sL -o porto.webp \"https://hmeparke.com/wp-content/uploads/2025/05/b966944c-bbfc-450c-9cf1-02f22faaa305.webp\")",
       "Bash(curl --ssl-no-revoke -sL -o antalya-cam.webp \"https://hmeparke.com/wp-content/uploads/2025/05/6ca6bd40-b3ac-4623-b4b6-4dded5f0cf88.webp\")",
       "Bash(curl --ssl-no-revoke -sL -o kemer-cam.webp \"https://hmeparke.com/wp-content/uploads/2025/05/456b29dd-472c-425c-8d6e-3892d0e8e87a.webp\")",
-      "Bash(curl --ssl-no-revoke -sL -o kanyon-mese.webp \"https://hmeparke.com/wp-content/uploads/2025/05/9f0bf375-529b-441d-8159-1976fc2e801e.webp\")"
+      "Bash(curl --ssl-no-revoke -sL -o kanyon-mese.webp \"https://hmeparke.com/wp-content/uploads/2025/05/9f0bf375-529b-441d-8159-1976fc2e801e.webp\")",
+      "WebFetch(domain:camsanparke.com)",
+      "Bash(BASE=\"https://d389em3lzsec2q.cloudfront.net/s3:avx-files-cdn/\")",
+      "Bash(DIR=\"/c/Users/sukru/OneDrive/süzen inşaat/assets/images/laminant-parke/camsan\")",
+      "Bash(curl -L \"$BASEFilyos_V2_50119b9c99.jpg\" -o \"$DIR/diamond/filyos.jpg\")",
+      "Bash(curl -L --ssl-no-revoke \"$BASEFilyos_V2_50119b9c99.jpg\" -o \"$DIR/diamond/filyos.jpg\")",
+      "Bash(curl -L --ssl-no-revoke \"$BASEFaralya_54fde701a5.jpg\" -o \"$DIR/diamond/faralya.jpg\")",
+      "Bash(curl -L --ssl-no-revoke \"$BASESalda_copy_db1ee10a0d.jpg\" -o \"$DIR/diamond/salda.jpg\")",
+      "Bash(curl -L --ssl-no-revoke \"$BASELindos_dbb53ac2eb.jpg\" -o \"$DIR/diamond/lindos.jpg\")",
+      "Bash(curl -L --ssl-no-revoke \"$BASELabranda_fc342be5b9.jpg\" -o \"$DIR/diamond/labranda.jpg\")",
+      "Bash(curl -L --ssl-no-revoke \"$BASEAtlas_Mese_V2_cc8e28c7b0.jpg\" -o \"$DIR/silver/atlas-mese.jpg\")",
+      "Bash(curl -L --ssl-no-revoke \"$BASEdiidm_renk_9c3c177395.jpg\" -o \"$DIR/silver/didim-mese.jpg\")",
+      "Bash(curl -L --ssl-no-revoke \"$BASEpolar_Renk_1b42be73ee.jpg\" -o \"$DIR/silver/polar-mese.jpg\")",
+      "Bash(curl -L --ssl-no-revoke \"$BASEburgazmese_ps_7d11f29257.jpg\" -o \"$DIR/silver/burgaz-mese.jpg\")",
+      "Bash(curl -L --ssl-no-revoke \"$BASEkaryamese_ps_a9321de4cc.jpg\" -o \"$DIR/silver/karya-mese.jpg\")",
+      "Bash(cp \"ısı yal.jpg\" \"isi-yal.jpg\")",
+      "Bash(cp \"Brick colour_ Ceramic solutions.jpeg\" \"brick-ceramic.jpeg\")"
     ]
   }
 }
