@@ -1092,7 +1092,7 @@ a:hover {
   }
 
   .logo-link {
-    width: 150px;
+    width: 160px;
     flex-shrink: 0;
     order: 1;
   }
@@ -1100,7 +1100,7 @@ a:hover {
   .menu-toggle {
     display: flex;
     order: 3;
-    margin-left: 0;
+    margin-left: auto; /* Hamburgeri en sağa iter */
   }
 
   .lang-switcher {
@@ -1494,7 +1494,7 @@ a:hover {
     color: var(--white) !important;
     position: static;
     transform: none;
-    margin-left: auto;
+    margin-left: var(--space-md); /* Tasarım butonu ile logo arasında boşluk */
     margin-right: 0;
     padding: 7px 14px;
     font-size: 0.8rem;
