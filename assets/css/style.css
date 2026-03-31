@@ -345,7 +345,7 @@ a:hover {
 /* Language Switcher */
 .lang-switcher {
   display: flex;
-  gap: var(--space-md);
+  gap: 4px;
   background: transparent;
   padding: 0;
   border-radius: 0;

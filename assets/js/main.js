@@ -2,55 +2,7 @@
 // SÜZEN İNŞAAT - MAIN JAVASCRIPT
 // ===================================
 
-// === HERO MOBILE SLIDER ===
-document.addEventListener("DOMContentLoaded", function () {
-  if (!window.matchMedia("(max-width: 1100px)").matches) return;
-  const track = document.getElementById("heroTrack");
-  const dotsContainer = document.getElementById("heroDots");
-  if (!track || !dotsContainer) return;
 
-  const slides = track.querySelectorAll("img");
-  const total = slides.length;
-  let current = 0;
-  let autoTimer;
-
-  // dots oluştur
-  slides.forEach((_, i) => {
-    const dot = document.createElement("span");
-    if (i === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => goTo(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  function goTo(index) {
-    current = (index + total) % total;
-    track.style.transform = "translateX(-" + (current * 100) + "%)";
-    dotsContainer.querySelectorAll("span").forEach((d, i) => {
-      d.classList.toggle("active", i === current);
-    });
-  }
-
-  function startAuto() {
-    autoTimer = setInterval(() => goTo(current + 1), 3000);
-  }
-  startAuto();
-
-  // swipe desteği
-  let startX = 0;
-  track.addEventListener("touchstart", e => { startX = e.touches[0].clientX; clearInterval(autoTimer); }, { passive: true });
-  track.addEventListener("touchend", e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
-    startAuto();
-  }, { passive: true });
-
-  // Click to next image
-  track.addEventListener("click", () => {
-    clearInterval(autoTimer);
-    goTo(current + 1);
-    startAuto();
-  });
-});
 
 // === HERO ACCORDION PANELS ===
 document.addEventListener("DOMContentLoaded", function () {
