@@ -446,7 +446,7 @@ a:hover {
   background: 
     linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)),
     url('../images/%d0%93%d0%bb%d0%b0%d0%b2%d0%bd%d0%b0%d1%8f%20-.jpeg') center/cover no-repeat;
-  filter: blur(3px); /* %5 buzlama hissi için 3px blur */
+  filter: blur(1.5px); /* %2 buzlama hissi için 1.5px blur */
   transform: scale(1.1); /* Blur kenarlarındaki beyazlığı önlemek için hafif büyütme */
   z-index: 0;
 }
@@ -654,24 +654,24 @@ a:hover {
   }
 
   .hero-layout .hero-content {
-    display: block;
-    position: relative;
-    z-index: 1;
-    order: 1;
-    width: 100%;
+    display: contents;
   }
 
   .hero-layout h1 {
     order: 1;
     text-align: center;
     margin-top: 2rem;
-    margin-bottom: 0.5rem; /* Azaltıldı */
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-layout p {
     order: 2;
     text-align: center;
-    margin-bottom: 1rem; /* Azaltıldı */
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-accordion {
@@ -690,6 +690,8 @@ a:hover {
     justify-content: center;
     width: 100%;
     margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
   }
 
 
