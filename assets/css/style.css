@@ -434,9 +434,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: 
-    linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.92)),
-    url('../images/indir%20(10).jpeg') center/cover no-repeat;
+  background: url('../images/indir%20(10).jpeg') center/cover no-repeat;
   overflow: hidden;
   padding-top: 100px;
 }
@@ -1602,8 +1600,8 @@ a:hover {
 /* === FIRSAT FLOAT BUTTON === */
 .firsat-float {
   position: fixed;
-  bottom: 30px;
-  left: 30px;
+  bottom: 80px;
+  left: -42px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1619,10 +1617,12 @@ a:hover {
   z-index: 9998;
   transition: all 0.25s ease;
   animation: pulse-orange 2.5s infinite;
+  transform: rotate(-90deg);
+  transform-origin: center center;
 }
 
 .firsat-float:hover {
-  transform: translateY(-3px) scale(1.04);
+  transform: rotate(-90deg) scale(1.04);
   box-shadow: 0 8px 24px rgba(243, 156, 18, 0.55);
 }
 
@@ -1634,8 +1634,8 @@ a:hover {
 
 @media (max-width: 900px) {
   .firsat-float {
-    bottom: 70px;
-    left: 12px;
+    bottom: 120px;
+    left: -38px;
     padding: 9px 14px;
     font-size: 0.78rem;
   }
