@@ -1418,14 +1418,34 @@ a:hover {
     display: none !important;
   }
 
-  /* Evini Tasarla butonu mobilde hamburger yanında */
+  /* Evini Tasarla butonu mobilde hamburger yanında - Yeni Tasarım */
   .nav-design-btn {
     display: inline-flex !important;
+    align-items: center;
+    background: linear-gradient(135deg, var(--red-600), var(--red-800)) !important;
+    color: var(--white) !important;
     margin-left: 0;
-    margin-right: 4px;
-    padding: 6px 12px;
-    font-size: 0.78rem;
+    margin-right: 8px;
+    padding: 7px 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4) !important;
     order: -1;
+    animation: mobile-pulse-red 2s infinite !important;
+  }
+
+  @keyframes mobile-pulse-red {
+    0% {
+      box-shadow: 0 0 0 0 rgba(230, 48, 48, 0.6) !important;
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(230, 48, 48, 0) !important;
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(230, 48, 48, 0) !important;
+    }
   }
 
   .lang-switcher {
