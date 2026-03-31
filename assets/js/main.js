@@ -698,3 +698,45 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(statsSection);
   }
 });
+
+// === CIN ALI (STICKMAN) BUILDER INJECTION (MOBILE ANIMATION) ===
+document.addEventListener("DOMContentLoaded", function () {
+  // Sadece mobil cihazlarda çalışması için kontrol eklenebilir ama CSS zaten gizliyor
+  const designBtns = document.querySelectorAll(".nav-design-btn");
+  
+  designBtns.forEach(btn => {
+    // Daha önce eklenmemişse ekle
+    if (!btn.querySelector(".builder-stickman")) {
+      const stickmanHTML = `
+        <svg class="builder-stickman" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g class="builder-body-group">
+            <g stroke="#ffffff" stroke-width="6" stroke-linecap="round" fill="none">
+              <!-- Body -->
+              <line x1="50" y1="45" x2="50" y2="75" />
+              <!-- Legs -->
+              <line x1="50" y1="75" x2="35" y2="95" />
+              <line x1="50" y1="75" x2="65" y2="95" />
+              <!-- Left arm -->
+              <line x1="50" y1="55" x2="35" y2="65" />
+              <!-- Right arm with hammer inside a rotating group -->
+              <g class="builder-arm-right">
+                <line x1="50" y1="55" x2="68" y2="45" />
+                <!-- Hammer head and handle -->
+                <rect x="65" y="15" width="6" height="35" fill="#f39c12" stroke="none" transform="rotate(30 68 32)" />
+                <rect x="57" y="12" width="22" height="12" fill="#bdc3c7" stroke="none" rx="2" transform="rotate(30 68 32)" />
+              </g>
+            </g>
+            <!-- Head -->
+            <circle cx="50" cy="35" r="12" fill="#ffffff" />
+            <!-- Hardhat -->
+            <path d="M34 35 Q50 10 66 35 Z" fill="#f1c40f" />
+            <rect x="32" y="33" width="36" height="5" fill="#f1c40f" rx="2" />
+          </g>
+        </svg>
+        <div class="builder-spark"></div>
+      `;
+      btn.insertAdjacentHTML('beforeend', stickmanHTML);
+    }
+  });
+});
+
