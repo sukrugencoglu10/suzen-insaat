@@ -632,6 +632,7 @@ a:hover {
 
   .hero-layout {
     flex-direction: column;
+    gap: 1.5rem; /* Azaltıldı: Başlıklar arası boşluğu kapatır */
   }
 
   .hero-layout .hero-content {
@@ -1471,13 +1472,12 @@ a:hover {
     display: none !important;
   }
 
-  /* Evini Tasarla butonu mobilde hamburger yanında - Yeni Tasarım */
   .nav-design-btn {
     display: inline-flex !important;
     align-items: center;
     background: linear-gradient(135deg, var(--red-600), var(--red-800)) !important;
     color: var(--white) !important;
-    margin-left: 0;
+    margin-left: auto; /* Sağa iterek logoyu sola yaslar */
     margin-right: var(--space-md);
     padding: 7px 14px;
     font-size: 0.8rem;
@@ -1485,7 +1485,7 @@ a:hover {
     border-radius: 40px;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4) !important;
-    order: -1;
+    order: 0;
     animation: mobile-pulse-red 2s infinite !important;
   }
 
