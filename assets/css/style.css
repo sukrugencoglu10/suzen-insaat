@@ -1633,16 +1633,16 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #f39c12, #e67e22);
-  color: white !important;
+  background: var(--white); /* Beyaz yapıldı */
+  color: var(--red-600) !important; /* Kırmızı yapıldı */
   text-decoration: none !important;
   padding: 12px 18px;
   border-radius: 50px;
   font-size: 0.85rem;
   font-weight: 700;
   white-space: nowrap;
-  box-shadow: 0 4px 15px rgba(243, 156, 18, 0.45);
-  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Gölge yumuşatıldı */
+  border: 1px solid var(--red-200); /* Hafif çerçeve eklendi */
   z-index: 9998;
   transition: all 0.25s ease;
   animation: pulse-white 2.5s infinite;
@@ -1714,13 +1714,13 @@ a:hover {
   }
 
   .btn-directions {
-    background: #f29f12;
-    color: white !important;
-    border-left: 1px solid rgba(0,0,0,0.1);
+    background: #ffffff; /* Beyaz yapıldı */
+    color: #CD0000 !important; /* Kırmızı yapıldı */
+    border-left: 1px solid var(--gray-100);
   }
 
   .btn-directions svg {
-    fill: white !important;
+    fill: #CD0000 !important; /* Kırmızı yapıldı */
   }
 
   .bottom-bar-btn svg {
