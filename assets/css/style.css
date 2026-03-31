@@ -1376,7 +1376,7 @@ a:hover {
   box-shadow: 0 3px 10px rgba(142, 68, 173, 0.35);
   transition: all 0.25s ease;
   margin-left: 8px;
-  margin-right: 0;
+  margin-right: var(--space-md);
 }
 
 .nav-design-btn svg {
