@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-586XMF2C');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Çamsan Parkelam ürün kataloğu — Diamond, Silver, Platinum, Klasik, Modern ve daha fazla seri. Fatsa, Ordu bölgesinde Çamsan bayii Süzen İnşaat.">
+  <title>Çamsan Parkelam Ürün Kataloğu - Süzen İnşaat</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/logolar/favicon.ico">
+  <link rel="icon" type="image/webp" href="assets/images/logolar/favicon_SÜZEN.webp">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .seri-grid .card {
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 0;
+    }
+    .seri-grid .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    }
+    .seri-grid .card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .seri-grid .card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .seri-grid .card-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .seri-grid .card-body {
+      padding: var(--space-lg) var(--space-xl);
+    }
+    .seri-grid .card-body h3 {
+      margin: 0 0 6px;
+      font-size: var(--text-lg);
+    }
+    .seri-grid .card-body .seri-specs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .seri-grid .card-body .spec-badge {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: var(--gray-100);
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    .spec-badge.ac5 { background: #fef3c7; color: #92400e; }
+    .spec-badge.ac4 { background: #dcfce7; color: #166534; }
+    .spec-badge.ac3 { background: #dbeafe; color: #1e40af; }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-2xl);
+      align-items: center;
+    }
+    .filter-label {
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-right: var(--space-xs);
+    }
+    .filter-btn {
+      border: 2px solid var(--gray-200);
+      background: var(--white);
+      color: var(--text-primary);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover {
+      border-color: var(--red-400);
+      color: var(--red-600);
+    }
+    .filter-btn.active {
+      background: var(--red-600);
+      border-color: var(--red-600);
+      color: var(--white);
+    }
+    .seri-card-hidden { display: none !important; }
+
+    .cta-section {
+      background: linear-gradient(135deg, var(--red-600), var(--red-700));
+      color: var(--white);
+      text-align: center;
+      padding: var(--space-3xl) 0;
+    }
+    .cta-section h2 { color: var(--white); margin-bottom: var(--space-md); }
+    .cta-section p { color: rgba(255,255,255,0.9); margin-bottom: var(--space-xl); max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cta-section .btn { background: var(--white); color: var(--red-600); font-weight: 700; }
+    .cta-section .btn:hover { background: var(--gray-100); }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-586XMF2C"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="../index.html" class="logo-link">
+          <img src="../assets/images/logolar/suzen-logo.svg" alt="Süzen İnşaat Logo" class="logo">
+        </a>
+        <ul class="nav-menu">
+          <li><a href="../index.html" class="nav-link">Ana Sayfa</a></li>
+          <li><a href="../index.html#hizmetler" class="nav-link active">Hizmetler</a></li>
+          <li><a href="../galeri.html" class="nav-link">Galeri</a></li>
+          <li><a href="../iletisim.html" class="nav-link">İletişim</a></li>
+        </ul><button class="menu-toggle" aria-label="Menüyü Aç/Kapat"><span></span><span></span><span></span></button><div class="lang-switcher">
+          <a href="https://maps.app.goo.gl/f9twghMtnYGKgav76" target="_blank" rel="noopener noreferrer" class="nav-directions-btn" aria-label="Yol Tarifi Al"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Yol Tarifi</a>
+          <a href="camsan-laminant.html?lang=tr" class="lang-btn active"><img src="https://flagcdn.com/w80/tr.png" width="20" height="14" alt="TR" style="vertical-align:middle;border-radius:2px;"></a>
+          <a href="../en/services/laminate.html" class="lang-btn"><img src="https://flagcdn.com/w80/gb.png" width="20" height="14" alt="EN" style="vertical-align:middle;border-radius:2px;"></a>
+          <a href="https://www.agt.com.tr/evini-tasarla/evini-tasarla" target="_blank" rel="noopener noreferrer" class="nav-design-btn" aria-label="Evini Tasarla"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;"><path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10c1.38 0 2.5-1.12 2.5-2.5 0-.61-.23-1.17-.62-1.6-.32-.36-.53-.82-.53-1.33C13.35 15.48 14.36 14.5 15.5 14.5h2.5c2.76 0 5-2.24 5-5s-4.48-8-11-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 8 6.5 8 8 8.67 8 9.5 7.33 11 6.5 11zm3-4C8.67 7 8 6.33 8 5.5S8.67 4 9.5 4 11 4.67 11 5.5 10.33 7 9.5 7zm5 0C13.67 7 13 6.33 13 5.5S13.67 4 14.5 4 16 4.67 16 5.5 15.33 7 14.5 7zm3 4c-.83 0-1.5-.67-1.5-1.5S15.67 8 16.5 8 18 8.67 18 9.5 17.33 11 16.5 11z"/></svg>Evini Tasarla</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="min-height: 50vh;">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Çamsan Parkelam Ürün Kataloğu</h1>
+        <p>10 farklı seri, 90'dan fazla ürün seçeneği. Süzen İnşaat güvencesiyle Çamsan Parkelam bayii.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Çamsan Parkelam</span>
+        <h2 class="section-title">Ürün Serileri</h2>
+        <p style="color:var(--text-secondary);max-width:600px;margin:0 auto;">Kalınlık, yüzey direnci veya seri adına göre filtreleyerek size en uygun laminant parkı bulun.</p>
+      </div>
+
+      <!-- Filtre Çubuğu -->
+      <div class="filter-bar">
+        <span class="filter-label">Kalınlık:</span>
+        <button class="filter-btn active" data-filter="all" onclick="filterSeri(this, 'all')">Tümü</button>
+        <button class="filter-btn" data-filter="8" onclick="filterSeri(this, '8')">8 mm</button>
+        <button class="filter-btn" data-filter="10" onclick="filterSeri(this, '10')">10 mm</button>
+        <button class="filter-btn" data-filter="12" onclick="filterSeri(this, '12')">12 mm</button>
+        <span class="filter-label" style="margin-left:var(--space-md);">AC Sınıfı:</span>
+        <button class="filter-btn" data-filter-ac="all" onclick="filterAc(this, 'all')">Tümü</button>
+        <button class="filter-btn" data-filter-ac="ac3" onclick="filterAc(this, 'ac3')">AC3-31</button>
+        <button class="filter-btn" data-filter-ac="ac4" onclick="filterAc(this, 'ac4')">AC4-32</button>
+        <button class="filter-btn" data-filter-ac="ac5" onclick="filterAc(this, 'ac5')">AC5-33</button>
+      </div>
+
+      <div id="seri-count" style="margin-bottom:var(--space-lg);color:var(--text-secondary);font-size:0.9rem;"></div>
+
+      <!-- Seri Kartları -->
+      <div class="grid grid-3 seri-grid" id="seri-grid">
+
+        <!-- Diamond -->
+        <div class="card seri-card" data-kalinlik="10" data-ac="ac4" onclick="location.href='camsan-seriler/diamond.html'">
+          <a href="camsan-seriler/diamond.html">
+            <img src="../assets/images/laminant-parke/camsan/diamond/filyos.jpg" alt="Diamond Seri" loading="lazy">
+            <div class="card-body">
+              <h3>Diamond Seri</h3>
+              <div class="seri-specs">
+                <span class="spec-badge">10 mm</span>
+                <span class="spec-badge ac4">AC4-32</span>
+                <span class="spec-badge">Derzli</span>
+                <span class="spec-badge">10 ürün</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Silver -->
+        <div class="card seri-card" data-kalinlik="8" data-ac="ac3" onclick="location.href='camsan-seriler/silver.html'">
+          <a href="camsan-seriler/silver.html">
+            <img src="../assets/images/laminant-parke/camsan/silver/atlas-mese.jpg" alt="Silver Seri" loading="lazy">
+            <div class="card-body">
+              <h3>Silver Seri</h3>
+              <div class="seri-specs">
+                <span class="spec-badge">8 mm</span>
+                <span class="spec-badge ac3">AC3-31</span>
+                <span class="spec-badge">Derzsiz</span>
+                <span class="spec-badge">11 ürün</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Platinum -->
+        <div class="card seri-card" data-kalinlik="mixed" data-ac="mixed" onclick="location.href='camsan-seriler/platinum.html'">
+          <a href="camsan-seriler/platinum.html">
+            <img src="../assets/images/laminant-parke/camsan/platinum/soft-mese.jpg" alt="Platinum Seri" loading="lazy">
+            <div class="card-body">
+              <h3>Platinum Seri</h3>
+              <div class="seri-specs">
+                <span class="spec-badge">8-10 mm</span>
+                <span class="spec-badge ac3">AC3-31</span>
+                <span class="spec-badge ac4">AC4-32</span>
+                <span class="spec-badge">9 ürün</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Klasik -->
+        <div class="card seri-card" data-kalinlik="8" data-ac="ac4" onclick="location.href='camsan-seriler/klasik.html'">
+          <a href="camsan-seriler/klasik.html">
+            <img src="../assets/images/laminant-parke/camsan/klasik/abant-mese.jpg" alt="Klasik Seri" loading="lazy">
+            <div class="card-body">
+              <h3>Klasik Seri</h3>
+              <div class="seri-specs">
+                <span class="spec-badge">8 mm</span>
+                <span class="spec-badge ac4">AC4-32</span>
+                <span class="spec-badge">Derzsiz</span>
+                <span class="spec-badge">15 ürün</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Modern -->
+        <div class="card seri-card" data-kalinlik="8" data-ac="ac4" onclick="location.href='camsan-seriler/modern.html'">
+          <a href="camsan-seriler/modern.html">
+            <img src="../assets/images/laminant-parke/camsan/modern/prestij-mese.jpg" alt="Modern Seri" loading="lazy">
+            <div class="card-body">
+              <h3>Modern Seri</h3>
+              <div class="seri-specs">
+                <span class="spec-badge">8 mm</span>
+                <span class="spec-badge ac4">AC4-32</span>
+                <span class="spec-badge">Derzli</span>
+                <span class="spec-badge">8 ürün</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Modern Long -->
+        <div class="card seri-card" data-kalinlik="8" data-ac="ac4" onclick="location.href='camsan-seriler/modern-long.html'">
+          <a href="camsan-seriler/modern-long.html">
+            <img src="../assets/images/laminant-parke/camsan/modern-long/balkan-mese.jpg" alt="Modern Long Seri" loading="lazy">
+            <div class="card-body">
+              <h3>Modern Long Seri</h3>
+              <div class="seri-specs">
+                <span class="spec-badge">8 mm</span>
+                <span class="spec-badge ac4">AC4-32</span>
+                <span class="spec-badge">Uzun tahta</span>
+                <span class="spec-badge">10 ürün</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Avangard -->
+        <div class="card seri-card" data-kalinlik="10" data-ac="ac4" onclick="location.href='camsan-seriler/avangard.html'">
+          <a href="camsan-seriler/avangard.html">
+            <img src="../assets/images/laminant-parke/camsan/avangard/anemon.jpg" alt="Avangard Seri" loading="lazy">
+            <div class="card-body">
+              <h3>Avangard Seri</h3>
+              <div class="seri-specs">
+                <span class="spec-badge">10 mm</span>
+                <span class="spec-badge ac4">AC4-32</span>
+                <span class="spec-badge">Derzli</span>
+                <span class="spec-badge">9 ürün</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Gloria -->
+        <div class="card seri-card" data-kalinlik="8" data-ac="ac4" onclick="location.href='camsan-seriler/gloria.html'">
+          <a href="camsan-seriler/gloria.html">
+            <img src="../assets/images/laminant-parke/camsan/gloria/karpat.jpg" alt="Gloria Seri" loading="lazy">
+            <div class="card-body">
+              <h3>Gloria Seri</h3>
+              <div class="seri-specs">
+                <span class="spec-badge">8 mm</span>
+                <span class="spec-badge ac4">AC4-32</span>
+                <span class="spec-badge">Derzli</span>
+                <span class="spec-badge">8 ürün</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Serenza -->
+        <div class="card seri-card" data-kalinlik="12" data-ac="ac5" onclick="location.href='camsan-seriler/serenza.html'">
+          <a href="camsan-seriler/serenza.html">
+            <img src="../assets/images/laminant-parke/camsan/serenza/fontana.jpg" alt="Serenza Seri" loading="lazy">
+            <div class="card-body">
+              <h3>Serenza Seri</h3>
+              <div class="seri-specs">
+                <span class="spec-badge">12 mm</span>
+                <span class="spec-badge ac5">AC5-33</span>
+                <span class="spec-badge">Premium</span>
+                <span class="spec-badge">5 ürün</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Belanda -->
+        <div class="card seri-card" data-kalinlik="8" data-ac="ac4" onclick="location.href='camsan-seriler/belanda.html'">
+          <a href="camsan-seriler/belanda.html">
+            <img src="../assets/images/laminant-parke/camsan/belanda/spil.jpg" alt="Belanda Seri" loading="lazy">
+            <div class="card-body">
+              <h3>Belanda Seri</h3>
+              <div class="seri-specs">
+                <span class="spec-badge">8 mm</span>
+                <span class="spec-badge ac4">AC4-32</span>
+                <span class="spec-badge">Derzli</span>
+                <span class="spec-badge">5 ürün</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Çamsan Parkelam ile Mekanlarınızı Dönüştürün</h2>
+      <p>Ürün ve fiyat bilgisi almak, ücretsiz keşif randevusu için bizimle iletişime geçin.</p>
+      <a href="../iletisim.html" class="btn btn-primary">İletişime Geçin</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Süzen İnşaat</h4>
+          <p>İnşaat yapı sistemlerinde güvenilir çözüm ortağınız.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Hızlı Linkler</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html">Ana Sayfa</a></li>
+            <li><a href="../kurumsal.html">Kurumsal</a></li>
+            <li><a href="../galeri.html">Galeri</a></li>
+            <li><a href="../iletisim.html">İletişim</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Hizmetlerimiz</h4>
+          <ul class="footer-links">
+            <li><a href="cati-kaplama.html">Çatı Kaplama & İzolasyon</a></li>
+            <li><a href="dis-cephe.html">Dış Cephe Sistemleri</a></li>
+            <li><a href="gunes-enerjisi.html">Güneş Enerjisi</a></li>
+            <li><a href="laminant.html">Laminant Parke</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>İletişim</h4>
+          <ul class="footer-links">
+            <li>📧 <a href="mailto:erolsuzen@hotmail.com">erolsuzen@hotmail.com</a></li>
+            <li>📞 <a href="tel:+905324052877">+90 532 405 28 77</a></li>
+            <li>📍 <a href="https://maps.app.goo.gl/f9twghMtnYGKgav76" target="_blank" rel="noopener noreferrer">Mustafa Kemal Paşa Mah. Ata Cd. No: 20/A, Fatsa/Ordu</a><br><a href="https://maps.app.goo.gl/f9twghMtnYGKgav76" target="_blank" rel="noopener noreferrer" style="color:var(--red-600);font-weight:600;font-size:0.9em;display:inline-block;margin-top:4px;">➔ Yol Tarifi Al</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Süzen İnşaat. Tüm hakları saklıdır.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://maps.app.goo.gl/f9twghMtnYGKgav76" class="directions-float" target="_blank" rel="noopener noreferrer" aria-label="Google Haritalar'da Yol Tarifi Al">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+  </a>
+
+  <a href="https://wa.me/905324052877?text=Merhaba,%20hizmetleriniz%20hakkında%20bilgi%20almak%20istiyorum." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile iletişime geç" data-tooltip="+90 532 405 28 77">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    let activeKalinlik = 'all';
+    let activeAc = 'all';
+
+    function updateVisible() {
+      const cards = document.querySelectorAll('.seri-card');
+      let visible = 0;
+      cards.forEach(card => {
+        const k = card.dataset.kalinlik;
+        const ac = card.dataset.ac;
+        const kMatch = activeKalinlik === 'all' || k === 'mixed' || k === activeKalinlik;
+        const acMatch = activeAc === 'all' || ac === 'mixed' || ac === activeAc;
+        if (kMatch && acMatch) {
+          card.classList.remove('seri-card-hidden');
+          visible++;
+        } else {
+          card.classList.add('seri-card-hidden');
+        }
+      });
+      const countEl = document.getElementById('seri-count');
+      countEl.textContent = visible === 10 ? '' : visible + ' seri gösteriliyor';
+    }
+
+    function filterSeri(btn, val) {
+      document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeKalinlik = val;
+      updateVisible();
+    }
+
+    function filterAc(btn, val) {
+      document.querySelectorAll('[data-filter-ac]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeAc = val;
+      updateVisible();
+    }
+
+    // Set initial AC "Tümü" button as active
+    document.querySelector('[data-filter-ac="all"]').classList.add('active');
+  </script>
+</body>
+</html>
