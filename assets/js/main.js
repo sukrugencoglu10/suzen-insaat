@@ -4,7 +4,7 @@
 
 // === HERO MOBILE SLIDER ===
 document.addEventListener("DOMContentLoaded", function () {
-  if (!window.matchMedia("(max-width: 900px)").matches) return;
+  if (!window.matchMedia("(max-width: 1100px)").matches) return;
   const track = document.getElementById("heroTrack");
   const dotsContainer = document.getElementById("heroDots");
   if (!track || !dotsContainer) return;
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // === HERO DESKTOP MOSAIC CLICK TO CYCLE ===
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.matchMedia("(max-width: 900px)").matches) return;
+  if (window.matchMedia("(max-width: 1100px)").matches) return;
 
   const heroMosaic = document.getElementById("heroMosaic");
   if (!heroMosaic) return;
@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // === LOGO TOUCH HOVER (mobile) ===
 document.addEventListener("DOMContentLoaded", function () {
   const logoLink = document.querySelector(".logo-link");
-  if (logoLink && window.matchMedia("(max-width: 900px)").matches) {
+  if (logoLink && window.matchMedia("(max-width: 1100px)").matches) {
     let timeout;
     logoLink.addEventListener("touchstart", function (e) {
       logoLink.classList.add("touch-hover");
@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Mobile: inject lang switcher into hamburger menu
-  if (window.matchMedia("(max-width: 900px)").matches) {
+  if (window.matchMedia("(max-width: 1100px)").matches) {
     const langSwitcher = document.querySelector(".lang-switcher");
     if (langSwitcher && navMenu) {
       const li = document.createElement("li");

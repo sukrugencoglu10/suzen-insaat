@@ -996,7 +996,7 @@ a:hover {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   :root {
     --text-5xl: 2.5rem;
     --text-4xl: 2rem;
@@ -1023,7 +1023,7 @@ a:hover {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   :root {
     --text-5xl: 2rem;
     --text-4xl: 1.75rem;
@@ -1031,7 +1031,7 @@ a:hover {
 
   .menu-toggle {
     display: flex;
-    order: 2; /* logo=1 | design-btn=2(via lang-switcher) | hamburger=3 */
+    order: 2;
   }
 
   .lang-switcher {
@@ -1406,8 +1406,8 @@ a:hover {
   background: linear-gradient(135deg, #d35400, #a04000);
 }
 
-@media (max-width: 900px) {
-  /* On mobile: hide lang-switcher items (flags, directions) — only design btn shown next to hamburger */
+@media (max-width: 1100px) {
+  /* On mobile/tablet: hide lang-switcher items (flags, directions) — only design btn shown */
   .nav-directions-btn {
     display: none !important;
   }
@@ -1416,17 +1416,16 @@ a:hover {
     display: none !important;
   }
 
-  /* Evini Tasarla butonu mobilde hamburger sağında gösterilir */
+  /* Evini Tasarla butonu mobilde hamburger yanında */
   .nav-design-btn {
     display: inline-flex !important;
     margin-left: 0;
     margin-right: 4px;
     padding: 6px 12px;
     font-size: 0.78rem;
-    order: -1; /* hamburger butonunun sağına gelsin */
+    order: -1;
   }
 
-  /* Lang-switcher sağ tarafta kalmasın, hamburger yanına taşı */
   .lang-switcher {
     margin-left: 0;
     margin-right: 0;
