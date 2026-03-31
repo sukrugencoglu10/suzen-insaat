@@ -649,13 +649,14 @@ a:hover {
   .hero-layout h1 {
     order: 1;
     text-align: center;
-    margin-top: 2rem; /* Başlığı navbar'dan uzaklaştırır */
+    margin-top: 2rem;
+    margin-bottom: 0.5rem; /* Azaltıldı */
   }
 
   .hero-layout p {
     order: 2;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1rem; /* Azaltıldı */
   }
 
   .hero-accordion {
@@ -1406,22 +1407,7 @@ a:hover {
 
 /* === NAV DESIGN BUTTON === */
 .nav-design-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: linear-gradient(135deg, #8e44ad, #9b59b6);
-  color: white !important;
-  text-decoration: none !important;
-  padding: 8px 16px;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  white-space: nowrap;
-  box-shadow: 0 3px 10px rgba(142, 68, 173, 0.35);
-  transition: all 0.25s ease;
-  margin-left: var(--space-lg);
-  margin-right: 0;
-  order: 2;
+  display: none !important; /* Kullanıcı isteği ile gizlendi */
 }
 
 .nav-design-btn svg {
@@ -1430,8 +1416,8 @@ a:hover {
 
 .nav-design-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(142, 68, 173, 0.45);
-  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+  box-shadow: 0 6px 18px rgba(220, 38, 38, 0.45);
+  background: linear-gradient(135deg, var(--red-700), var(--red-600));
 }
 
 /* On mobile: design button shown next to hamburger - controlled by mobile media query below */
@@ -1677,7 +1663,7 @@ a:hover {
   }
 
   .btn-call {
-    background: #EFEDE6;
+    background: #ffffff;
     color: #CD0000 !important;
   }
 
