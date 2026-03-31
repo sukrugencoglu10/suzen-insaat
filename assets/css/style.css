@@ -644,10 +644,28 @@ a:hover {
   }
 
   .hero-accordion {
+    display: flex;
     flex-direction: column;
-    height: 500px;
+    min-height: 500px;
+    height: 60vh;
     width: 100%;
     margin-top: 2rem;
+  }
+  .accordion-panel {
+    min-height: 60px;
+  }
+  .panel-content {
+    padding: 12px 15px; /* Azaltılmış padding */
+  }
+  .accordion-panel.active .panel-content p {
+    margin-bottom: 6px;
+  }
+  .panel-btn {
+    padding: 6px 14px;
+    font-size: 0.75rem;
+  }
+  .accordion-panel.active .panel-btn {
+    padding: 6px 14px;
   }
 }
 
