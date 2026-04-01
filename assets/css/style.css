@@ -1996,6 +1996,8 @@ a:hover {
 
 @media (max-width: 768px) {
   .hesap-referans-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
+  .hesap-col { order: 1; }
+  .referans-col { order: 2; }
 }
 
 /* === MÜŞTERİ YORUMLARI (TESTİMONIALS) === */
