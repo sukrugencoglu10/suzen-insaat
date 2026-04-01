@@ -1795,20 +1795,12 @@ a:hover {
 
 @media (max-width: 768px) {
   .stats-section {
-    background: linear-gradient(135deg, var(--red-600), var(--red-800));
-    color: var(--white);
-    border-top: none;
+    background: var(--white);
+    border-top: 1px solid var(--gray-100);
   }
-  
-  .stats-section .section-title,
-  .stats-section .section-label,
-  .stat-label {
-    color: var(--white) !important;
-  }
-  
+
   .stat-number {
     font-size: var(--text-3xl);
-    color: var(--white) !important;
   }
 }
 
