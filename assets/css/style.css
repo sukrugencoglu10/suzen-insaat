@@ -469,14 +469,24 @@ a:hover {
   margin-bottom: var(--space-lg);
   text-shadow: none;
   animation: fadeInUp 0.8s ease-out;
+  background: rgba(245, 243, 237, 0.85);
+  display: inline;
+  padding: 4px 12px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .hero p {
   color: #000000;
   font-size: var(--text-xl);
-  font-weight: 600; /* Kalınlaştırıldı */
+  font-weight: 600;
   margin-bottom: var(--space-2xl);
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  background: rgba(245, 243, 237, 0.85);
+  display: inline;
+  padding: 4px 12px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .hero-buttons {
