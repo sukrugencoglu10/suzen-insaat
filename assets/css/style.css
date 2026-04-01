@@ -479,20 +479,6 @@ a:hover {
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
-.hero-content h1 span {
-  background: rgba(245, 243, 237, 0.85);
-  padding: 4px 12px;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-
-.hero-content p {
-  background: rgba(245, 243, 237, 0.85);
-  display: inline;
-  padding: 4px 12px;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
 
 .hero-buttons {
   display: flex;
