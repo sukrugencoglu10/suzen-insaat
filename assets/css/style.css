@@ -472,8 +472,9 @@ a:hover {
 .hero h1 {
   color: var(--red-600);
   font-family: 'Boldonse', sans-serif;
-  font-size: clamp(1.8rem, 3.2vw, 3.75rem);
+  font-size: clamp(1.5rem, 2.6vw, 3rem);
   font-weight: 900;
+  line-height: 1.4;
   margin-bottom: var(--space-lg);
   text-shadow: none;
   animation: fadeInUp 0.8s ease-out;
