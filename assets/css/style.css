@@ -469,11 +469,6 @@ a:hover {
   margin-bottom: var(--space-lg);
   text-shadow: none;
   animation: fadeInUp 0.8s ease-out;
-  background: rgba(245, 243, 237, 0.85);
-  display: inline;
-  padding: 4px 12px;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
 }
 
 .hero p {
@@ -482,6 +477,10 @@ a:hover {
   font-weight: 600;
   margin-bottom: var(--space-2xl);
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.hero-content h1,
+.hero-content p {
   background: rgba(245, 243, 237, 0.85);
   display: inline;
   padding: 4px 12px;
