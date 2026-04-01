@@ -474,7 +474,7 @@ a:hover {
   font-family: 'Boldonse', sans-serif;
   font-size: clamp(1.5rem, 2.6vw, 3rem);
   font-weight: 900;
-  line-height: 1.4;
+  line-height: 1.7;
   margin-bottom: var(--space-lg);
   text-shadow: none;
   animation: fadeInUp 0.8s ease-out;
