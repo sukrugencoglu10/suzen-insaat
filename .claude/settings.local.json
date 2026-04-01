@@ -95,7 +95,10 @@
       "Bash(curl -L --ssl-no-revoke \"$BASEburgazmese_ps_7d11f29257.jpg\" -o \"$DIR/silver/burgaz-mese.jpg\")",
       "Bash(curl -L --ssl-no-revoke \"$BASEkaryamese_ps_a9321de4cc.jpg\" -o \"$DIR/silver/karya-mese.jpg\")",
       "Bash(cp \"ısı yal.jpg\" \"isi-yal.jpg\")",
-      "Bash(cp \"Brick colour_ Ceramic solutions.jpeg\" \"brick-ceramic.jpeg\")"
+      "Bash(cp \"Brick colour_ Ceramic solutions.jpeg\" \"brick-ceramic.jpeg\")",
+      "Bash(where python3:*)",
+      "Bash(where python:*)",
+      "Bash(where py:*)"
     ]
   }
 }
