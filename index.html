@@ -566,7 +566,7 @@
             const saving = u.old_price - u.new_price;
             const pct    = Math.round(saving / u.old_price * 100);
             return `
-              <div class="firsat-card">
+              <div class="firsat-card" data-img="${u.image_url}" data-title="${(u.title||'').replace(/"/g,'&quot;')}" data-desc="${(u.description||'').replace(/"/g,'&quot;')}" data-old="${u.old_price}" data-new="${u.new_price}">
                 <div class="firsat-stock-badge">${u.badge || '✅ STOKTA HAZIR'}</div>
                 <div class="firsat-img">
                   <img src="${u.image_url}" alt="${u.title}">
@@ -583,9 +583,17 @@
                     <div class="price-saving">💰 ₺${saving.toLocaleString('tr-TR')} Tasarruf (%${pct})</div>
                   </div>
                   <a href="tel:+905324052877" class="btn btn-red" style="width:100%;text-align:center;margin-top:auto;"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="vertical-align:middle;margin-right:6px"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.39 21 3 14.61 3 7c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>Hemen Ara - Bilgi Al</a>
+                  <button class="btn-share-item" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/></svg>Paylaş</button>
                 </div>
               </div>`;
           }).join('');
+          grid.querySelectorAll('.btn-share-item').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const c = btn.closest('.firsat-card');
+              spOpen(c.dataset.img, c.dataset.title,
+                `🏷️ ${c.dataset.title}\n${c.dataset.desc}\n💰 ₺${parseInt(c.dataset.old).toLocaleString('tr-TR')} → ₺${parseInt(c.dataset.new).toLocaleString('tr-TR')}\n\n📞 Süzen İnşaat: 0532 405 28 77`);
+            });
+          });
         });
 
     })();
@@ -627,6 +635,65 @@
       document.getElementById('hesapM2').addEventListener('keydown', function(e) {
         if (e.key === 'Enter') hesapla();
       });
+    </script>
+    <script>
+    // ── Paylaş Popup ──
+    (function(){
+      var d = document;
+      d.body.insertAdjacentHTML('beforeend',
+        '<div id="sp-overlay" onclick="if(event.target===this)spClose()">'+
+        '<div id="sp-box" onclick="event.stopPropagation()">'+
+        '<div id="sp-head"><img id="sp-thumb" src="" alt=""><div id="sp-ttl"></div><button onclick="spClose()">✕</button></div>'+
+        '<div id="sp-btns"></div>'+
+        '<button id="sp-cpbtn" onclick="spCopy()">🔗 Linki Kopyala</button>'+
+        '<div id="sp-cptxt">✓ Kopyalandı!</div>'+
+        '</div></div>');
+      var st = d.createElement('style');
+      st.textContent =
+        '#sp-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.55);align-items:flex-end;justify-content:center}'+
+        '#sp-overlay.open{display:flex}'+
+        '#sp-box{background:#fff;border-radius:20px 20px 0 0;padding:1.5rem;width:100%;max-width:480px;animation:spUp .25s ease}'+
+        '@keyframes spUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}'+
+        '#sp-head{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem}'+
+        '#sp-thumb{width:64px;height:64px;object-fit:cover;border-radius:10px;flex-shrink:0}'+
+        '#sp-ttl{flex:1;min-width:0;font-weight:700;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}'+
+        '#sp-head>button{background:none;border:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;padding:4px}'+
+        '#sp-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center;margin-bottom:1rem}'+
+        '.sp-btn{display:flex;flex-direction:column;align-items:center;gap:5px;text-decoration:none;padding:10px 4px;border-radius:12px;transition:background .15s}'+
+        '.sp-btn:hover{background:#f3f4f6}'+
+        '.sp-btn svg{width:40px;height:40px}'+
+        '.sp-btn span{font-size:.72rem;color:#374151;font-weight:500}'+
+        '#sp-cpbtn{width:100%;padding:.7rem;background:#f3f4f6;border:1.5px solid #e5e7eb;border-radius:10px;font-size:.88rem;font-weight:600;cursor:pointer;color:#374151}'+
+        '#sp-cptxt{display:none;text-align:center;color:#16a34a;font-size:.83rem;margin-top:.5rem}'+
+        '.btn-share-item{display:flex;align-items:center;justify-content:center;width:100%;padding:.55rem;margin-top:8px;background:#f3f4f6;border:1.5px solid #e5e7eb;border-radius:8px;font-size:.85rem;font-weight:600;color:#374151;cursor:pointer}'+
+        '.btn-share-item:hover{background:#e5e7eb}';
+      d.head.appendChild(st);
+      var _url='';
+      window.spOpen = async function(img,title,text){
+        _url = img||location.href;
+        if(navigator.share){
+          try{
+            if(img&&navigator.canShare){
+              var r=await fetch(img),b=await r.blob(),f=new File([b],title+'.'+(b.type.split('/')[1]||'jpg'),{type:b.type});
+              if(navigator.canShare({files:[f]})){await navigator.share({files:[f],title,text});return;}
+            }
+            await navigator.share({title,text,url:_url});return;
+          }catch(e){if(e.name==='AbortError')return;}
+        }
+        d.getElementById('sp-thumb').src=img||'';
+        d.getElementById('sp-ttl').textContent=title;
+        d.getElementById('sp-cptxt').style.display='none';
+        var et=encodeURIComponent(text),eu=encodeURIComponent(_url);
+        d.getElementById('sp-btns').innerHTML=
+          '<a class="sp-btn" href="https://wa.me/?text='+et+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp</span></a>'+
+          '<a class="sp-btn" href="https://www.facebook.com/sharer/sharer.php?u='+eu+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg><span>Facebook</span></a>'+
+          '<a class="sp-btn" href="https://x.com/intent/tweet?text='+et+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#000"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span>X</span></a>'+
+          '<a class="sp-btn" href="https://t.me/share/url?url='+eu+'&text='+et+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#26A5E4"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span>Telegram</span></a>';
+        d.getElementById('sp-overlay').classList.add('open');
+      };
+      window.spClose=function(){d.getElementById('sp-overlay').classList.remove('open');};
+      window.spCopy=function(){navigator.clipboard.writeText(_url).then(function(){var ok=d.getElementById('sp-cptxt');ok.style.display='block';setTimeout(function(){ok.style.display='none';},2500);});};
+    })();
     </script>
   </body>
 </html>
