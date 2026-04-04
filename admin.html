@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Paneli — Süzen İnşaat</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-config.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #CD0000;
+      --red-dark: #a50000;
+      --bg: #f2f4f7;
+      --card: #ffffff;
+      --sidebar: #1a1a2e;
+      --sidebar-hover: #16213e;
+      --text: #1f2937;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --radius: 10px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── LOGIN ── */
+    #login-page {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #CD0000 100%);
+    }
+    .login-card {
+      background: var(--card); border-radius: 16px; padding: 2.5rem 2rem;
+      width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .login-logo { text-align: center; margin-bottom: 1.5rem; }
+    .login-logo img { height: 52px; }
+    .login-card h1 { font-size: 1.4rem; text-align: center; margin-bottom: 0.25rem; }
+    .login-card p  { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.75rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 0.65rem 0.9rem; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 0.95rem; transition: border-color 0.2s;
+      background: #fff;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--red);
+    }
+    .form-group textarea { resize: vertical; min-height: 72px; }
+    #login-error { color: var(--danger); font-size: 0.85rem; margin-bottom: 0.75rem; min-height: 1.2em; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 0.65rem 1.25rem;
+           border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+    .btn-primary { background: var(--red); color: #fff; width: 100%; justify-content: center; }
+    .btn-primary:hover { background: var(--red-dark); }
+    .btn-secondary { background: var(--bg); color: var(--text); border: 1.5px solid var(--border); }
+    .btn-secondary:hover { background: var(--border); }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-danger  { background: transparent; color: var(--danger); border: 1.5px solid var(--danger); }
+    .btn-danger:hover { background: var(--danger); color: #fff; }
+    .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.82rem; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* ── ADMIN LAYOUT ── */
+    #admin-panel { display: none; min-height: 100vh; }
+    .admin-header {
+      position: fixed; top: 0; left: 0; right: 0; height: 60px; z-index: 100;
+      background: var(--card); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 1.5rem; gap: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .admin-header img { height: 36px; }
+    .admin-header .title { font-weight: 700; font-size: 1rem; color: var(--text); flex: 1; }
+    .admin-header .user-info { font-size: 0.82rem; color: var(--text-muted); }
+    .admin-body { display: flex; padding-top: 60px; min-height: 100vh; }
+    .admin-sidebar {
+      width: 230px; flex-shrink: 0; background: var(--sidebar); padding: 1.5rem 0;
+      position: fixed; top: 60px; bottom: 0; overflow-y: auto;
+    }
+    .sidebar-label { color: #9ca3af; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+                     padding: 0 1.25rem; margin-bottom: 0.5rem; margin-top: 1rem; }
+    .sidebar-label:first-child { margin-top: 0; }
+    .tab-btn {
+      display: flex; align-items: center; gap: 10px; width: 100%; padding: 0.75rem 1.25rem;
+      background: transparent; border: none; color: #d1d5db; font-size: 0.9rem; cursor: pointer;
+      text-align: left; transition: all 0.15s;
+    }
+    .tab-btn:hover { background: var(--sidebar-hover); color: #fff; }
+    .tab-btn.active { background: var(--red); color: #fff; }
+    .tab-btn .icon { font-size: 1.1rem; width: 20px; text-align: center; }
+    .admin-main { margin-left: 230px; flex: 1; padding: 2rem; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── CONTENT ── */
+    .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.75rem; flex-wrap: gap; }
+    .page-header h2 { font-size: 1.4rem; }
+    .page-header p  { color: var(--text-muted); font-size: 0.88rem; margin-top: 2px; }
+    .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+    .item-card {
+      background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+      overflow: hidden; border: 1.5px solid var(--border); transition: box-shadow 0.15s;
+    }
+    .item-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+    .item-card-img { width: 100%; height: 160px; object-fit: cover; background: var(--bg); display: block; }
+    .item-card-img-placeholder { width: 100%; height: 160px; background: var(--bg); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 2.5rem; }
+    .item-card-body { padding: 1rem; }
+    .item-card-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; }
+    .item-card-meta  { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .item-card-price { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem; }
+    .price-old-sm { text-decoration: line-through; color: var(--text-muted); font-size: 0.88rem; }
+    .price-new-sm { color: var(--red); font-weight: 700; font-size: 1rem; }
+    .item-card-actions { display: flex; gap: 0.5rem; }
+    .badge-active   { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: #dcfce7; color: #16a34a; }
+    .badge-inactive { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: #fee2e2; color: #dc2626; }
+    .sort-badge { display: inline-block; padding: 2px 7px; border-radius: 20px; font-size: 0.75rem; background: #f3f4f6; color: #6b7280; margin-left: 4px; }
+    .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
+    .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
+
+    /* ── MODAL ── */
+    #modal-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 1000; align-items: flex-start; justify-content: center; padding: 2rem 1rem; overflow-y: auto;
+    }
+    #modal-overlay.open { display: flex; }
+    #modal {
+      background: var(--card); border-radius: 14px; width: 100%; max-width: 540px;
+      padding: 2rem; box-shadow: 0 25px 80px rgba(0,0,0,0.25); margin: auto;
+    }
+    #modal h3 { font-size: 1.2rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+    .modal-actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .img-preview { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-top: 0.5rem; border: 1.5px solid var(--border); }
+    .img-placeholder { width: 100%; height: 180px; background: var(--bg); border-radius: 8px; margin-top: 0.5rem; border: 1.5px dashed var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 2rem; }
+    .upload-progress { margin-top: 0.5rem; font-size: 0.82rem; color: var(--text-muted); }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; padding: 0.75rem 1.25rem;
+      border-radius: 10px; color: #fff; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 9999;
+      transform: translateY(100px); opacity: 0; transition: all 0.3s;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.success { background: var(--success); }
+    .toast.error   { background: var(--danger); }
+    .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .config-warning {
+      background: #fef3c7; border: 1.5px solid #fbbf24; border-radius: var(--radius);
+      padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: 0.9rem;
+    }
+    .config-warning strong { display: block; margin-bottom: 0.25rem; }
+    .config-warning code { background: #fff; padding: 2px 6px; border-radius: 4px; font-size: 0.82rem; }
+    @media (max-width: 768px) {
+      .admin-sidebar { width: 60px; }
+      .tab-btn span { display: none; }
+      .admin-main { margin-left: 60px; padding: 1rem; }
+      .two-col { grid-template-columns: 1fr; }
+      .item-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     LOGIN SAYFASI
+════════════════════════════════════════ -->
+<div id="login-page">
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="assets/images/logolar/suzen-logo.svg" alt="Süzen İnşaat">
+    </div>
+    <h1>Admin Paneli</h1>
+    <p>Yönetim paneline giriş yapın</p>
+    <div id="login-error"></div>
+    <div class="form-group">
+      <label>E-posta</label>
+      <input type="email" id="login-email" placeholder="admin@suzeninsaat.com" autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label>Şifre</label>
+      <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="btn btn-primary" id="login-btn" onclick="handleLogin()">Giriş Yap</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     ADMIN PANELİ
+════════════════════════════════════════ -->
+<div id="admin-panel">
+  <header class="admin-header">
+    <img src="assets/images/logolar/suzen-logo.svg" alt="Logo">
+    <span class="title">Admin Paneli</span>
+    <span class="user-info" id="user-email"></span>
+    <button class="btn btn-secondary btn-sm" onclick="handleLogout()">Çıkış</button>
+  </header>
+
+  <div class="admin-body">
+    <nav class="admin-sidebar">
+      <div class="sidebar-label">Yönetim</div>
+      <button class="tab-btn active" data-tab="firsat" onclick="switchTab('firsat')">
+        <span class="icon">🏷️</span>
+        <span>Fırsat Ürünleri</span>
+      </button>
+      <button class="tab-btn" data-tab="projeler" onclick="switchTab('projeler')">
+        <span class="icon">🏗️</span>
+        <span>Projelerim</span>
+      </button>
+    </nav>
+
+    <main class="admin-main">
+      <div id="config-warning" class="config-warning" style="display:none">
+        <strong>⚠️ Supabase henüz yapılandırılmamış</strong>
+        <code>assets/js/supabase-config.js</code> dosyasına URL ve anon key'i girin.
+      </div>
+
+      <!-- ── FIRSAT ÜRÜNLERİ ── -->
+      <div id="tab-firsat" class="tab-content active">
+        <div class="page-header">
+          <div>
+            <h2>Fırsat Ürünleri</h2>
+            <p>Ana sayfadaki ürün kartlarını yönetin</p>
+          </div>
+          <button class="btn btn-primary" onclick="openModal('firsat')">+ Yeni Ürün</button>
+        </div>
+        <div id="firsat-list" class="item-grid">
+          <div class="empty-state" style="grid-column:1/-1"><div class="spinner"></div><br>Yükleniyor...</div>
+        </div>
+      </div>
+
+      <!-- ── PROJELERİM ── -->
+      <div id="tab-projeler" class="tab-content">
+        <div class="page-header">
+          <div>
+            <h2>Projelerim</h2>
+            <p>Hero bölümündeki proje panellerini yönetin</p>
+          </div>
+          <button class="btn btn-primary" onclick="openModal('projeler')">+ Yeni Proje</button>
+        </div>
+        <div id="proje-list" class="item-grid">
+          <div class="empty-state" style="grid-column:1/-1"><div class="spinner"></div><br>Yükleniyor...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     MODAL (Ekle / Düzenle)
+════════════════════════════════════════ -->
+<div id="modal-overlay">
+  <div id="modal">
+    <h3 id="modal-title">Ürün Ekle</h3>
+    <input type="hidden" id="item-id">
+    <input type="hidden" id="item-type">
+
+    <!-- Fırsat alanları -->
+    <div id="firsat-fields">
+      <div class="form-group">
+        <label>Ürün Adı *</label>
+        <input type="text" id="f-title" placeholder="örn. Çatı Kiremiti">
+      </div>
+      <div class="form-group">
+        <label>Açıklama</label>
+        <textarea id="f-desc" placeholder="Kısa açıklama..."></textarea>
+      </div>
+      <div class="two-col">
+        <div class="form-group">
+          <label>Eski Fiyat (₺)</label>
+          <input type="number" id="f-old-price" placeholder="500" min="0">
+        </div>
+        <div class="form-group">
+          <label>Yeni Fiyat (₺)</label>
+          <input type="number" id="f-new-price" placeholder="350" min="0">
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="form-group">
+          <label>Rozet Yazısı</label>
+          <input type="text" id="f-badge" placeholder="✅ STOKTA HAZIR">
+        </div>
+        <div class="form-group">
+          <label>Sıra No</label>
+          <input type="number" id="f-sort" placeholder="0" min="0">
+        </div>
+      </div>
+      <div class="form-group">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="f-active" checked style="width:auto;">
+          Aktif (sitede göster)
+        </label>
+      </div>
+    </div>
+
+    <!-- Proje alanları -->
+    <div id="proje-fields" style="display:none">
+      <div class="form-group">
+        <label>Proje Başlığı *</label>
+        <input type="text" id="p-title" placeholder="örn. Çatı Kaplama">
+      </div>
+      <div class="form-group">
+        <label>Alt Yazı</label>
+        <input type="text" id="p-desc" placeholder="örn. Profesyonel çatı çözümleri">
+      </div>
+      <div class="form-group">
+        <label>Link URL</label>
+        <input type="text" id="p-link" placeholder="hizmetler/cati-kaplama.html">
+      </div>
+      <div class="two-col">
+        <div class="form-group">
+          <label>Sıra No</label>
+          <input type="number" id="p-sort" placeholder="0" min="0">
+        </div>
+        <div class="form-group" style="align-self:end; padding-bottom:0.1rem;">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+            <input type="checkbox" id="p-active" checked style="width:auto;">
+            Aktif
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resim (ortak) -->
+    <div class="form-group">
+      <label>Resim</label>
+      <div id="img-preview-wrap">
+        <div class="img-placeholder" id="img-placeholder">📷</div>
+        <img id="img-preview" class="img-preview" style="display:none" alt="Önizleme">
+      </div>
+      <input type="file" id="img-file" accept="image/*" style="margin-top:0.5rem; width:100%;" onchange="previewImage(this)">
+      <div class="upload-progress" id="upload-progress"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-danger btn-sm" id="delete-btn" onclick="deleteItem()" style="display:none; margin-right:auto;">Sil</button>
+      <button class="btn btn-secondary" onclick="closeModal()">İptal</button>
+      <button class="btn btn-primary" id="save-btn" onclick="saveItem()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+// ── Init Supabase ──
+let sb = null;
+function initSupabase() {
+  const url = window.SUPABASE_URL;
+  const key = window.SUPABASE_ANON_KEY;
+  if (!url || url === 'YOUR_SUPABASE_URL') {
+    document.getElementById('config-warning').style.display = 'block';
+    return false;
+  }
+  sb = window.supabase.createClient(url, key);
+  return true;
+}
+
+// ── Auth ──
+async function checkSession() {
+  if (!initSupabase()) return;
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) showPanel(session.user.email);
+}
+
+async function handleLogin() {
+  if (!initSupabase()) { showToast('Supabase yapılandırılmamış!', 'error'); return; }
+  const email    = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const btn      = document.getElementById('login-btn');
+  const errEl    = document.getElementById('login-error');
+
+  errEl.textContent = '';
+  btn.innerHTML = '<span class="spinner"></span>';
+  btn.disabled = true;
+
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  btn.innerHTML = 'Giriş Yap'; btn.disabled = false;
+
+  if (error) { errEl.textContent = 'Hatalı e-posta veya şifre.'; return; }
+  showPanel(data.user.email);
+}
+
+async function handleLogout() {
+  if (sb) await sb.auth.signOut();
+  document.getElementById('admin-panel').style.display = 'none';
+  document.getElementById('login-page').style.display  = 'flex';
+}
+
+function showPanel(email) {
+  document.getElementById('login-page').style.display  = 'none';
+  document.getElementById('admin-panel').style.display = 'block';
+  document.getElementById('user-email').textContent    = email;
+  loadFirsat();
+  loadProjeler();
+}
+
+// Enter key on login
+document.getElementById('login-password').addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+
+// ── Tabs ──
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+}
+
+// ── Load Data ──
+async function loadFirsat() {
+  if (!sb) return;
+  const { data, error } = await sb.from('firsat_urunleri').select('*').order('sort_order');
+  if (error) { showToast('Ürünler yüklenemedi', 'error'); return; }
+  renderFirsatList(data || []);
+}
+
+async function loadProjeler() {
+  if (!sb) return;
+  const { data, error } = await sb.from('projeler').select('*').order('sort_order');
+  if (error) { showToast('Projeler yüklenemedi', 'error'); return; }
+  renderProjeList(data || []);
+}
+
+// ── Render Lists ──
+function renderFirsatList(items) {
+  const el = document.getElementById('firsat-list');
+  if (!items.length) {
+    el.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="icon">🏷️</div><p>Henüz ürün yok. "Yeni Ürün" butonuna tıklayın.</p></div>';
+    return;
+  }
+  el.innerHTML = items.map(u => `
+    <div class="item-card">
+      ${u.image_url
+        ? `<img src="${u.image_url}" class="item-card-img" alt="${escHtml(u.title)}" onerror="this.style.display='none'">`
+        : `<div class="item-card-img-placeholder">📷</div>`}
+      <div class="item-card-body">
+        <div class="item-card-title">${escHtml(u.title)}</div>
+        <div class="item-card-meta">
+          ${u.active ? '<span class="badge-active">Aktif</span>' : '<span class="badge-inactive">Pasif</span>'}
+          <span class="sort-badge">Sıra: ${u.sort_order}</span>
+        </div>
+        <div class="item-card-price">
+          <span class="price-old-sm">₺${u.old_price.toLocaleString('tr-TR')}</span>
+          <span class="price-new-sm">₺${u.new_price.toLocaleString('tr-TR')}</span>
+        </div>
+        <div class="item-card-actions">
+          <button class="btn btn-secondary btn-sm" onclick='openModal("firsat", ${JSON.stringify(u)})'>✏️ Düzenle</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderProjeList(items) {
+  const el = document.getElementById('proje-list');
+  if (!items.length) {
+    el.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="icon">🏗️</div><p>Henüz proje yok. "Yeni Proje" butonuna tıklayın.</p></div>';
+    return;
+  }
+  el.innerHTML = items.map(p => `
+    <div class="item-card">
+      ${p.image_url
+        ? `<img src="${p.image_url}" class="item-card-img" alt="${escHtml(p.title)}" onerror="this.style.display='none'">`
+        : `<div class="item-card-img-placeholder">🏗️</div>`}
+      <div class="item-card-body">
+        <div class="item-card-title">${escHtml(p.title)}</div>
+        <div class="item-card-meta">
+          ${p.active ? '<span class="badge-active">Aktif</span>' : '<span class="badge-inactive">Pasif</span>'}
+          <span class="sort-badge">Sıra: ${p.sort_order}</span>
+        </div>
+        <div class="item-card-meta" style="margin-top:4px;">${escHtml(p.description || '')}</div>
+        <div class="item-card-actions" style="margin-top:0.75rem;">
+          <button class="btn btn-secondary btn-sm" onclick='openModal("projeler", ${JSON.stringify(p)})'>✏️ Düzenle</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── Modal ──
+let currentType = 'firsat';
+
+function openModal(type, item = null) {
+  currentType = type;
+  const isFiresat = type === 'firsat';
+
+  document.getElementById('firsat-fields').style.display = isFiresat ? '' : 'none';
+  document.getElementById('proje-fields').style.display  = isFiresat ? 'none' : '';
+  document.getElementById('delete-btn').style.display    = item ? '' : 'none';
+  document.getElementById('modal-title').textContent     = item
+    ? (isFiresat ? 'Ürünü Düzenle' : 'Projeyi Düzenle')
+    : (isFiresat ? 'Yeni Ürün Ekle' : 'Yeni Proje Ekle');
+
+  // Reset
+  document.getElementById('item-id').value  = item ? item.id : '';
+  document.getElementById('item-type').value = type;
+  document.getElementById('upload-progress').textContent = '';
+  document.getElementById('img-preview').style.display  = 'none';
+  document.getElementById('img-placeholder').style.display = 'flex';
+  document.getElementById('img-file').value = '';
+
+  if (isFiresat) {
+    document.getElementById('f-title').value     = item ? item.title       : '';
+    document.getElementById('f-desc').value      = item ? item.description : '';
+    document.getElementById('f-old-price').value = item ? item.old_price   : '';
+    document.getElementById('f-new-price').value = item ? item.new_price   : '';
+    document.getElementById('f-badge').value     = item ? item.badge       : '✅ STOKTA HAZIR';
+    document.getElementById('f-sort').value      = item ? item.sort_order  : 0;
+    document.getElementById('f-active').checked  = item ? item.active      : true;
+  } else {
+    document.getElementById('p-title').value  = item ? item.title       : '';
+    document.getElementById('p-desc').value   = item ? item.description : '';
+    document.getElementById('p-link').value   = item ? item.link_url    : '';
+    document.getElementById('p-sort').value   = item ? item.sort_order  : 0;
+    document.getElementById('p-active').checked = item ? item.active    : true;
+  }
+
+  if (item && item.image_url) {
+    document.getElementById('img-preview').src           = item.image_url;
+    document.getElementById('img-preview').style.display = 'block';
+    document.getElementById('img-placeholder').style.display = 'none';
+  }
+
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+function previewImage(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('img-preview').src           = e.target.result;
+    document.getElementById('img-preview').style.display = 'block';
+    document.getElementById('img-placeholder').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── Save ──
+async function saveItem() {
+  if (!sb) return;
+  const type   = document.getElementById('item-type').value;
+  const id     = document.getElementById('item-id').value;
+  const saveBtn = document.getElementById('save-btn');
+  const progEl  = document.getElementById('upload-progress');
+
+  saveBtn.innerHTML = '<span class="spinner"></span> Kaydediliyor...';
+  saveBtn.disabled = true;
+  progEl.textContent = '';
+
+  try {
+    // 1. Resim yükle
+    let imageUrl = null;
+    const fileInput = document.getElementById('img-file');
+    if (fileInput.files[0]) {
+      progEl.textContent = '📤 Resim yükleniyor...';
+      const bucket = type === 'firsat' ? 'firsat-images' : 'proje-images';
+      imageUrl = await uploadImage(fileInput.files[0], bucket);
+      progEl.textContent = '✅ Resim yüklendi';
+    }
+
+    // 2. Veri hazırla
+    let payload;
+    if (type === 'firsat') {
+      const oldP = parseInt(document.getElementById('f-old-price').value) || 0;
+      const newP = parseInt(document.getElementById('f-new-price').value) || 0;
+      payload = {
+        title:       document.getElementById('f-title').value.trim(),
+        description: document.getElementById('f-desc').value.trim(),
+        old_price:   oldP,
+        new_price:   newP,
+        badge:       document.getElementById('f-badge').value.trim() || '✅ STOKTA HAZIR',
+        sort_order:  parseInt(document.getElementById('f-sort').value) || 0,
+        active:      document.getElementById('f-active').checked,
+      };
+      if (!payload.title) { showToast('Ürün adı zorunlu!', 'error'); return; }
+    } else {
+      payload = {
+        title:       document.getElementById('p-title').value.trim(),
+        description: document.getElementById('p-desc').value.trim(),
+        link_url:    document.getElementById('p-link').value.trim() || '#',
+        sort_order:  parseInt(document.getElementById('p-sort').value) || 0,
+        active:      document.getElementById('p-active').checked,
+      };
+      if (!payload.title) { showToast('Başlık zorunlu!', 'error'); return; }
+    }
+
+    if (imageUrl) payload.image_url = imageUrl;
+
+    // 3. DB işlemi
+    const table = type === 'firsat' ? 'firsat_urunleri' : 'projeler';
+    let error;
+    if (id) {
+      ({ error } = await sb.from(table).update(payload).eq('id', id));
+    } else {
+      ({ error } = await sb.from(table).insert(payload));
+    }
+
+    if (error) throw error;
+
+    showToast(id ? 'Güncellendi ✓' : 'Eklendi ✓', 'success');
+    closeModal();
+    if (type === 'firsat') loadFirsat(); else loadProjeler();
+
+  } catch (err) {
+    showToast('Hata: ' + (err.message || 'Bilinmeyen hata'), 'error');
+  } finally {
+    saveBtn.innerHTML = 'Kaydet'; saveBtn.disabled = false;
+  }
+}
+
+// ── Delete ──
+async function deleteItem() {
+  if (!sb) return;
+  if (!confirm('Bu kaydı silmek istediğinizden emin misiniz?')) return;
+  const id    = document.getElementById('item-id').value;
+  const type  = document.getElementById('item-type').value;
+  const table = type === 'firsat' ? 'firsat_urunleri' : 'projeler';
+
+  const { error } = await sb.from(table).delete().eq('id', id);
+  if (error) { showToast('Silinemedi: ' + error.message, 'error'); return; }
+
+  showToast('Silindi ✓', 'success');
+  closeModal();
+  if (type === 'firsat') loadFirsat(); else loadProjeler();
+}
+
+// ── Image Upload ──
+async function uploadImage(file, bucket) {
+  const ext      = file.name.split('.').pop().toLowerCase();
+  const safeName = `${Date.now()}.${ext}`;
+  const { error } = await sb.storage.from(bucket).upload(safeName, file, { upsert: true });
+  if (error) throw error;
+  const { data: { publicUrl } } = sb.storage.from(bucket).getPublicUrl(safeName);
+  return publicUrl;
+}
+
+// ── Toast ──
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type}`;
+  setTimeout(() => t.classList.add('show'), 10);
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ── Utils ──
+function escHtml(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Modali dışına tıklayınca kapat
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ── Init ──
+checkSession();
+</script>
+</body>
+</html>

@@ -5,12 +5,17 @@
 
 
 // === HERO ACCORDION PANELS ===
-document.addEventListener("DOMContentLoaded", function () {
+// Global olarak erişilebilir — dinamik içerik sonrası da çağrılabilir
+window.initHeroAccordion = function () {
   const accordion = document.getElementById("heroAccordion");
   if (!accordion) return;
 
   const panels = accordion.querySelectorAll(".accordion-panel");
-  let autoTimer;
+  if (!panels.length) return;
+
+  // Önceki timer varsa temizle
+  if (accordion._autoTimer) clearInterval(accordion._autoTimer);
+
   let currentIndex = 0;
   let isHovering = false;
 
@@ -20,11 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
     currentIndex = index;
   }
 
-  // Hover interaction
   panels.forEach((panel, index) => {
     panel.addEventListener("mouseenter", function () {
       isHovering = true;
-      clearInterval(autoTimer);
+      clearInterval(accordion._autoTimer);
       activatePanel(index);
     });
   });
@@ -34,10 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
     startAuto();
   });
 
-  // Auto-cycle panels
   function startAuto() {
-    clearInterval(autoTimer);
-    autoTimer = setInterval(() => {
+    clearInterval(accordion._autoTimer);
+    accordion._autoTimer = setInterval(() => {
       if (!isHovering) {
         currentIndex = (currentIndex + 1) % panels.length;
         activatePanel(currentIndex);
@@ -46,6 +49,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   startAuto();
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  window.initHeroAccordion();
 });
 
 // === LOGO TOUCH HOVER (mobile) ===

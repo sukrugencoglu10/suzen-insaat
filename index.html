@@ -191,7 +191,7 @@
           <div class="firsat-trust-item"><strong>Depodan Direkt Satış</strong></div>
         </div>
 
-        <div class="grid grid-3" style="max-width:960px;margin:0 auto;">
+        <div id="firsat-grid" class="grid grid-3" style="max-width:960px;margin:0 auto;">
 
           <!-- Ürün 1 -->
           <div class="firsat-card">
@@ -542,6 +542,74 @@
 
     <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
+    <!-- Supabase Dinamik İçerik -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script>
+    (function() {
+      const url = window.SUPABASE_URL;
+      const key = window.SUPABASE_ANON_KEY;
+      if (!url || url === 'YOUR_SUPABASE_URL') return; // henüz yapılandırılmamış
+
+      const sb = window.supabase.createClient(url, key);
+
+      // ── Fırsat Ürünleri ──
+      sb.from('firsat_urunleri')
+        .select('*')
+        .eq('active', true)
+        .order('sort_order')
+        .then(({ data, error }) => {
+          if (error || !data || !data.length) return;
+          const grid = document.getElementById('firsat-grid');
+          if (!grid) return;
+          grid.innerHTML = data.map(u => {
+            const saving = u.old_price - u.new_price;
+            const pct    = Math.round(saving / u.old_price * 100);
+            return `
+              <div class="firsat-card">
+                <div class="firsat-stock-badge">${u.badge || '✅ STOKTA HAZIR'}</div>
+                <div class="firsat-img">
+                  <img src="${u.image_url}" alt="${u.title}">
+                </div>
+                <div class="firsat-body">
+                  <h3 class="firsat-title">${u.title}</h3>
+                  <p class="firsat-desc">${u.description}</p>
+                  <div class="firsat-price-block">
+                    <div class="price-label">Depo Boşaltma Fiyatı</div>
+                    <div class="firsat-price">
+                      <span class="price-old">₺${u.old_price.toLocaleString('tr-TR')}</span>
+                      <span class="price-new">₺${u.new_price.toLocaleString('tr-TR')}</span>
+                    </div>
+                    <div class="price-saving">💰 ₺${saving.toLocaleString('tr-TR')} Tasarruf (%${pct})</div>
+                  </div>
+                  <a href="tel:+905324052877" class="btn btn-red" style="width:100%;text-align:center;margin-top:auto;"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="vertical-align:middle;margin-right:6px"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.39 21 3 14.61 3 7c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>Hemen Ara - Bilgi Al</a>
+                </div>
+              </div>`;
+          }).join('');
+        });
+
+      // ── Projelerim (Hero Accordion) ──
+      sb.from('projeler')
+        .select('*')
+        .eq('active', true)
+        .order('sort_order')
+        .then(({ data, error }) => {
+          if (error || !data || !data.length) return;
+          const accordion = document.getElementById('heroAccordion');
+          if (!accordion) return;
+          accordion.innerHTML = data.map((p, i) => `
+            <div class="accordion-panel ${i === 0 ? 'active' : ''}" style="background-image: url('${p.image_url}')">
+              <div class="panel-overlay"></div>
+              <div class="panel-content">
+                <h3>${p.title}</h3>
+                <p>${p.description}</p>
+                <a href="${p.link_url || '#'}" class="panel-btn">Devamı</a>
+              </div>
+            </div>`).join('');
+          if (typeof window.initHeroAccordion === 'function') window.initHeroAccordion();
+        });
+    })();
+    </script>
     <script>
       // Hesap Makinesi Tab
       document.querySelectorAll('.hesap-tab').forEach(function(btn) {
