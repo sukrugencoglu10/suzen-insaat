@@ -1819,7 +1819,7 @@ a:hover {
 }
 
 /* === FIRSAT ÜRÜNLERİ === */
-.firsat-section { background: var(--gray-50); }
+.firsat-section { background: var(--gray-50); padding-top: var(--space-2xl); }
 
 .firsat-card {
   background: var(--white);
