@@ -1879,9 +1879,9 @@ a:hover {
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-sm);
-  background: white;
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-xl);
+  background: none;
+  border: none;
+  border-radius: 0;
   padding: var(--space-md) var(--space-xl);
   margin-bottom: var(--space-2xl);
   color: var(--text-primary);
