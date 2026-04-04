@@ -127,7 +127,7 @@
             <div class="panel-content">
               <h3>Projelerimiz</h3>
               <p>Tamamlanan işler</p>
-              <a href="galeri.html" class="panel-btn">Devamı</a>
+              <a href="projeler.html" class="panel-btn">Devamı</a>
             </div>
           </div>
         </div>
@@ -588,26 +588,6 @@
           }).join('');
         });
 
-      // ── Projelerim (Hero Accordion) ──
-      sb.from('projeler')
-        .select('*')
-        .eq('active', true)
-        .order('sort_order')
-        .then(({ data, error }) => {
-          if (error || !data || !data.length) return;
-          const accordion = document.getElementById('heroAccordion');
-          if (!accordion) return;
-          accordion.innerHTML = data.map((p, i) => `
-            <div class="accordion-panel ${i === 0 ? 'active' : ''}" style="background-image: url('${p.image_url}')">
-              <div class="panel-overlay"></div>
-              <div class="panel-content">
-                <h3>${p.title}</h3>
-                <p>${p.description}</p>
-                <a href="${p.link_url || '#'}" class="panel-btn">Devamı</a>
-              </div>
-            </div>`).join('');
-          if (typeof window.initHeroAccordion === 'function') window.initHeroAccordion();
-        });
     })();
     </script>
     <script>

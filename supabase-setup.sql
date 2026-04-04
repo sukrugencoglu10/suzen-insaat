@@ -42,10 +42,48 @@ CREATE POLICY "admin_write_firsat"   ON firsat_urunleri FOR ALL USING (auth.role
 CREATE POLICY "admin_write_projeler" ON projeler        FOR ALL USING (auth.role() = 'authenticated');
 
 -- ============================================================
--- STORAGE BUCKET KURULUMU (Dashboard'dan yapın):
--- Storage > New Bucket > "firsat-images"  → Public: ON
--- Storage > New Bucket > "proje-images"   → Public: ON
---
--- AUTH KURULUMU:
--- Authentication > Users > Invite User > admin e-posta ve şifre girin
+-- 6. STORAGE POLİCYLERİ (resim yükleme için zorunlu!)
 -- ============================================================
+
+-- Herkese okuma izni
+CREATE POLICY "public_read_firsat_storage"
+  ON storage.objects FOR SELECT
+  USING (bucket_id = 'firsat-images');
+
+CREATE POLICY "public_read_proje_storage"
+  ON storage.objects FOR SELECT
+  USING (bucket_id = 'proje-images');
+
+-- Giriş yapmış admin yükleyebilir
+CREATE POLICY "auth_insert_firsat_storage"
+  ON storage.objects FOR INSERT
+  WITH CHECK (bucket_id = 'firsat-images' AND auth.role() = 'authenticated');
+
+CREATE POLICY "auth_insert_proje_storage"
+  ON storage.objects FOR INSERT
+  WITH CHECK (bucket_id = 'proje-images' AND auth.role() = 'authenticated');
+
+-- Giriş yapmış admin güncelleyebilir
+CREATE POLICY "auth_update_firsat_storage"
+  ON storage.objects FOR UPDATE
+  USING (bucket_id = 'firsat-images' AND auth.role() = 'authenticated');
+
+CREATE POLICY "auth_update_proje_storage"
+  ON storage.objects FOR UPDATE
+  USING (bucket_id = 'proje-images' AND auth.role() = 'authenticated');
+
+-- Giriş yapmış admin silebilir
+CREATE POLICY "auth_delete_firsat_storage"
+  ON storage.objects FOR DELETE
+  USING (bucket_id = 'firsat-images' AND auth.role() = 'authenticated');
+
+CREATE POLICY "auth_delete_proje_storage"
+  ON storage.objects FOR DELETE
+  USING (bucket_id = 'proje-images' AND auth.role() = 'authenticated');
+
+-- ============================================================
+-- 7. PROJELER — ÇOK RESİM DESTEĞİ
+-- Mevcut projeler tablosuna images kolonu ekler (en fazla 10 URL)
+-- ============================================================
+ALTER TABLE projeler
+  ADD COLUMN IF NOT EXISTS images TEXT[] DEFAULT '{}';

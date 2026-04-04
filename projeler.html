@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-586XMF2C');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Süzen İnşaat tamamlanan projeler — çatı kaplama, dış cephe ve laminant parke işlerimiz." />
+  <title>Projelerimiz — Süzen İnşaat</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/logolar/favicon.ico">
+  <link rel="icon" type="image/webp" href="assets/images/logolar/favicon_SÜZEN.webp">
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* ── Sayfa başlığı ── */
+    .page-hero {
+      background: var(--gray-900);
+      padding: 5rem 0 3rem;
+      text-align: center;
+    }
+    .page-hero h1 { color: #fff; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 0.5rem; }
+    .page-hero p  { color: var(--gray-300); font-size: 1.05rem; }
+
+    /* ── Proje grid ── */
+    .projeler-section { padding: var(--space-3xl) 0; background: var(--bg); }
+    .projeler-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-xl);
+    }
+
+    /* ── Proje kartı ── */
+    .proje-card {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .proje-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .proje-card-img {
+      width: 100%; height: 220px;
+      object-fit: cover;
+      display: block;
+      background: var(--gray-200);
+    }
+    .proje-card-img-placeholder {
+      width: 100%; height: 220px;
+      background: var(--gray-200);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: 2.5rem;
+    }
+    .proje-card-body { padding: var(--space-lg); }
+    .proje-card-title { font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; }
+    .proje-card-desc  { font-size: 0.9rem; color: var(--text-muted); margin-bottom: var(--space-md); line-height: 1.5; }
+    .proje-card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .proje-img-count { font-size: 0.82rem; color: var(--text-muted); }
+    .btn-gallery {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--red-600); color: #fff;
+      padding: 0.45rem 1rem; border-radius: var(--radius-md);
+      font-size: 0.85rem; font-weight: 600; border: none; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-gallery:hover { background: var(--red-700); }
+
+    /* ── Boş durum ── */
+    .projeler-empty {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--text-muted);
+    }
+    .projeler-empty p { font-size: 1.1rem; margin-top: 1rem; }
+
+    /* ── Yükleme ── */
+    .projeler-loading {
+      grid-column: 1/-1;
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+      padding: 4rem; color: var(--text-muted); font-size: 1rem;
+    }
+    .spin {
+      width: 24px; height: 24px;
+      border: 3px solid var(--gray-200);
+      border-top-color: var(--red-600);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Lightbox ── */
+    #proje-lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(0,0,0,0.95);
+      flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    #proje-lightbox.open { display: flex; }
+    #lb-img {
+      max-width: 90vw; max-height: 80vh;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    #lb-title {
+      color: #fff; font-size: 1rem; font-weight: 600;
+      margin-top: 0.75rem; text-align: center;
+    }
+    #lb-counter { color: var(--gray-400); font-size: 0.82rem; margin-top: 0.25rem; }
+    .lb-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.12); border: none;
+      color: #fff; font-size: 1.8rem; padding: 0.75rem 1.1rem;
+      cursor: pointer; border-radius: 6px; transition: background 0.2s;
+      line-height: 1;
+    }
+    .lb-btn:hover { background: rgba(255,255,255,0.25); }
+    #lb-prev { left: 1rem; }
+    #lb-next { right: 1rem; }
+    #lb-close {
+      position: absolute; top: 1rem; right: 1.5rem;
+      background: none; border: none; color: #fff;
+      font-size: 2.2rem; cursor: pointer; line-height: 1;
+    }
+    #lb-thumbs {
+      display: flex; gap: 8px; margin-top: 1rem;
+      flex-wrap: wrap; justify-content: center;
+      max-width: 90vw;
+    }
+    #lb-thumbs img {
+      width: 56px; height: 42px; object-fit: cover;
+      border-radius: 4px; cursor: pointer;
+      opacity: 0.55; transition: opacity 0.2s;
+      border: 2px solid transparent;
+    }
+    #lb-thumbs img.active { opacity: 1; border-color: var(--red-600); }
+
+    @media (max-width: 600px) {
+      .lb-btn { padding: 0.5rem 0.75rem; font-size: 1.4rem; }
+      #lb-thumbs img { width: 44px; height: 33px; }
+    }
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-586XMF2C"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="index.html" class="logo-link">
+        <img src="assets/images/logolar/suzen-logo.svg" alt="Süzen İnşaat Logo" class="logo" />
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+        <li><a href="hizmetler.html" class="nav-link">Hizmetler</a></li>
+        <li><a href="galeri.html" class="nav-link">Galeri</a></li>
+        <li><a href="hakkimizda.html" class="nav-link">Hakkımızda</a></li>
+        <li><a href="iletisim.html" class="nav-link">İletişim</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="Menüyü Aç/Kapat">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="https://maps.app.goo.gl/f9twghMtnYGKgav76" target="_blank" rel="noopener noreferrer" class="nav-directions-btn" aria-label="Yol Tarifi Al">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Yol Tarifi
+      </a>
+      <div class="lang-switcher">
+        <a href="projeler.html" class="lang-btn active"><img src="https://flagcdn.com/w80/tr.png" width="20" height="14" alt="TR" style="vertical-align:middle;border-radius:2px;"></a>
+        <a href="en/index.html" class="lang-btn"><img src="https://flagcdn.com/w80/gb.png" width="20" height="14" alt="EN" style="vertical-align:middle;border-radius:2px;"></a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Sayfa Başlığı -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Projelerimiz</h1>
+    <p>Tamamlanan ve devam eden çalışmalarımızdan seçmeler</p>
+  </div>
+</section>
+
+<!-- Projeler -->
+<section class="projeler-section">
+  <div class="container">
+    <div class="projeler-grid" id="projeler-grid">
+      <div class="projeler-loading">
+        <div class="spin"></div>
+        Projeler yükleniyor...
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <img src="assets/images/logolar/suzen-logo.svg" alt="Süzen İnşaat Logo" class="footer-logo" />
+      </div>
+      <div class="footer-section">
+        <h4>Hizmetlerimiz</h4>
+        <ul class="footer-links">
+          <li><a href="hizmetler/cati-kaplama.html">Çatı Kaplama & İzolasyon</a></li>
+          <li><a href="hizmetler/dis-cephe.html">Dış Cephe Sistemleri</a></li>
+          <li><a href="hizmetler/laminant.html">Laminant Parke</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>İletişim</h4>
+        <ul class="footer-links">
+          <li>📧 <a href="mailto:erolsuzen@hotmail.com">erolsuzen@hotmail.com</a></li>
+          <li>📞 <a href="tel:+905324052877">+90 532 405 28 77</a></li>
+          <li>📍 <a href="https://maps.app.goo.gl/f9twghMtnYGKgav76" target="_blank" rel="noopener noreferrer">Mustafa Kemal Paşa Mah. Ata Cd. No: 20/A, Fatsa/Ordu</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-seo-text">Fatsa, Ünye, Ordu ve çevresinde inşaat malzemeleri, dış cephe kaplama ve laminant parke ihtiyaçlarınızda depodan doğrudan satış.</p>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Süzen İnşaat. Tüm hakları saklıdır.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom-bar">
+  <a href="tel:+905324052877" class="bottom-bar-btn btn-call">
+    <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    Hemen Ara
+  </a>
+  <a href="https://maps.app.goo.gl/f9twghMtnYGKgav76" target="_blank" rel="noopener noreferrer" class="bottom-bar-btn btn-directions">
+    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+    Yol Tarifi Al
+  </a>
+</div>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/905324052877?text=Merhaba,%20hizmetleriniz%20hakkında%20bilgi%20almak%20istiyorum."
+   class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+</a>
+
+<!-- ── Lightbox ── -->
+<div id="proje-lightbox">
+  <button id="lb-close" aria-label="Kapat">&times;</button>
+  <button class="lb-btn" id="lb-prev" aria-label="Önceki">&#10094;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-btn" id="lb-next" aria-label="Sonraki">&#10095;</button>
+  <div id="lb-title"></div>
+  <div id="lb-counter"></div>
+  <div id="lb-thumbs"></div>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-config.js"></script>
+<script>
+(function () {
+  // ── Lightbox state ──
+  let lbImages = [];
+  let lbIndex  = 0;
+  const lb      = document.getElementById('proje-lightbox');
+  const lbImg   = document.getElementById('lb-img');
+  const lbTitle = document.getElementById('lb-title');
+  const lbCtr   = document.getElementById('lb-counter');
+  const lbThmbs = document.getElementById('lb-thumbs');
+
+  function openLightbox(images, title, startIndex) {
+    lbImages = images;
+    lbIndex  = startIndex || 0;
+    lbTitle.textContent = title;
+    lb.classList.add('open');
+    renderLb();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderLb() {
+    lbImg.src = lbImages[lbIndex];
+    lbCtr.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+    lbThmbs.innerHTML = lbImages.map((url, i) =>
+      `<img src="${url}" class="${i === lbIndex ? 'active' : ''}" data-i="${i}" alt="">`
+    ).join('');
+    lbThmbs.querySelectorAll('img').forEach(t => {
+      t.addEventListener('click', () => { lbIndex = +t.dataset.i; renderLb(); });
+    });
+  }
+
+  function lbPrev() { lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; renderLb(); }
+  function lbNext() { lbIndex = (lbIndex + 1) % lbImages.length; renderLb(); }
+
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-prev').addEventListener('click', lbPrev);
+  document.getElementById('lb-next').addEventListener('click', lbNext);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  lbPrev();
+    if (e.key === 'ArrowRight') lbNext();
+  });
+
+  // ── Supabase ──
+  const url = window.SUPABASE_URL;
+  const key = window.SUPABASE_ANON_KEY;
+  const grid = document.getElementById('projeler-grid');
+
+  if (!url || url === 'YOUR_SUPABASE_URL') {
+    grid.innerHTML = '<div class="projeler-empty"><p>Projeler yüklenemedi.</p></div>';
+    return;
+  }
+
+  const sb = window.supabase.createClient(url, key);
+
+  sb.from('projeler')
+    .select('*')
+    .eq('active', true)
+    .order('sort_order')
+    .then(({ data, error }) => {
+      if (error || !data || !data.length) {
+        grid.innerHTML = `
+          <div class="projeler-empty">
+            <p>Yakında projelerimiz burada olacak.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = data.map(p => {
+        // images dizisi + kapak resmi birleştirilir
+        const extras = Array.isArray(p.images) ? p.images.filter(Boolean) : [];
+        const allImgs = [p.image_url, ...extras].filter(Boolean);
+        const count   = allImgs.length;
+
+        const imgTag = p.image_url
+          ? `<img class="proje-card-img" src="${p.image_url}" alt="${p.title}" loading="lazy">`
+          : `<div class="proje-card-img-placeholder">🏗️</div>`;
+
+        return `
+          <div class="proje-card" data-id="${p.id}">
+            ${imgTag}
+            <div class="proje-card-body">
+              <div class="proje-card-title">${p.title}</div>
+              ${p.description ? `<div class="proje-card-desc">${p.description}</div>` : ''}
+              <div class="proje-card-footer">
+                <span class="proje-img-count">${count > 1 ? count + ' fotoğraf' : ''}</span>
+                ${count > 0 ? `<button class="btn-gallery" data-imgs='${JSON.stringify(allImgs)}' data-title="${p.title}">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                  Fotoğrafları Gör
+                </button>` : ''}
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+
+      // Galeri butonlarına event bağla
+      grid.querySelectorAll('.btn-gallery').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const imgs  = JSON.parse(btn.dataset.imgs);
+          const title = btn.dataset.title;
+          openLightbox(imgs, title, 0);
+        });
+      });
+
+      // Karta tıklamak da galeriyi açar
+      grid.querySelectorAll('.proje-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const btn = card.querySelector('.btn-gallery');
+          if (btn) btn.click();
+        });
+      });
+    });
+})();
+</script>
+</body>
+</html>
