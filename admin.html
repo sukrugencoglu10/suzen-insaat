@@ -77,7 +77,19 @@
     .admin-sidebar {
       width: 230px; flex-shrink: 0; background: var(--sidebar); padding: 1.5rem 0;
       position: fixed; top: 60px; bottom: 0; overflow-y: auto;
+      display: flex; flex-direction: column;
     }
+    .sidebar-user {
+      margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 0.5rem;
+    }
+    .sidebar-email {
+      font-size: 0.75rem; color: #9ca3af;
+      padding: 0.4rem 1.25rem 0.25rem;
+      word-break: break-all;
+    }
+    .sidebar-logout { color: #f87171; }
+    .sidebar-logout:hover { background: rgba(220,38,38,0.2); color: #fca5a5; }
     .sidebar-label { color: #9ca3af; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
                      padding: 0 1.25rem; margin-bottom: 0.5rem; margin-top: 1rem; }
     .sidebar-label:first-child { margin-top: 0; }
@@ -265,8 +277,6 @@
     </button>
     <img src="assets/images/logolar/suzen-logo.svg" alt="Logo">
     <span class="title">Admin Paneli</span>
-    <span class="user-info" id="user-email"></span>
-    <button class="btn btn-secondary btn-sm" onclick="handleLogout()">Çıkış</button>
   </header>
 
   <div id="drawer-backdrop" onclick="closeDrawer()"></div>
@@ -281,6 +291,15 @@
         <span class="icon">🏗️</span>
         <span>Projelerim</span>
       </button>
+
+      <div class="sidebar-user">
+        <span class="sidebar-label" style="margin-top:auto">Hesap</span>
+        <div class="sidebar-email" id="user-email"></div>
+        <button class="tab-btn sidebar-logout" onclick="handleLogout()">
+          <span class="icon">🚪</span>
+          <span>Çıkış Yap</span>
+        </button>
+      </div>
     </nav>
 
     <main class="admin-main">
