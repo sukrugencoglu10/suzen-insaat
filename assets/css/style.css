@@ -1874,6 +1874,10 @@ a:hover {
 }
 
 /* === FIRSAT — YENİ ELEMENTLER === */
+.firsat-section .section-header {
+  margin-bottom: var(--space-lg);
+}
+
 .firsat-trust-bar {
   display: flex;
   flex-wrap: wrap;
@@ -1882,8 +1886,8 @@ a:hover {
   background: none;
   border: none;
   border-radius: 0;
-  padding: var(--space-md) var(--space-xl);
-  margin-bottom: var(--space-2xl);
+  padding: var(--space-sm) var(--space-xl);
+  margin-bottom: var(--space-lg);
   color: var(--text-primary);
 }
 .firsat-trust-item {
