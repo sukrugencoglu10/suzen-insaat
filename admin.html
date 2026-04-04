@@ -160,26 +160,51 @@
     }
 
     /* ── Mobil (≤ 520px) ── */
+    /* Hamburger butonu — sadece mobilde görünür */
+    .hamburger-btn {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      padding: 6px; color: var(--text);
+      flex-direction: column; gap: 5px; align-items: center; justify-content: center;
+    }
+    .hamburger-btn span {
+      display: block; width: 22px; height: 2px;
+      background: currentColor; border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    /* Backdrop */
+    #drawer-backdrop {
+      display: none;
+      position: fixed; inset: 0; z-index: 49;
+      background: rgba(0,0,0,0.45);
+    }
+    #drawer-backdrop.open { display: block; }
+
     @media (max-width: 520px) {
-      /* Sidebar → yatay alt çubuk */
-      .admin-layout  { flex-direction: column; }
+      .hamburger-btn { display: flex; }
+
+      /* Sidebar → sabit drawer */
       .admin-sidebar {
-        width: 100%; height: auto;
-        flex-direction: row; justify-content: center;
-        padding: 0.5rem 1rem; gap: 0.5rem;
-        position: sticky; top: 0; z-index: 20;
-        overflow-x: auto;
-        border-right: none; border-bottom: 1px solid var(--border);
+        position: fixed; top: 0; left: 0; bottom: 0;
+        width: 220px; z-index: 50;
+        transform: translateX(-100%);
+        transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+        box-shadow: none;
+        flex-direction: column;
+        padding-top: 4rem;
       }
-      .sidebar-label { display: none; }
-      .tab-btn {
-        flex-direction: column; gap: 2px;
-        padding: 0.5rem 1.25rem; font-size: 0.7rem;
-        min-width: 70px;
+      .admin-sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 24px rgba(0,0,0,0.25);
       }
-      .tab-btn .icon { font-size: 1.4rem; }
-      .tab-btn span  { display: block !important; font-size: 0.65rem; }
-      .admin-main    { margin-left: 0; padding: 0.75rem; }
+      .sidebar-label { display: block; }
+      .tab-btn { width: 100%; text-align: left; padding: 0.9rem 1.25rem; font-size: 0.9rem; }
+      .tab-btn span  { display: inline !important; }
+
+      /* Ana içerik tam genişlik */
+      .admin-body  { flex-direction: row; }
+      .admin-main  { margin-left: 0 !important; padding: 0.85rem; width: 100%; }
 
       /* Modal tam ekran */
       #modal-overlay { align-items: flex-start; padding: 0.5rem; }
@@ -235,12 +260,16 @@
 ════════════════════════════════════════ -->
 <div id="admin-panel">
   <header class="admin-header">
+    <button class="hamburger-btn" onclick="toggleDrawer()" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
     <img src="assets/images/logolar/suzen-logo.svg" alt="Logo">
     <span class="title">Admin Paneli</span>
     <span class="user-info" id="user-email"></span>
     <button class="btn btn-secondary btn-sm" onclick="handleLogout()">Çıkış</button>
   </header>
 
+  <div id="drawer-backdrop" onclick="closeDrawer()"></div>
   <div class="admin-body">
     <nav class="admin-sidebar">
       <div class="sidebar-label">Yönetim</div>
@@ -455,11 +484,21 @@ function showPanel(email) {
 document.getElementById('login-password').addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
 
 // ── Tabs ──
+function toggleDrawer() {
+  document.querySelector('.admin-sidebar').classList.toggle('open');
+  document.getElementById('drawer-backdrop').classList.toggle('open');
+}
+function closeDrawer() {
+  document.querySelector('.admin-sidebar').classList.remove('open');
+  document.getElementById('drawer-backdrop').classList.remove('open');
+}
+
 function switchTab(tab) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
   document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+  closeDrawer();
 }
 
 // ── Load Data ──
