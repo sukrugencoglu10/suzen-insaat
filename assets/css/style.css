@@ -1883,9 +1883,10 @@ a:hover {
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-sm);
-  background: none;
-  border: none;
-  border-radius: 0;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-xl);
   padding: var(--space-sm) var(--space-xl);
   margin-bottom: var(--space-lg);
   color: var(--text-primary);
