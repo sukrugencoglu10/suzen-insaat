@@ -482,7 +482,7 @@ a:hover {
 
 .hero p {
   color: #ffffff;
-  font-family: 'Rowdies', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: var(--text-xl);
   font-weight: 700;
   margin-bottom: var(--space-2xl);
