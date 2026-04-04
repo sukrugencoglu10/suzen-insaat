@@ -1745,11 +1745,11 @@ a:hover {
 
   .btn-call {
     background: #ffffff;
-    color: #CD0000 !important;
+    color: #E65000 !important;
   }
 
   .btn-call svg {
-    fill: #CD0000 !important;
+    fill: #E65000 !important;
   }
 
   .btn-directions {
