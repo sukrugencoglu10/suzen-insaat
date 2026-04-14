@@ -2419,7 +2419,7 @@ a:hover {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
 }
 .top-bar-left, .top-bar-right {
   display: flex;
@@ -2427,45 +2427,47 @@ a:hover {
   gap: 20px;
 }
 .top-bar a {
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 .top-bar a:hover {
   color: var(--white);
 }
 .top-bar-lang {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
   background: #ffffff;
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-left: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 6px 15px;
+  border-radius: 4px; /* More standard block shape */
+  margin-left: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 .top-bar-lang a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: transparent;
-  padding: 0;
-  border-radius: 0;
-  opacity: 0.65;
+  padding: 2px;
+  opacity: 0.8;
   transition: 0.3s;
   box-shadow: none;
 }
 .top-bar-lang a:hover, .top-bar-lang a.active {
   opacity: 1;
-  transform: scale(1.15);
+  transform: scale(1.1);
   box-shadow: none;
 }
 .top-bar-lang a img {
   display: block;
   border-radius: 2px;
   border: 1px solid var(--gray-200);
+  width: 20px; /* Slightly larger for visibility */
+  height: auto;
 }
 
 /* Yol Tarifi sari-turuncu renk (kirmizi uzeri okunur) */
