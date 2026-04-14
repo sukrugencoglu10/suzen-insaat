@@ -39,13 +39,24 @@
     .login-card h1 { font-size: 1.4rem; text-align: center; margin-bottom: 0.25rem; }
     .login-card p  { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.75rem; }
     .form-group { margin-bottom: 1rem; position: relative; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 0.65rem 0.9rem; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 0.95rem; transition: border-color 0.2s;
+      background: #fff;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--red);
+    }
+    .form-group textarea { resize: vertical; min-height: 72px; }
+    #login-error { color: var(--danger); font-size: 0.85rem; margin-bottom: 0.75rem; min-height: 1.2em; line-height: 1.4; }
+    
     .password-wrapper { position: relative; }
     .password-toggle {
       position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
       background: none; border: none; cursor: pointer; color: var(--text-muted); padding: 5px;
       display: flex; align-items: center; justify-content: center;
     }
-    #login-error { color: var(--danger); font-size: 0.85rem; margin-bottom: 0.75rem; min-height: 1.2em; line-height: 1.4; }
     .btn { display: inline-flex; align-items: center; gap: 6px; padding: 0.65rem 1.25rem;
            border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
     .btn-primary { background: var(--red); color: #fff; width: 100%; justify-content: center; }
