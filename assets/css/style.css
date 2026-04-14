@@ -2420,6 +2420,17 @@ a:hover {
   opacity: 1;
 }
 
+/* Yol Tarifi turuncu renk */
+.top-bar-right > a[href*="maps"] {
+  color: #e67e22 !important;
+  font-weight: 600;
+  transition: color 0.3s, opacity 0.3s;
+}
+.top-bar-right > a[href*="maps"]:hover {
+  color: #f39c12 !important;
+  opacity: 0.9;
+}
+
 @media (max-width: 900px) {
   .top-bar { display: none; }
 }
