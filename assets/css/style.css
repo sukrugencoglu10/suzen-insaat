@@ -994,12 +994,12 @@ a:hover {
   right: 30px;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #e67e22, #d35400);
+  background: linear-gradient(135deg, #f39c12, #e67e22);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.4);
+  box-shadow: 0 4px 12px rgba(243, 156, 18, 0.45);
   z-index: 999;
   transition: all var(--transition);
   text-decoration: none;
@@ -1007,8 +1007,8 @@ a:hover {
 
 .maps-float:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(230, 126, 34, 0.55);
-  background: linear-gradient(135deg, #d35400, #a04000);
+  box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
 }
 
 @media (max-width: 900px) {
