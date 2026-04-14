@@ -306,7 +306,7 @@ a:hover {
   margin-left: auto;
   flex-wrap: nowrap;
   white-space: nowrap;
-  flex: 1;
+  flex: 0 0 auto;
   justify-content: center;
   position: static;
   transform: none;
@@ -1486,9 +1486,10 @@ a:hover {
   white-space: nowrap;
   box-shadow: 0 3px 10px rgba(220, 38, 38, 0.35);
   transition: all 0.25s ease;
-  margin-left: var(--space-xs);
-  margin-right: 0;
-  order: 2;
+  margin-left: var(--space-lg);
+  margin-right: var(--space-xs);
+  order: 4;
+  flex-shrink: 0;
 }
 
 .nav-design-btn svg {
