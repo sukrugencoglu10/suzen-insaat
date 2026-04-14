@@ -987,6 +987,34 @@ a:hover {
   font-size: var(--text-sm);
 }
 
+/* === MAPS FLOAT BUTTON (Desktop Only) === */
+.maps-float {
+  position: fixed;
+  bottom: 100px; /* WhatsApp 30px + 60px height + 10px gap */
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.4);
+  z-index: 999;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.maps-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(230, 126, 34, 0.55);
+  background: linear-gradient(135deg, #d35400, #a04000);
+}
+
+@media (max-width: 900px) {
+  .maps-float { display: none; }
+}
+
 /* === WHATSAPP BUTTON === */
 .whatsapp-float {
   position: fixed;
