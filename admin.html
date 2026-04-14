@@ -276,6 +276,9 @@
       </div>
     </div>
     <button class="btn btn-primary" id="login-btn" onclick="handleLogin()">Giriş Yap</button>
+    <div style="text-align: center; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 10px;">
+      <a href="javascript:void(0)" onclick="handleForgotPassword()" style="font-size: 0.82rem; color: var(--red); text-decoration: none; font-weight: 600;">Şifremi Unuttum</a>
+    </div>
   </div>
 </div>
 
@@ -536,6 +539,27 @@ function togglePasswordVisibility() {
   } else {
     pwdInput.type = 'password';
     eyeIcon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+  }
+}
+
+async function handleForgotPassword() {
+  if (!initSupabase()) return;
+  let email = document.getElementById('login-email').value.trim();
+  if (email.toLowerCase() === 'admin') email = 'admin@suzeninsaat.com';
+  
+  if (!email || !email.includes('@')) {
+    alert('Lütfen önce e-posta adresinizi (veya "admin" yazarak) girin.');
+    return;
+  }
+
+  const confirmReset = confirm(email + ' adresine şifre sıfırlama bağlantısı gönderilsin mi?');
+  if (!confirmReset) return;
+
+  const { error } = await sb.auth.resetPasswordForEmail(email);
+  if (error) {
+    showToast('Hata: ' + error.message, 'error');
+  } else {
+    showToast('Sıfırlama bağlantısı gönderildi! E-postanızı kontrol edin.', 'success');
   }
 }
 
