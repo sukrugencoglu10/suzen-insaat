@@ -2380,11 +2380,11 @@ a:hover {
 
 /* === TOP BAR UI & UX REFINEMENTS === */
 .top-bar {
-  background: var(--gray-900);
-  color: var(--gray-300);
+  background: linear-gradient(135deg, var(--red-700), var(--red-600));
+  color: rgba(255, 255, 255, 0.9);
   padding: 8px 0;
   font-size: 0.85rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.15);
 }
 .top-bar-container {
   display: flex;
@@ -2397,7 +2397,7 @@ a:hover {
   gap: var(--space-lg);
 }
 .top-bar a {
-  color: var(--gray-300);
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -2408,11 +2408,11 @@ a:hover {
   display: flex;
   gap: 8px;
   align-items: center;
-  border-left: 1px solid rgba(255,255,255,0.2);
+  border-left: 1px solid rgba(255,255,255,0.3);
   padding-left: 15px;
 }
 .top-bar-lang a {
-  opacity: 0.6;
+  opacity: 0.7;
   border-radius: 2px;
   transition: 0.3s;
 }
@@ -2420,15 +2420,14 @@ a:hover {
   opacity: 1;
 }
 
-/* Yol Tarifi turuncu renk */
+/* Yol Tarifi sari-turuncu renk (kirmizi uzeri okunur) */
 .top-bar-right > a[href*="maps"] {
-  color: #e67e22 !important;
-  font-weight: 600;
-  transition: color 0.3s, opacity 0.3s;
+  color: #ffd166 !important;
+  font-weight: 700;
+  transition: color 0.3s;
 }
 .top-bar-right > a[href*="maps"]:hover {
-  color: #f39c12 !important;
-  opacity: 0.9;
+  color: #fff !important;
 }
 
 @media (max-width: 900px) {
