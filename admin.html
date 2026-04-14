@@ -493,7 +493,7 @@ async function handleLogin() {
   
   // "admin" kısayolunu tam e-postaya dönüştür
   if (email.toLowerCase() === 'admin') {
-    email = 'admin@suzeninsaat.com';
+    email = 'sukrugencoglu10@gmail.com';
   }
 
   errEl.textContent = '';
@@ -545,7 +545,7 @@ function togglePasswordVisibility() {
 async function handleForgotPassword() {
   if (!initSupabase()) return;
   let email = document.getElementById('login-email').value.trim();
-  if (email.toLowerCase() === 'admin') email = 'admin@suzeninsaat.com';
+  if (email.toLowerCase() === 'admin') email = 'sukrugencoglu10@gmail.com';
   
   if (!email || !email.includes('@')) {
     alert('Lütfen önce e-posta adresinizi (veya "admin" yazarak) girin.');
