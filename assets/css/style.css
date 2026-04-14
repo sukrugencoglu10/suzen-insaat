@@ -2376,3 +2376,60 @@ a:hover {
     display: none !important;
   }
 }
+
+/* === TOP BAR UI & UX REFINEMENTS === */
+.top-bar {
+  background: var(--gray-900);
+  color: var(--gray-300);
+  padding: 8px 0;
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.top-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top-bar-left, .top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+.top-bar a {
+  color: var(--gray-300);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.top-bar a:hover {
+  color: var(--white);
+}
+.top-bar-lang {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-left: 1px solid rgba(255,255,255,0.2);
+  padding-left: 15px;
+}
+.top-bar-lang a {
+  opacity: 0.6;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+.top-bar-lang a:hover, .top-bar-lang a.active {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .top-bar { display: none; }
+}
+
+/* Global Card Enhancements */
+.card {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  border: 1px solid var(--gray-100);
+}
+.card:hover {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border-color: var(--red-100);
+}
+
