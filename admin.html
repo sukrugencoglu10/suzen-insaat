@@ -515,6 +515,12 @@ async function handleLogin() {
 
 async function handleLogout() {
   if (sb) await sb.auth.signOut();
+  
+  // Inputları temizle
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-password').value = '';
+  document.getElementById('login-error').textContent = '';
+  
   document.getElementById('admin-panel').style.display = 'none';
   document.getElementById('login-page').style.display  = 'flex';
 }
