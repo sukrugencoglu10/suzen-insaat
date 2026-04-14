@@ -264,10 +264,7 @@
         </button>
       </div>
     </div>
-    <button class="btn btn-primary" id="login-btn" data-mode="login" onclick="handleLogin()">Giriş Yap</button>
-    <div style="text-align: center; margin-top: 1.5rem;">
-      <a href="javascript:void(0)" id="toggle-mode-link" onclick="toggleLoginMode()" style="font-size: 0.82rem; color: var(--text-muted); text-decoration: none;">Hesabınız yok mu? Yeni admin oluştur</a>
-    </div>
+    <button class="btn btn-primary" id="login-btn" onclick="handleLogin()">Giriş Yap</button>
   </div>
 </div>
 
@@ -477,56 +474,28 @@ async function handleLogin() {
   const password = document.getElementById('login-password').value;
   const btn      = document.getElementById('login-btn');
   const errEl    = document.getElementById('login-error');
-  const isSignUp = btn.getAttribute('data-mode') === 'signup';
 
   if (!email || !password) { errEl.textContent = 'Lütfen tüm alanları doldurun.'; return; }
   
   // "admin" kısayolunu tam e-postaya dönüştür
   if (email.toLowerCase() === 'admin') {
     email = 'admin@suzeninsaat.com';
-  } else if (!email.includes('@')) {
-    errEl.textContent = 'Geçerli bir e-posta veya "admin" yazın.';
-    return;
   }
 
   errEl.textContent = '';
-  btn.innerHTML = isSignUp ? 'Kaydediliyor...' : '<span class="spinner"></span> Giriş Yapılıyor...';
+  btn.innerHTML = '<span class="spinner"></span> Giriş Yapılıyor...';
   btn.disabled = true;
 
   try {
-    if (isSignUp) {
-      const { data, error } = await sb.auth.signUp({ email, password });
-      if (error) throw error;
-      showToast('Kullanıcı oluşturuldu! Giriş yapabilirsiniz.', 'success');
-      toggleLoginMode(); // Giriş moduna geri dön
-    } else {
-      const { data, error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) throw error;
-      showPanel(data.user.email);
-    }
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    showPanel(data.user.email);
   } catch (error) {
     console.error(error);
-    errEl.textContent = error.message === 'Invalid login credentials' ? 'Hatalı e-posta veya şifre.' : error.message;
+    errEl.textContent = 'Hatalı e-posta veya şifre.';
   } finally {
-    btn.innerHTML = isSignUp ? 'Hesap Oluştur' : 'Giriş Yap';
-    btn.disabled = false;
-  }
-}
-
-function toggleLoginMode() {
-  const btn = document.getElementById('login-btn');
-  const link = document.getElementById('toggle-mode-link');
-  const errEl = document.getElementById('login-error');
-  errEl.textContent = '';
-  
-  if (btn.getAttribute('data-mode') === 'signup') {
-    btn.setAttribute('data-mode', 'login');
     btn.innerHTML = 'Giriş Yap';
-    link.textContent = 'Hesabınız yok mu? Yeni admin oluştur';
-  } else {
-    btn.setAttribute('data-mode', 'signup');
-    btn.innerHTML = 'Hesap Oluştur';
-    link.textContent = 'Geri dön';
+    btn.disabled = false;
   }
 }
 
