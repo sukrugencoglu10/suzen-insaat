@@ -2364,3 +2364,15 @@ a:hover {
 @media (max-width: 900px) {
   .hero-illustration { max-width: 280px; margin: var(--space-md) auto; }
 }
+
+/* === ADMIN BUTTON VISIBILITY === */
+@media (min-width: 901px) {
+  .admin-mobile-only {
+    display: none !important;
+  }
+}
+@media (max-width: 900px) {
+  .admin-desktop-only {
+    display: none !important;
+  }
+}

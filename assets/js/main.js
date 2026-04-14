@@ -55,16 +55,35 @@ document.addEventListener("DOMContentLoaded", function () {
   window.initHeroAccordion();
 });
 
-// === LOGO TOUCH HOVER (mobile) ===
+// === LOGO TOUCH HOVER AND DOUBLE CLICK ADMIN (mobile) ===
 document.addEventListener("DOMContentLoaded", function () {
   const logoLink = document.querySelector(".logo-link");
   if (logoLink && window.matchMedia("(max-width: 1100px)").matches) {
     let timeout;
+    let lastTap = 0;
+    
     logoLink.addEventListener("touchstart", function (e) {
+      // Touch hover logic
       logoLink.classList.add("touch-hover");
       clearTimeout(timeout);
       timeout = setTimeout(() => logoLink.classList.remove("touch-hover"), 2000);
     }, { passive: true });
+
+    // Double tap admin login
+    logoLink.addEventListener("touchend", function (e) {
+      const currentTime = new Date().getTime();
+      const tapLength = currentTime - lastTap;
+      
+      if (tapLength < 500 && tapLength > 0) {
+        window.location.href = "admin.html";
+      }
+      lastTap = currentTime;
+    });
+
+    // Support double click as well (desktop testing in mobile mode etc.)
+    logoLink.addEventListener("dblclick", function(e) {
+      window.location.href = "admin.html";
+    });
   }
 });
 

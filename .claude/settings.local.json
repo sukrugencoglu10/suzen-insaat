@@ -98,7 +98,16 @@
       "Bash(cp \"Brick colour_ Ceramic solutions.jpeg\" \"brick-ceramic.jpeg\")",
       "Bash(where python3:*)",
       "Bash(where python:*)",
-      "Bash(where py:*)"
+      "Bash(where py:*)",
+      "WebSearch",
+      "Bash(curl -L --ssl-no-revoke -o boldonse.zip \"https://fontesk.com/download/96925/\")",
+      "Bash(rm boldonse.zip)",
+      "Bash(curl -L --ssl-no-revoke -o boldonse.zip \"https://www.fontspace.com/get/family/128227\")",
+      "Bash(curl -L --ssl-no-revoke -A \"Mozilla/5.0\" -o boldonse.zip \"https://dl.dafont.com/dl/?f=boldonse\")",
+      "Bash(curl -L --ssl-no-revoke -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\)\" -o boldonse.zip \"https://www.1001fonts.com/download/ut-boldonse-demo.zip\")",
+      "Bash(unzip -l boldonse.zip)",
+      "Bash(unzip -o boldonse.zip \"UT Boldonse Demo.ttf\")",
+      "Bash(mv \"UT Boldonse Demo.ttf\" boldonse.ttf)"
     ]
   }
 }
