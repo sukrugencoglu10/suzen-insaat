@@ -204,70 +204,7 @@
         </div>
 
         <div id="firsat-grid" class="grid grid-3" style="max-width:960px;margin:0 auto;">
-
-          <!-- Ürün 1 -->
-          <div class="firsat-card">
-            <div class="firsat-stock-badge">✅ STOKTA HAZIR</div>
-            <div class="firsat-img">
-              <img src="assets/images/1.jpg" alt="Ürün 1">
-            </div>
-            <div class="firsat-body">
-              <h3 class="firsat-title">Ürün Adı 1</h3>
-              <p class="firsat-desc">Kısa açıklama metni buraya gelecek.</p>
-              <div class="firsat-price-block">
-                <div class="price-label">Depo Boşaltma Fiyatı</div>
-                <div class="firsat-price">
-                  <span class="price-old">₺500</span>
-                  <span class="price-new">₺350</span>
-                </div>
-                <div class="price-saving">💰 ₺150 Tasarruf (%30)</div>
-              </div>
-              <a href="tel:+905324052877" class="btn btn-red" style="width:100%;text-align:center;margin-top:auto;"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="vertical-align:middle;margin-right:6px"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.39 21 3 14.61 3 7c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>Hemen Ara - Bilgi Al</a>
-            </div>
-          </div>
-
-          <!-- Ürün 2 -->
-          <div class="firsat-card">
-            <div class="firsat-stock-badge">✅ STOKTA HAZIR</div>
-            <div class="firsat-img">
-              <img src="assets/images/2.jpg" alt="Ürün 2">
-            </div>
-            <div class="firsat-body">
-              <h3 class="firsat-title">Ürün Adı 2</h3>
-              <p class="firsat-desc">Kısa açıklama metni buraya gelecek.</p>
-              <div class="firsat-price-block">
-                <div class="price-label">Depo Boşaltma Fiyatı</div>
-                <div class="firsat-price">
-                  <span class="price-old">₺800</span>
-                  <span class="price-new">₺600</span>
-                </div>
-                <div class="price-saving">💰 ₺200 Tasarruf (%25)</div>
-              </div>
-              <a href="tel:+905324052877" class="btn btn-red" style="width:100%;text-align:center;margin-top:auto;"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="vertical-align:middle;margin-right:6px"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.39 21 3 14.61 3 7c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>Hemen Ara - Bilgi Al</a>
-            </div>
-          </div>
-
-          <!-- Ürün 3 -->
-          <div class="firsat-card">
-            <div class="firsat-stock-badge">✅ STOKTA HAZIR</div>
-            <div class="firsat-img">
-              <img src="assets/images/3.jpg" alt="Ürün 3">
-            </div>
-            <div class="firsat-body">
-              <h3 class="firsat-title">Ürün Adı 3</h3>
-              <p class="firsat-desc">Kısa açıklama metni buraya gelecek.</p>
-              <div class="firsat-price-block">
-                <div class="price-label">Depo Boşaltma Fiyatı</div>
-                <div class="firsat-price">
-                  <span class="price-old">₺1.200</span>
-                  <span class="price-new">₺950</span>
-                </div>
-                <div class="price-saving">💰 ₺250 Tasarruf (%21)</div>
-              </div>
-              <a href="tel:+905324052877" class="btn btn-red" style="width:100%;text-align:center;margin-top:auto;"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="vertical-align:middle;margin-right:6px"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.39 21 3 14.61 3 7c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>Hemen Ara - Bilgi Al</a>
-            </div>
-          </div>
-
+          <!-- Content loaded dynamically from Supabase -->
         </div>
       </div>
     </section>
@@ -573,14 +510,18 @@
 
       const sb = window.supabase.createClient(url, key);
 
-      // ── Fırsat Ürünleri ──
+      const section = document.getElementById('firsat-urunleri');
+      const grid = document.getElementById('firsat-grid');
+      
       sb.from('firsat_urunleri')
         .select('*')
         .eq('active', true)
         .order('sort_order')
         .then(({ data, error }) => {
-          if (error || !data || !data.length) return;
-          const grid = document.getElementById('firsat-grid');
+          if (error || !data || !data.length) {
+            if (section) section.style.display = 'none';
+            return;
+          }
           if (!grid) return;
           grid.innerHTML = data.map(u => {
             const saving = u.old_price - u.new_price;

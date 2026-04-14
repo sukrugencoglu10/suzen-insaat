@@ -155,6 +155,29 @@
       </div>
     </div>
   </section>
+  
+  <!-- Special Offers -->
+  <section id="firsat-urunleri" class="section firsat-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">⚡ Flash Sale — Limited Stock!</span>
+        <h2 class="section-title">Special Offers</h2>
+        <p class="section-description">
+          Limited stock at warehouse delivery prices. These prices are valid only until stocks last!
+        </p>
+      </div>
+
+      <div class="firsat-trust-bar">
+        <div class="firsat-trust-item"><strong>Free Delivery in Fatsa</strong></div>
+        <div class="firsat-trust-item"><strong>District-wide Delivery</strong></div>
+        <div class="firsat-trust-item"><strong>Direct Factory Sale</strong></div>
+      </div>
+
+      <div id="firsat-grid" class="grid grid-3" style="max-width:960px;margin:0 auto;">
+        <!-- Content loaded dynamically from Supabase -->
+      </div>
+    </div>
+  </section>
 
   <section class="section" style="background: var(--gray-50);">
     <div class="container">
@@ -361,6 +384,58 @@
 
 
   <script src="../assets/js/main.js"></script>
+
+  <!-- Supabase Dynamic Content -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/js/supabase-config.js"></script>
+  <script>
+  (function() {
+    const url = window.SUPABASE_URL;
+    const key = window.SUPABASE_ANON_KEY;
+    if (!url || url === 'YOUR_SUPABASE_URL') return;
+
+    const sb = window.supabase.createClient(url, key);
+
+    const section = document.getElementById('firsat-urunleri');
+    const grid = document.getElementById('firsat-grid');
+    
+    sb.from('firsat_urunleri')
+      .select('*')
+      .eq('active', true)
+      .order('sort_order')
+      .then(({ data, error }) => {
+        if (error || !data || !data.length) {
+          if (section) section.style.display = 'none';
+          return;
+        }
+        if (!grid) return;
+        grid.innerHTML = data.map(u => {
+          const saving = u.old_price - u.new_price;
+          const pct    = Math.round(saving / u.old_price * 100);
+          return `
+            <div class="firsat-card">
+              <div class="firsat-stock-badge">${u.badge || '✅ IN STOCK'}</div>
+              <div class="firsat-img">
+                <img src="${u.image_url}" alt="${u.title_en || u.title}">
+              </div>
+              <div class="firsat-body">
+                <h3 class="firsat-title">${u.title_en || u.title}</h3>
+                <p class="firsat-desc">${u.description_en || u.description}</p>
+                <div class="firsat-price-block">
+                  <div class="price-label">Warehouse Delivery Price</div>
+                  <div class="firsat-price">
+                    <span class="price-old">₺${u.old_price.toLocaleString('en-US')}</span>
+                    <span class="price-new">₺${u.new_price.toLocaleString('en-US')}</span>
+                  </div>
+                  <div class="price-saving">💰 ₺${saving.toLocaleString('en-US')} Saved (${pct}%)</div>
+                </div>
+                <a href="tel:+905324052877" class="btn btn-red" style="width:100%;text-align:center;margin-top:auto;"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="vertical-align:middle;margin-right:6px"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.39 21 3 14.61 3 7c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>Call Now - Get Info</a>
+              </div>
+            </div>`;
+        }).join('');
+      });
+  })();
+  </script>
 </body>
 </html>
 
