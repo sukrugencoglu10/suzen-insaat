@@ -2417,13 +2417,14 @@ a:hover {
 }
 .top-bar-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  gap: 20px;
 }
 .top-bar-left, .top-bar-right {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
+  gap: 20px;
 }
 .top-bar a {
   color: rgba(255, 255, 255, 0.92);
