@@ -303,10 +303,10 @@ a:hover {
   gap: var(--space-lg);
   align-items: center;
   order: 3;
-  margin-left: auto;
+  margin-left: 0;
   flex-wrap: nowrap;
   white-space: nowrap;
-  flex: 0 0 auto;
+  flex: 1;
   justify-content: center;
   position: static;
   transform: none;
@@ -1561,7 +1561,7 @@ a:hover {
   white-space: nowrap;
   box-shadow: 0 3px 10px rgba(220, 38, 38, 0.35);
   transition: all 0.25s ease;
-  margin-left: var(--space-lg);
+  margin-left: 0;
   margin-right: var(--space-xs);
   order: 4;
   flex-shrink: 0;
