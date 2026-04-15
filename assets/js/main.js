@@ -482,6 +482,8 @@ document.addEventListener("DOMContentLoaded", function () {
 window.addEventListener('scroll', function() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
+  const currentPath = window.location.pathname;
+  const isHomePage = currentPath === '/' || currentPath.endsWith('index.html');
   
   let currentSection = '';
   const scrollPosition = window.scrollY + 150; // Offset for header
@@ -495,19 +497,35 @@ window.addEventListener('scroll', function() {
     }
   });
   
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    const href = link.getAttribute('href');
-    
-    // Check if link points to current section
-    if (href === '#' + currentSection) {
-      link.classList.add('active');
-    }
-    // Keep homepage link active if at top of page
-    else if (scrollPosition < 200 && (href === 'index.html' || href.endsWith('/index.html'))) {
-      link.classList.add('active');
-    }
-  });
+  // If we found a section we're in, update nav links
+  if (currentSection || scrollPosition < 200) {
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      const linkUrl = new URL(link.href, window.location.origin);
+      const isInternalLink = href.startsWith('#');
+      const isSamePageLink = linkUrl.pathname === currentPath;
+
+      // Rule 1: Clear the link first unless it's a page link on a different page
+      // But actually, we want to BE CAREFUL. 
+      // Simplified approach:
+      
+      link.classList.remove('active');
+
+      // Rule A: Current section match
+      if (currentSection && href === '#' + currentSection) {
+        link.classList.add('active');
+      }
+      // Rule B: HomePage at top
+      else if (isHomePage && scrollPosition < 200 && (href === 'index.html' || href.endsWith('index.html') || href === '#')) {
+        link.classList.add('active');
+      }
+      // Rule C: Page match (for standalone pages like iletisim.html)
+      // Only do this if we AREN'T currently in a specific section that overlaps
+      else if (!currentSection && isSamePageLink && !isInternalLink) {
+          link.classList.add('active');
+      }
+    });
+  }
 });
 
 

@@ -105,6 +105,27 @@
             
             <button type="submit" class="btn btn-red" style="width: 100%;">Send</button>
           </form>
+          <script>
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+              e.preventDefault();
+              const name    = document.getElementById('name').value;
+              const email   = document.getElementById('email').value;
+              const phone   = document.getElementById('phone').value;
+              const service = document.getElementById('service').value;
+              const message = document.getElementById('message').value;
+              const serviceLabels = {
+                'roofing': 'Roofing & Insulation',
+                'facade': 'Exterior Facade Systems',
+                'laminate': 'Laminate Flooring',
+                'other': 'Other'
+              };
+              const serviceText = serviceLabels[service] || 'Not specified';
+              const text = `Hello, you've received a message from the contact form:\n\n👤 Name: ${name}\n📧 Email: ${email}\n📞 Phone: ${phone}\n🔧 Service: ${serviceText}\n\n💬 Message:\n${message}`;
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({'event': 'form_submitted', 'form_type': 'contact_whatsapp_en'});
+              window.open('https://wa.me/905324052877?text=' + encodeURIComponent(text), '_blank');
+            });
+          </script>
         </div>
         
         <div>
